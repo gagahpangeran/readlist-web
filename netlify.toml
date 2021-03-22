@@ -1,0 +1,12 @@
+# See https://docs.netlify.com/configure-builds/file-based-configuration/
+# for config documentation
+
+[build]
+  command = "yarn build"
+  publish = "build"
+  functions = "funcs"
+
+[[redirects]]
+  from = "/graphql"
+  to = "/.netlify/functions/graphql"
+  status = 200
