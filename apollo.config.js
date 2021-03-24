@@ -9,4 +9,4 @@ module.exports = {
     },
     includes: ["./src/**/*.ts", "./src/**/*.tsx"]
   }
-}
+};
