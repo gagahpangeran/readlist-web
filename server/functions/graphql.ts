@@ -1,33 +1,9 @@
-import { ApolloServer, gql } from "apollo-server-lambda";
+import "reflect-metadata";
+import { ApolloServer } from "apollo-server-lambda";
+import { buildSchemaSync } from "type-graphql";
+import ReadListResolver from "../ReadListResolver";
 
-const typeDefs = gql`
-  type Query {
-    name: String!
-  }
-  type Mutation {
-    changeName(name: String): String!
-  }
-`;
-
-let name = "world";
-
-const resolvers = {
-  Query: {
-    name: () => {
-      return name;
-    }
-  },
-  Mutation: {
-    changeName: (parent, args, context) => {
-      name = args.name;
-      return name;
-    }
-  }
-};
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers
-});
+const schema = buildSchemaSync({ resolvers: [ReadListResolver] });
+const server = new ApolloServer({ schema });
 
 export const handler = server.createHandler();
