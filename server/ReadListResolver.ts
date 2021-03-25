@@ -3,14 +3,14 @@ import ReadList from "./ReadList";
 
 const readLists = [new ReadList("http://test.com", "Test", true)];
 
-@Resolver(of => ReadList)
+@Resolver(_of => ReadList)
 export default class ReadListResolver {
-  @Query(returns => [ReadList])
+  @Query(_returns => [ReadList])
   readLists() {
     return readLists;
   }
 
-  @Mutation(returns => [ReadList])
+  @Mutation(_returns => [ReadList])
   addReadList(
     @Arg("link") link: string,
     @Arg("title") title: string,

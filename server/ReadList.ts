@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 @ObjectType()
 export default class ReadList {
-  @Field(type => ID)
+  @Field(_type => ID)
   id: string;
 
   @Field()
