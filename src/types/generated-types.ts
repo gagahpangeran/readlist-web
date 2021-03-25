@@ -4,6 +4,28 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: DeleteReadLists
+// ====================================================
+
+export interface DeleteReadLists_deleteReadLists {
+  __typename: "ReadList";
+  id: string;
+}
+
+export interface DeleteReadLists {
+  deleteReadLists: DeleteReadLists_deleteReadLists[];
+}
+
+export interface DeleteReadListsVariables {
+  ids: string[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetReadLists
 // ====================================================
 
