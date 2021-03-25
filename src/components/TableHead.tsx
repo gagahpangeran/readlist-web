@@ -43,7 +43,6 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: "title", label: "Title", align: "left" },
-  { id: "link", label: "Link", align: "left" },
   { id: "submittedAt", label: "Submitted At", align: "right" },
   { id: "readAt", label: "Read At", align: "right" }
 ];
@@ -72,7 +71,6 @@ export default function ReadListTableHead(props: Props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ "aria-label": "select all desserts" }}
           />
         </TableCell>
         {headCells.map(headCell => (

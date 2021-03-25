@@ -24,7 +24,7 @@ export default function ReadListTableBody(props: Props) {
     return (
       <TableBody>
         <TableRow>
-          <TableCell colSpan={5} align="center">
+          <TableCell colSpan={4} align="center">
             {loading ? <CircularProgress /> : "No Data"}
           </TableCell>
         </TableRow>
@@ -56,11 +56,8 @@ export default function ReadListTableBody(props: Props) {
                 />
               </TableCell>
               <TableCell component="th" id={labelId} scope="row">
-                {row.title}
-              </TableCell>
-              <TableCell>
                 <a href={row.link} target="_blank" rel="nofollow noreferrer">
-                  {row.link}
+                  {row.title}
                 </a>
               </TableCell>
               <TableCell align="right">
