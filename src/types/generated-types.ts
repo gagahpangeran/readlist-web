@@ -4,6 +4,34 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AddReadList
+// ====================================================
+
+export interface AddReadList_addReadList {
+  __typename: "ReadList";
+  id: string;
+  title: string;
+  link: string;
+  submittedAt: DateTime;
+  readAt: DateTime | null;
+}
+
+export interface AddReadList {
+  addReadList: AddReadList_addReadList[];
+}
+
+export interface AddReadListVariables {
+  link: string;
+  title: string;
+  isRead: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: DeleteReadLists
 // ====================================================
 
