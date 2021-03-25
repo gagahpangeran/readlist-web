@@ -4,28 +4,21 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetName
+// GraphQL query operation: getReadlists
 // ====================================================
 
-export interface GetName {
-  name: string;
+export interface getReadlists_readLists {
+  __typename: "ReadList";
+  id: string;
+  title: string;
+  link: string;
+  isRead: boolean;
+  submittedAt: any;
+  readAt: any | null;
 }
 
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: ChangeName
-// ====================================================
-
-export interface ChangeName {
-  changeName: string;
-}
-
-export interface ChangeNameVariables {
-  name: string;
+export interface getReadlists {
+  readLists: getReadlists_readLists[];
 }
 
 /* tslint:disable */
