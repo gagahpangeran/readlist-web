@@ -5,7 +5,6 @@ export const READ_LIST = gql`
     id
     title
     link
-    isRead
     submittedAt
     readAt
   }

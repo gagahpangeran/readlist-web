@@ -13,9 +13,6 @@ export default class ReadList {
   title: string;
 
   @Field()
-  isRead: boolean;
-
-  @Field()
   submittedAt: Date;
 
   @Field({ nullable: true })
@@ -26,7 +23,6 @@ export default class ReadList {
     this.id = uuidv4();
     this.link = link;
     this.title = title;
-    this.isRead = isRead;
     this.submittedAt = now;
     this.readAt = isRead ? now : null;
   }

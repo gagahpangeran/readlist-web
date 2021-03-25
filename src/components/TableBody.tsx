@@ -24,7 +24,7 @@ export default function ReadListTableBody(props: Props) {
     return (
       <TableBody>
         <TableRow>
-          <TableCell colSpan={6} align="center">
+          <TableCell colSpan={5} align="center">
             {loading ? <CircularProgress /> : "No Data"}
           </TableCell>
         </TableRow>
@@ -62,9 +62,6 @@ export default function ReadListTableBody(props: Props) {
                 <a href={row.link} target="_blank" rel="nofollow noreferrer">
                   {row.link}
                 </a>
-              </TableCell>
-              <TableCell padding="checkbox">
-                <Checkbox checked={row.isRead} disabled />
               </TableCell>
               <TableCell align="right">
                 {dateFormatter(row.submittedAt)}

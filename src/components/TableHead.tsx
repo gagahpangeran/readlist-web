@@ -44,7 +44,6 @@ interface HeadCell {
 const headCells: HeadCell[] = [
   { id: "title", label: "Title", align: "left" },
   { id: "link", label: "Link", align: "left" },
-  { id: "isRead", label: "Read?", align: "left" },
   { id: "submittedAt", label: "Submitted At", align: "right" },
   { id: "readAt", label: "Read At", align: "right" }
 ];

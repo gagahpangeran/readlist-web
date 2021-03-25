@@ -12,7 +12,6 @@ export interface DeleteReadLists_deleteReadLists {
   id: string;
   title: string;
   link: string;
-  isRead: boolean;
   submittedAt: DateTime;
   readAt: DateTime | null;
 }
@@ -39,7 +38,6 @@ export interface GetReadLists_readLists {
   id: string;
   title: string;
   link: string;
-  isRead: boolean;
   submittedAt: DateTime;
   readAt: DateTime | null;
 }
@@ -62,7 +60,6 @@ export interface ReadList {
   id: string;
   title: string;
   link: string;
-  isRead: boolean;
   submittedAt: DateTime;
   readAt: DateTime | null;
 }
