@@ -16,10 +16,10 @@ export default class ReadList {
   isRead: boolean;
 
   @Field()
-  createdAt: Date;
+  submittedAt: Date;
 
-  @Field()
-  updatedAt: Date;
+  @Field({ nullable: true })
+  readAt: Date | null;
 
   constructor(link: string, title: string, isRead: boolean) {
     const now = new Date();
@@ -27,7 +27,7 @@ export default class ReadList {
     this.link = link;
     this.title = title;
     this.isRead = isRead;
-    this.createdAt = now;
-    this.updatedAt = now;
+    this.submittedAt = now;
+    this.readAt = isRead ? now : null;
   }
 }
