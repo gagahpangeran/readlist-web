@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
 import React from "react";
+import { gql } from "@apollo/client";
 
 export const GET_READLISTS = gql`
-  query getReadlists {
+  query GetReadlists {
     readLists {
       id
       title

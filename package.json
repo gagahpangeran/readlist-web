@@ -44,10 +44,10 @@
   "scripts": {
     "start": "run-p start:*",
     "start:app": "BROWSER=none react-scripts start",
-    "start:func": "NODE_ENV=development netlify-lambda serve ./server/functions",
+    "start:func": "NODE_ENV=development netlify-lambda serve ./graphql/functions",
     "build": "run-p build:*",
     "build:app": "react-scripts build",
-    "build:lambda": "netlify-lambda build ./server/functions",
+    "build:lambda": "netlify-lambda build ./graphql/functions",
     "format": "run-s format:*",
     "format:eslint": "eslint --fix  \"**/*.{ts,tsx}\"",
     "format:prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
