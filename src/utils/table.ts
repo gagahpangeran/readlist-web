@@ -1,8 +1,7 @@
-import { GetReadLists_readLists } from "../types/generated-types";
+import { ReadList } from "../types/generated-types";
 
 export type Order = "asc" | "desc";
-export type ReadList = GetReadLists_readLists;
-export type ReadListKey = keyof ReadList;
+export type ReadListKey = keyof Omit<ReadList, "__typename">;
 
 export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {

@@ -4,14 +4,9 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
+import { ReadList } from "../types/generated-types";
 import { dateFormatter } from "../utils/helper";
-import {
-  getComparator,
-  Order,
-  ReadList,
-  ReadListKey,
-  stableSort
-} from "../utils/table";
+import { getComparator, Order, ReadListKey, stableSort } from "../utils/table";
 
 interface Props {
   rows: ReadList[] | null;
