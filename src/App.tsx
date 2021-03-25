@@ -1,6 +1,8 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import Data from "./Data";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import ReadListTable from "./components/Table";
 
 const uri =
   process.env.NODE_ENV === "production"
@@ -15,9 +17,10 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <Data />
-      </div>
+      <Container component="main" maxWidth="md">
+        <Typography variant="h2">Read List</Typography>
+        <ReadListTable />
+      </Container>
     </ApolloProvider>
   );
 }
