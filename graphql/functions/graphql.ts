@@ -1,5 +1,5 @@
-import "reflect-metadata";
 import { ApolloServer } from "apollo-server-lambda";
+import "reflect-metadata";
 import { buildSchemaSync } from "type-graphql";
 import ReadListResolver from "../ReadListResolver";
 

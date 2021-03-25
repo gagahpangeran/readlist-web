@@ -1,4 +1,4 @@
-import { Mutation, Query, Resolver, Arg } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import ReadList from "./ReadList";
 
 const readLists = [new ReadList("http://test.com", "Test", true)];
