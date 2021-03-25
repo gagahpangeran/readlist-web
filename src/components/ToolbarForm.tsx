@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -8,6 +9,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { ADD_READ_LIST } from "../gql/mutation";
+import { GET_READ_LISTS } from "../gql/query";
+import { AddReadList, AddReadListVariables } from "../types/generated-types";
 
 interface Props {
   className: string;
@@ -33,10 +37,22 @@ export default function ToolbarForm(props: Props) {
   const { className, closeForm } = props;
   const classes = useStyles();
 
-  const { register, handleSubmit } = useForm<InputForm>();
+  const [addReadList] = useMutation<AddReadList, AddReadListVariables>(
+    ADD_READ_LIST,
+    {
+      refetchQueries: [
+        {
+          query: GET_READ_LISTS
+        }
+      ]
+    }
+  );
 
-  const onSubmit = (value: InputForm) => {
-    console.log(value);
+  const { register, handleSubmit, reset } = useForm<InputForm>();
+
+  const onSubmit = async (data: InputForm) => {
+    await addReadList({ variables: { ...data } });
+    reset();
   };
 
   return (
