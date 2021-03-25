@@ -2,10 +2,12 @@ function pad(num: number) {
   return `${num}`.padStart(2, "0");
 }
 
-export function dateFormatter(datetime: Date | null) {
-  if (datetime === null) {
+export function dateFormatter(dateString: string | null) {
+  if (dateString === null) {
     return "N/A";
   }
+
+  const datetime = new Date(dateString);
 
   const year = datetime.getFullYear();
   const month = pad(datetime.getMonth() + 1);
