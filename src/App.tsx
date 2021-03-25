@@ -1,6 +1,5 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import "./App.css";
 
 const uri =
   process.env.NODE_ENV === "production"
