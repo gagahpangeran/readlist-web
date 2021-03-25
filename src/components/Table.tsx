@@ -1,10 +1,12 @@
+import { useQuery } from "@apollo/client";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import React, { useState } from "react";
-import ReadList from "../../graphql/ReadList";
-import { getSelected, Order } from "../utils/table";
+import { GET_READ_LISTS } from "../gql/query";
+import { GetReadLists } from "../types/generated-types";
+import { getSelected, Order, ReadListKey } from "../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
 import ReadListTableToolbar from "./TableToolbar";
@@ -27,14 +29,26 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ReadListTable() {
   const classes = useStyles();
   const [order, setOrder] = useState<Order>("desc");
-  const [orderBy, setOrderBy] = useState<keyof ReadList>("submittedAt");
+  const [orderBy, setOrderBy] = useState<ReadListKey>("submittedAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const readList: ReadList[] = [];
+  const { data, loading, refetch } = useQuery<GetReadLists>(GET_READ_LISTS, {
+    fetchPolicy: "network-only"
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (data === undefined) {
+    return <div>No Data!</div>;
+  }
+
+  const { readLists } = data;
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
-    property: keyof ReadList
+    property: ReadListKey
   ) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -43,7 +57,7 @@ export default function ReadListTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = readList?.map(n => n.id) ?? [];
+      const newSelecteds = readLists?.map(n => n.id) ?? [];
       setSelected(newSelecteds);
       return;
     }
@@ -60,10 +74,7 @@ export default function ReadListTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <ReadListTableToolbar
-          selected={selected}
-          refetch={() => console.log("refetch")}
-        />
+        <ReadListTableToolbar selected={selected} refetch={refetch} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -77,10 +88,10 @@ export default function ReadListTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={readList?.length ?? 0}
+              rowCount={readLists?.length ?? 0}
             />
             <ReadListTableBody
-              rows={readList}
+              rows={readLists}
               order={order}
               orderBy={orderBy}
               loading={false}
