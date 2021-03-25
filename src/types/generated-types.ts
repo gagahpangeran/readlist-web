@@ -10,6 +10,11 @@
 export interface DeleteReadLists_deleteReadLists {
   __typename: "ReadList";
   id: string;
+  title: string;
+  link: string;
+  isRead: boolean;
+  submittedAt: DateTime;
+  readAt: DateTime | null;
 }
 
 export interface DeleteReadLists {
@@ -41,6 +46,25 @@ export interface GetReadLists_readLists {
 
 export interface GetReadLists {
   readLists: GetReadLists_readLists[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: ReadList
+// ====================================================
+
+export interface ReadList {
+  __typename: "ReadList";
+  id: string;
+  title: string;
+  link: string;
+  isRead: boolean;
+  submittedAt: DateTime;
+  readAt: DateTime | null;
 }
 
 /* tslint:disable */
