@@ -5,14 +5,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import React from "react";
-import ReadList from "../../graphql/ReadList";
-import { Order } from "../utils/table";
+import { Order, ReadListKey } from "../utils/table";
 
 interface Props {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof ReadList
+    property: ReadListKey
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
@@ -37,7 +36,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface HeadCell {
-  id: keyof ReadList;
+  id: ReadListKey;
   label: string;
   align: "left" | "right";
 }
@@ -59,7 +58,7 @@ export default function ReadListTableHead(props: Props) {
     rowCount,
     onRequestSort
   } = props;
-  const createSortHandler = (property: keyof ReadList) => (
+  const createSortHandler = (property: ReadListKey) => (
     event: React.MouseEvent<unknown>
   ) => {
     onRequestSort(event, property);
