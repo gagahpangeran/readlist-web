@@ -7,10 +7,17 @@ import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   className: string;
   closeForm: () => void;
+}
+
+interface InputForm {
+  link: string;
+  title: string;
+  isRead: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,17 +33,36 @@ export default function ToolbarForm(props: Props) {
   const { className, closeForm } = props;
   const classes = useStyles();
 
+  const { register, handleSubmit } = useForm<InputForm>();
+
+  const onSubmit = (value: InputForm) => {
+    console.log(value);
+  };
+
   return (
     <>
       <form
         className={`${classes.root} ${className}`}
         noValidate
         autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <TextField name="link" label="Link" autoFocus={true} />
-        <TextField name="title" label="Title" />
+        <TextField
+          inputRef={register}
+          name="link"
+          label="Link"
+          autoFocus={true}
+        />
+        <TextField inputRef={register} name="title" label="Title" />
         <FormControlLabel
-          control={<Checkbox defaultChecked name="isRead" color="primary" />}
+          control={
+            <Checkbox
+              inputRef={register}
+              defaultChecked
+              name="isRead"
+              color="primary"
+            />
+          }
           label="Already Read?"
         />
 
