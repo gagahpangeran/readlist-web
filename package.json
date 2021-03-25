@@ -46,9 +46,16 @@
     "build": "run-p build:*",
     "build:app": "react-scripts build",
     "build:lambda": "netlify-lambda build ./server/functions",
+    "format": "run-s format:*",
+    "format:eslint": "eslint --fix  \"**/*.{ts,tsx}\"",
+    "format:prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint --quiet \"**/*.{ts,tsx}\"",
+    "lint:prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "gen-types": "apollo client:codegen ./src/generated-types.ts --target=typescript --outputFlat"
+    "gen-types": "apollo client:codegen ./src/generated-types.ts --target=typescript --outputFlat",
+    "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
