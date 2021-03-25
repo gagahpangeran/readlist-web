@@ -1,5 +1,6 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import Data from "./Data";
 
 const uri =
   process.env.NODE_ENV === "production"
@@ -15,7 +16,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <h1>Hello!</h1>
+        <Data />
       </div>
     </ApolloProvider>
   );
