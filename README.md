@@ -1,24 +1,15 @@
-# React Netlify Lambda GraphQL
+# Readlist Web
 
-Template for serverless app using React, Netlify Lambda, and GraphQL with
-Typescript support.
+Web version of [Readlist](https://github.com/gagahpangeran/readlist/) using
+React Material UI and GraphQL.
 
-## Live Demo
+This project is also includes the serverless graphql backend using Apollo
+GraphQL Lambda and netlify functions.
 
-<https://rnlg.gagahpangeran.com>
+And of course support Typescript.
 
-## Deploy to Netlify
+## Template
 
-Instant deploy to your Netlify.
-
-[![](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gagahpangeran/react-netlify-lambda-graphql)
-
-## How to use
-
-`// TODO`
-
-## Javascript version
-
-I don't have time and energy to create the Javascript version. Just rename all
-`.ts` files to `.js` and `.tsx` files to `.jsx`, don't forget to delete the type
-definition.
+Built using
+[React Netlify Lambda GraphQL](https://github.com/gagahpangeran/react-netlify-lambda-graphql/)
+template.
