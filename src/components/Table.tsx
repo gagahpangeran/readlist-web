@@ -74,7 +74,7 @@ export default function ReadListTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <ReadListTableToolbar selected={selected} refetch={refetch} />
+        <ReadListTableToolbar selected={selected} refetch={() => refetch()} />
         <TableContainer>
           <Table
             className={classes.table}
