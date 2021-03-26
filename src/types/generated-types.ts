@@ -17,7 +17,7 @@ export interface AddReadList_addReadList {
 }
 
 export interface AddReadList {
-  addReadList: AddReadList_addReadList[];
+  addReadList: AddReadList_addReadList;
 }
 
 export interface AddReadListVariables {
@@ -58,10 +58,10 @@ export interface DeleteReadListsVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetReadLists
+// GraphQL query operation: GetAllReadLists
 // ====================================================
 
-export interface GetReadLists_readLists {
+export interface GetAllReadLists_allReadLists {
   __typename: "ReadList";
   id: string;
   title: string;
@@ -70,8 +70,8 @@ export interface GetReadLists_readLists {
   readAt: DateTime | null;
 }
 
-export interface GetReadLists {
-  readLists: GetReadLists_readLists[];
+export interface GetAllReadLists {
+  allReadLists: GetAllReadLists_allReadLists[];
 }
 
 /* tslint:disable */

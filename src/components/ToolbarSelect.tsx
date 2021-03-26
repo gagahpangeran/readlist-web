@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import { DELETE_READ_LISTS } from "../gql/mutation";
-import { GET_READ_LISTS } from "../gql/query";
+import { GET_ALL_READ_LISTS } from "../gql/query";
 import {
   DeleteReadLists,
   DeleteReadListsVariables
@@ -25,7 +25,7 @@ export default function ToolbarSelect(props: Props) {
   >(DELETE_READ_LISTS, {
     refetchQueries: [
       {
-        query: GET_READ_LISTS
+        query: GET_ALL_READ_LISTS
       }
     ]
   });

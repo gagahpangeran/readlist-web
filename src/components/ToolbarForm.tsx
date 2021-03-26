@@ -10,7 +10,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ADD_READ_LIST } from "../gql/mutation";
-import { GET_READ_LISTS } from "../gql/query";
+import { GET_ALL_READ_LISTS } from "../gql/query";
 import { AddReadList, AddReadListVariables } from "../types/generated-types";
 
 interface Props {
@@ -42,7 +42,7 @@ export default function ToolbarForm(props: Props) {
     {
       refetchQueries: [
         {
-          query: GET_READ_LISTS
+          query: GET_ALL_READ_LISTS
         }
       ]
     }

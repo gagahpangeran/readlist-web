@@ -4,8 +4,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import React, { useState } from "react";
-import { GET_READ_LISTS } from "../gql/query";
-import { GetReadLists } from "../types/generated-types";
+import { GET_ALL_READ_LISTS } from "../gql/query";
+import { GetAllReadLists } from "../types/generated-types";
 import { getSelected, Order, ReadListKey } from "../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
@@ -32,9 +32,10 @@ export default function ReadListTable() {
   const [orderBy, setOrderBy] = useState<ReadListKey>("submittedAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { data, loading, refetch } = useQuery<GetReadLists>(GET_READ_LISTS, {
-    fetchPolicy: "network-only"
-  });
+  const { data, loading, refetch } = useQuery<GetAllReadLists>(
+    GET_ALL_READ_LISTS,
+    { fetchPolicy: "network-only" }
+  );
 
   if (loading) {
     return <div>Loading...</div>;
@@ -44,7 +45,7 @@ export default function ReadListTable() {
     return <div>No Data!</div>;
   }
 
-  const { readLists } = data;
+  const { allReadLists } = data;
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
@@ -57,7 +58,7 @@ export default function ReadListTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = readLists?.map(n => n.id) ?? [];
+      const newSelecteds = allReadLists?.map(n => n.id) ?? [];
       setSelected(newSelecteds);
       return;
     }
@@ -88,10 +89,10 @@ export default function ReadListTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={readLists?.length ?? 0}
+              rowCount={allReadLists?.length ?? 0}
             />
             <ReadListTableBody
-              rows={readLists}
+              rows={allReadLists}
               order={order}
               orderBy={orderBy}
               loading={false}
