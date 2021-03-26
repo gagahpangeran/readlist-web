@@ -6,14 +6,13 @@ import {
   Context
 } from "aws-lambda";
 import "reflect-metadata";
-import { buildSchema } from "type-graphql";
 import { connectDB } from "../db";
-import ReadListResolver from "../ReadListResolver";
+import { createSchema } from "../schema";
 
 const createHandler = async () => {
   await connectDB();
 
-  const schema = await buildSchema({ resolvers: [ReadListResolver] });
+  const schema = await createSchema();
   const server = new ApolloServer({ schema });
   return server.createHandler();
 };
