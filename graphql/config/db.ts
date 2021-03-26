@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import {
+  Connection,
   ConnectionOptions,
   createConnection,
   getConnectionManager
@@ -23,16 +24,20 @@ const connectionOptions: ConnectionOptions = {
   entities: [ReadList]
 };
 
-export async function connectDB() {
-  const connectionManager = getConnectionManager();
+const connectionManager = getConnectionManager();
+
+export async function getConnection() {
+  let connection: Connection;
 
   if (connectionManager.has(CONNECTION_NAME)) {
-    const connection = connectionManager.get(CONNECTION_NAME);
+    connection = await connectionManager.get(CONNECTION_NAME);
 
     if (!connection.isConnected) {
-      await connection.connect();
+      connection.connect();
     }
   } else {
-    await createConnection(connectionOptions);
+    connection = await createConnection(connectionOptions);
   }
+
+  return connection;
 }

@@ -6,12 +6,9 @@ import {
   Context
 } from "aws-lambda";
 import "reflect-metadata";
-import { connectDB } from "../config/db";
 import { createSchema } from "../config/schema";
 
 const createHandler = async () => {
-  await connectDB();
-
   const schema = await createSchema();
   const server = new ApolloServer({ schema });
   return server.createHandler();
