@@ -1,29 +1,29 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import ReadList from "../model/ReadList";
-
-let readLists = [new ReadList("http://test.com", "Test", true)];
+import {
+  addReadList,
+  deleteReadLists,
+  getAllReadList
+} from "../service/ReadListService";
 
 @Resolver(_of => ReadList)
 export default class ReadListResolver {
   @Query(_returns => [ReadList])
-  readLists() {
-    return readLists;
+  async allReadLists() {
+    return await getAllReadList();
   }
 
-  @Mutation(_returns => [ReadList])
+  @Mutation(_returns => ReadList)
   addReadList(
     @Arg("link") link: string,
     @Arg("title") title: string,
     @Arg("isRead") isRead: boolean
   ) {
-    readLists.push(new ReadList(link, title, isRead));
-    return readLists;
+    return addReadList(new ReadList(link, title, isRead));
   }
 
   @Mutation(_returns => [ReadList])
   deleteReadLists(@Arg("ids", _type => [String]) ids: string[]) {
-    const newReadLists = readLists.filter(({ id }) => !ids.includes(id));
-    readLists = newReadLists;
-    return readLists;
+    return deleteReadLists(ids);
   }
 }
