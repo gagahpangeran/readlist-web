@@ -7,9 +7,12 @@ import {
 } from "aws-lambda";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
+import { connectDB } from "../db";
 import ReadListResolver from "../ReadListResolver";
 
 const createHandler = async () => {
+  await connectDB();
+
   const schema = await buildSchema({ resolvers: [ReadListResolver] });
   const server = new ApolloServer({ schema });
   return server.createHandler();
