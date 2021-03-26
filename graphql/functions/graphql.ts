@@ -6,8 +6,8 @@ import {
   Context
 } from "aws-lambda";
 import "reflect-metadata";
-import { connectDB } from "../db";
-import { createSchema } from "../schema";
+import { connectDB } from "../config/db";
+import { createSchema } from "../config/schema";
 
 const createHandler = async () => {
   await connectDB();

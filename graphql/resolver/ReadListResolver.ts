@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import ReadList from "./ReadList";
+import ReadList from "../model/ReadList";
 
 let readLists = [new ReadList("http://test.com", "Test", true)];
 

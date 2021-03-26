@@ -4,7 +4,7 @@ import {
   createConnection,
   getConnectionManager
 } from "typeorm";
-import ReadList from "./ReadList";
+import ReadList from "../model/ReadList";
 
 dotenv.config();
 
