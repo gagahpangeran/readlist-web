@@ -10,9 +10,10 @@ import { dateFormatter } from "../../utils/helper";
 
 interface Props {
   readList: ReadList;
+  onCancelButtonClick: () => void;
 }
 
-export default function EditRow({ readList }: Props) {
+export default function EditRow({ readList, onCancelButtonClick }: Props) {
   const { title, link, readAt, comment } = readList;
 
   return (
@@ -58,7 +59,11 @@ export default function EditRow({ readList }: Props) {
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>
-        <Button variant="outlined" color="secondary">
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={onCancelButtonClick}
+        >
           Cancel
         </Button>
       </TableCell>
