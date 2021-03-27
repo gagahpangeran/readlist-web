@@ -12,6 +12,7 @@ import {
   ReadListKey,
   stableSort
 } from "../../utils/table";
+import DeleteButton from "../Button/DeleteButton";
 
 interface Props {
   rows: ReadList[] | null;
@@ -67,7 +68,9 @@ export default function ReadListTableBody(props: Props) {
               </TableCell>
               <TableCell align="left">{dateFormatter(row.readAt)}</TableCell>
               <TableCell align="left">{row.comment ?? "-"}</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>
+                <DeleteButton id={row.id} />
+              </TableCell>
             </TableRow>
           );
         }
