@@ -5,7 +5,7 @@ export const READ_LIST = gql`
     id
     title
     link
-    submittedAt
     readAt
+    comment
   }
 `;

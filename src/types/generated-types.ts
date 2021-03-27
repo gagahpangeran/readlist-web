@@ -12,8 +12,8 @@ export interface AddReadList_addReadList {
   id: string;
   title: string;
   link: string;
-  submittedAt: DateTime;
   readAt: DateTime | null;
+  comment: string | null;
 }
 
 export interface AddReadList {
@@ -23,7 +23,8 @@ export interface AddReadList {
 export interface AddReadListVariables {
   link: string;
   title: string;
-  isRead: boolean;
+  readAt?: DateTime | null;
+  comment?: string | null;
 }
 
 /* tslint:disable */
@@ -40,8 +41,8 @@ export interface DeleteReadLists_deleteReadLists {
   id: string;
   title: string;
   link: string;
-  submittedAt: DateTime;
   readAt: DateTime | null;
+  comment: string | null;
 }
 
 export interface DeleteReadLists {
@@ -66,8 +67,8 @@ export interface GetAllReadLists_allReadLists {
   id: string;
   title: string;
   link: string;
-  submittedAt: DateTime;
   readAt: DateTime | null;
+  comment: string | null;
 }
 
 export interface GetAllReadLists {
@@ -88,8 +89,8 @@ export interface ReadList {
   id: string;
   title: string;
   link: string;
-  submittedAt: DateTime;
   readAt: DateTime | null;
+  comment: string | null;
 }
 
 /* tslint:disable */
