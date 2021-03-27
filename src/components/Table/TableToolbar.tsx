@@ -7,9 +7,9 @@ import {
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import React from "react";
-import ToolbarForm from "./ToolbarForm";
-import ToolbarNormal from "./ToolbarNormal";
-import ToolbarSelect from "./ToolbarSelect";
+import ToolbarForm from "../ToolbarForm";
+import ToolbarNormal from "../ToolbarNormal";
+import ToolbarSelect from "../ToolbarSelect";
 
 interface Props {
   selected: string[];

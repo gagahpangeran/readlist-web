@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import ReadListTable from "./components/Table";
+import ReadListTable from "./components/Table/Table";
 
 const uri =
   process.env.NODE_ENV === "production"

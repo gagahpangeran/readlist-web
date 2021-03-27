@@ -5,7 +5,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import React from "react";
-import { Order, ReadListKey } from "../utils/table";
+import { Order, ReadListKey } from "../../utils/table";
 
 interface Props {
   numSelected: number;
