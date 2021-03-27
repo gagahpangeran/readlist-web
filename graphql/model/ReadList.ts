@@ -1,10 +1,11 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
+import { BaseModel } from "./BaseModel";
 
 @ObjectType()
 @Entity()
-export default class ReadList {
+export default class ReadList extends BaseModel {
   @Field(_type => ID)
   @PrimaryColumn()
   id: string;
@@ -17,20 +18,20 @@ export default class ReadList {
   @Column()
   title: string;
 
-  @Field()
-  @Column()
-  submittedAt: Date;
-
   @Field({ nullable: true })
   @Column({ nullable: true })
-  readAt: Date | null;
+  readAt?: Date;
 
-  constructor(link: string, title: string, isRead: boolean) {
-    const now = new Date();
+  @Field({ nullable: true })
+  @Column("text", { nullable: true })
+  comment?: string;
+
+  constructor(link: string, title: string, readAt?: Date, comment?: string) {
+    super();
     this.id = uuidv4();
     this.link = link;
     this.title = title;
-    this.submittedAt = now;
-    this.readAt = isRead ? now : null;
+    this.readAt = readAt;
+    this.comment = comment;
   }
 }
