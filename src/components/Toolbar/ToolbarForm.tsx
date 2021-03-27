@@ -11,7 +11,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ADD_READ_LIST } from "../../gql/mutation";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
-import { AddReadList, AddReadListVariables } from "../../types/generated-types";
+import {
+  AddReadList,
+  AddReadListInput,
+  AddReadListVariables
+} from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 
 interface Props {
@@ -61,13 +65,13 @@ export default function ToolbarForm(props: Props) {
     comment
   }: InputForm) => {
     comment = comment.trim();
-    const data: AddReadListVariables = {
+    const data: AddReadListInput = {
       link,
       title,
       readAt: isRead ? new Date(readAt).toISOString() : null,
       comment: comment.length > 0 ? comment : null
     };
-    await addReadList({ variables: { ...data } });
+    await addReadList({ variables: { data } });
     reset();
   };
 
