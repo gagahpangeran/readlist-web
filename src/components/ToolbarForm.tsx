@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { ADD_READ_LIST } from "../gql/mutation";
 import { GET_ALL_READ_LISTS } from "../gql/query";
 import { AddReadList, AddReadListVariables } from "../types/generated-types";
+import { dateFormatter } from "../utils/helper";
 
 interface Props {
   className: string;
@@ -22,6 +23,7 @@ interface InputForm {
   link: string;
   title: string;
   isRead: boolean;
+  readAt: string | null;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,12 +50,26 @@ export default function ToolbarForm(props: Props) {
     }
   );
 
-  const { register, handleSubmit, reset } = useForm<InputForm>();
+  const { register, handleSubmit, reset, watch } = useForm<InputForm>();
 
-  const onSubmit = async (data: InputForm) => {
+  const onSubmit = async ({ link, title, isRead, readAt }: InputForm) => {
+    if (isRead && readAt !== null) {
+      readAt = new Date(readAt).toISOString();
+    } else {
+      readAt = null;
+    }
+
+    const data: AddReadListVariables = {
+      link,
+      title,
+      readAt
+    };
+
     await addReadList({ variables: { ...data } });
     reset();
   };
+
+  const isRead = watch("isRead") ?? true;
 
   return (
     <>
@@ -63,28 +79,42 @@ export default function ToolbarForm(props: Props) {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <TextField
-          inputRef={register}
-          name="link"
-          label="Link"
-          autoFocus={true}
-        />
-        <TextField inputRef={register} name="title" label="Title" />
-        <FormControlLabel
-          control={
-            <Checkbox
-              inputRef={register}
-              defaultChecked
-              name="isRead"
-              color="primary"
-            />
-          }
-          label="Already Read?"
-        />
+        <div>
+          <TextField
+            inputRef={register}
+            name="link"
+            label="Link"
+            autoFocus={true}
+          />
+          <TextField inputRef={register} name="title" label="Title" />
+        </div>
 
-        <Button variant="contained" color="primary" type="submit">
-          Submit
-        </Button>
+        <div>
+          <FormControlLabel
+            control={
+              <Checkbox
+                inputRef={register}
+                defaultChecked
+                name="isRead"
+                color="primary"
+              />
+            }
+            label="Already Read?"
+          />
+          <TextField
+            inputRef={register}
+            type="date"
+            name="readAt"
+            defaultValue={dateFormatter(new Date())}
+            disabled={!isRead}
+          />
+        </div>
+
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </div>
       </form>
 
       <Tooltip title="Add New Read List">
