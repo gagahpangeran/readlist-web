@@ -23,7 +23,8 @@ interface InputForm {
   link: string;
   title: string;
   isRead: boolean;
-  readAt: string | null;
+  readAt: string;
+  comment: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,19 +53,20 @@ export default function ToolbarForm(props: Props) {
 
   const { register, handleSubmit, reset, watch } = useForm<InputForm>();
 
-  const onSubmit = async ({ link, title, isRead, readAt }: InputForm) => {
-    if (isRead && readAt !== null) {
-      readAt = new Date(readAt).toISOString();
-    } else {
-      readAt = null;
-    }
-
+  const onSubmit = async ({
+    link,
+    title,
+    isRead,
+    readAt,
+    comment
+  }: InputForm) => {
+    comment = comment.trim();
     const data: AddReadListVariables = {
       link,
       title,
-      readAt
+      readAt: isRead ? new Date(readAt).toISOString() : null,
+      comment: comment.length > 0 ? comment : null
     };
-
     await addReadList({ variables: { ...data } });
     reset();
   };
@@ -87,9 +89,7 @@ export default function ToolbarForm(props: Props) {
             autoFocus={true}
           />
           <TextField inputRef={register} name="title" label="Title" />
-        </div>
 
-        <div>
           <FormControlLabel
             control={
               <Checkbox
@@ -111,6 +111,12 @@ export default function ToolbarForm(props: Props) {
         </div>
 
         <div>
+          <TextField
+            inputRef={register}
+            name="comment"
+            placeholder="Comment"
+            multiline
+          />
           <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
