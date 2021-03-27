@@ -19,12 +19,12 @@ interface Props {
   order: Order;
   orderBy: ReadListKey;
   loading: boolean;
-  onRowClick: (event: React.MouseEvent<unknown>, id: string) => void;
+  onCheckboxClick: (id: string) => void;
   isSelected: (id: string) => boolean;
 }
 
 export default function ReadListTableBody(props: Props) {
-  const { rows, order, orderBy, loading, onRowClick, isSelected } = props;
+  const { rows, order, orderBy, loading, onCheckboxClick, isSelected } = props;
 
   if (rows === null || loading) {
     return (
@@ -55,7 +55,7 @@ export default function ReadListTableBody(props: Props) {
               <TableCell padding="checkbox">
                 <Checkbox
                   checked={isItemSelected}
-                  onClick={e => onRowClick(e, row.id)}
+                  onClick={() => onCheckboxClick(row.id)}
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </TableCell>

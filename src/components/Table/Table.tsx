@@ -65,7 +65,7 @@ export default function ReadListTable() {
     setSelected([]);
   };
 
-  const handleClick = (_: React.MouseEvent<unknown>, id: string) => {
+  const handleClick = (id: string) => {
     const newSelected = getSelected(selected, id);
     setSelected(newSelected);
   };
@@ -96,7 +96,7 @@ export default function ReadListTable() {
               order={order}
               orderBy={orderBy}
               loading={false}
-              onRowClick={handleClick}
+              onCheckboxClick={handleClick}
               isSelected={isSelected}
             />
           </Table>
