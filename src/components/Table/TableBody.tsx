@@ -1,21 +1,19 @@
-import Checkbox from "@material-ui/core/Checkbox";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
 import { ReadList } from "../../types/generated-types";
-import { dateFormatter } from "../../utils/helper";
 import {
   getComparator,
   Order,
   ReadListKey,
   stableSort
 } from "../../utils/table";
-import DeleteButton from "../Button/DeleteButton";
+import ReadListTableRow from "./TableRow";
 
 interface Props {
-  rows: ReadList[] | null;
+  rows: ReadList[];
   order: Order;
   orderBy: ReadListKey;
   loading: boolean;
@@ -40,39 +38,16 @@ export default function ReadListTableBody(props: Props) {
 
   return (
     <TableBody>
-      {stableSort(rows ?? [], getComparator(order, orderBy)).map(
-        (row, index) => {
-          const isItemSelected = isSelected(row.id);
-          const labelId = `enhanced-table-checkbox-${index}`;
-
-          return (
-            <TableRow
-              hover
-              tabIndex={-1}
-              key={row.id}
-              selected={isItemSelected}
-            >
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={isItemSelected}
-                  onClick={() => onCheckboxClick(row.id)}
-                  inputProps={{ "aria-labelledby": labelId }}
-                />
-              </TableCell>
-              <TableCell component="th" id={labelId} scope="row">
-                <a href={row.link} target="_blank" rel="nofollow noreferrer">
-                  {row.title}
-                </a>
-              </TableCell>
-              <TableCell align="left">{dateFormatter(row.readAt)}</TableCell>
-              <TableCell align="left">{row.comment ?? "-"}</TableCell>
-              <TableCell>
-                <DeleteButton id={row.id} />
-              </TableCell>
-            </TableRow>
-          );
-        }
-      )}
+      {stableSort(rows ?? [], getComparator(order, orderBy)).map(row => {
+        return (
+          <ReadListTableRow
+            key={row.id}
+            readList={row}
+            isRowSelected={isSelected(row.id)}
+            onCheckboxClick={onCheckboxClick}
+          />
+        );
+      })}
     </TableBody>
   );
 }
