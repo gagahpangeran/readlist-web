@@ -43,8 +43,8 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: "title", label: "Title", align: "left" },
-  { id: "submittedAt", label: "Submitted At", align: "right" },
-  { id: "readAt", label: "Read At", align: "right" }
+  { id: "readAt", label: "Read At", align: "left" },
+  { id: "comment", label: "Comment", align: "left" }
 ];
 
 export default function ReadListTableHead(props: Props) {

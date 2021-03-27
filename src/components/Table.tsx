@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ReadListTable() {
   const classes = useStyles();
   const [order, setOrder] = useState<Order>("desc");
-  const [orderBy, setOrderBy] = useState<ReadListKey>("submittedAt");
+  const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
 
   const { data, loading, refetch } = useQuery<GetAllReadLists>(

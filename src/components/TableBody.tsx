@@ -60,10 +60,8 @@ export default function ReadListTableBody(props: Props) {
                   {row.title}
                 </a>
               </TableCell>
-              <TableCell align="right">
-                {dateFormatter(row.submittedAt)}
-              </TableCell>
-              <TableCell align="right">{dateFormatter(row.readAt)}</TableCell>
+              <TableCell align="left">{dateFormatter(row.readAt)}</TableCell>
+              <TableCell align="left">{row.comment ?? "-"}</TableCell>
             </TableRow>
           );
         }
