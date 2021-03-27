@@ -12,9 +12,10 @@ import {
 
 interface Props {
   id: string;
+  disabled: boolean;
 }
 
-function DeleteButton({ id }: Props) {
+function DeleteButton({ id, disabled }: Props) {
   const [deleteReadLists] = useMutation<
     DeleteReadLists,
     DeleteReadListsVariables
@@ -32,7 +33,12 @@ function DeleteButton({ id }: Props) {
 
   return (
     <Tooltip title="Delete">
-      <IconButton aria-label="delete" color="secondary" onClick={handleClick}>
+      <IconButton
+        aria-label="delete"
+        color="secondary"
+        onClick={handleClick}
+        disabled={disabled}
+      >
         <DeleteIcon />
       </IconButton>
     </Tooltip>
