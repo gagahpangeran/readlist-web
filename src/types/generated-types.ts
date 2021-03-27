@@ -30,6 +30,33 @@ export interface AddReadListVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: EditReadList
+// ====================================================
+
+export interface EditReadList_editReadList {
+  __typename: "ReadList";
+  id: string;
+  title: string;
+  link: string;
+  readAt: DateTime | null;
+  comment: string | null;
+}
+
+export interface EditReadList {
+  editReadList: EditReadList_editReadList;
+}
+
+export interface EditReadListVariables {
+  id: string;
+  data: ReadListInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: DeleteReadLists
 // ====================================================
 
