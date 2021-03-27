@@ -46,7 +46,7 @@ export default function ToolbarSelect(props: Props) {
       </Typography>
 
       <Tooltip title="Delete">
-        <IconButton aria-label="delete" onClick={handleClick}>
+        <IconButton aria-label="delete" color="secondary" onClick={handleClick}>
           <DeleteIcon />
         </IconButton>
       </Tooltip>
