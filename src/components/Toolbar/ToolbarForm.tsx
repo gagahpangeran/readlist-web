@@ -11,24 +11,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ADD_READ_LIST } from "../../gql/mutation";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
-import {
-  AddReadList,
-  AddReadListVariables,
-  ReadListInput
-} from "../../types/generated-types";
-import { dateFormatter } from "../../utils/helper";
+import { AddReadList, AddReadListVariables } from "../../types/generated-types";
+import { dateFormatter, getSubmitData, InputData } from "../../utils/helper";
 
 interface Props {
   className: string;
   closeForm: () => void;
-}
-
-interface InputForm {
-  link: string;
-  title: string;
-  isRead: boolean;
-  readAt: string;
-  comment: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,22 +43,10 @@ export default function ToolbarForm(props: Props) {
     }
   );
 
-  const { register, handleSubmit, reset, watch } = useForm<InputForm>();
+  const { register, handleSubmit, reset, watch } = useForm<InputData>();
 
-  const onSubmit = async ({
-    link,
-    title,
-    isRead,
-    readAt,
-    comment
-  }: InputForm) => {
-    comment = comment.trim();
-    const data: ReadListInput = {
-      link,
-      title,
-      readAt: isRead ? new Date(readAt).toISOString() : null,
-      comment: comment.length > 0 ? comment : null
-    };
+  const onSubmit = async (inputData: InputData) => {
+    const data = getSubmitData(inputData);
     await addReadList({ variables: { data } });
     reset();
   };
