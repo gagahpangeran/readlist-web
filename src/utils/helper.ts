@@ -2,23 +2,18 @@ function pad(num: number) {
   return `${num}`.padStart(2, "0");
 }
 
-export function dateFormatter(dateString: string | null) {
-  if (dateString === null) {
-    return "N/A";
+export function dateFormatter(datetime: string | Date | null) {
+  if (datetime === null) {
+    return "-";
   }
 
-  const datetime = new Date(dateString);
+  datetime = new Date(datetime);
 
   const year = datetime.getFullYear();
   const month = pad(datetime.getMonth() + 1);
   const date = pad(datetime.getDate());
 
-  const hour = pad(datetime.getHours());
-  const minute = pad(datetime.getMinutes());
-  const second = pad(datetime.getSeconds());
-
   const fullDate = `${year}-${month}-${date}`;
-  const fullTime = `${hour}:${minute}:${second}`;
 
-  return `${fullDate}, ${fullTime}`;
+  return fullDate;
 }
