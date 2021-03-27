@@ -10,7 +10,7 @@ import EditButton from "../Button/EditButton";
 interface Props {
   readList: ReadList;
   isRowSelected: boolean;
-  onCheckboxClick: (id: string) => void;
+  onCheckboxClick: () => void;
   onEditButtonClick: () => void;
 }
 
@@ -25,7 +25,7 @@ export default function NormalRow({
   return (
     <TableRow tabIndex={-1} selected={isRowSelected}>
       <TableCell padding="checkbox">
-        <Checkbox checked={isRowSelected} onClick={() => onCheckboxClick(id)} />
+        <Checkbox checked={isRowSelected} onClick={onCheckboxClick} />
       </TableCell>
       <TableCell component="th" scope="row">
         <a href={link} target="_blank" rel="nofollow noreferrer">

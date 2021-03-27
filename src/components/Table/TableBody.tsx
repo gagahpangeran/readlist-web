@@ -56,7 +56,7 @@ export default function ReadListTableBody(props: Props) {
             key={row.id}
             readList={row}
             isRowSelected={isSelected(row.id)}
-            onCheckboxClick={onCheckboxClick}
+            onCheckboxClick={() => onCheckboxClick(row.id)}
             onEditButtonClick={() => onEditButtonClick(row.id)}
           />
         )
