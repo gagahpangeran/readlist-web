@@ -9,10 +9,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ADD_READ_LIST } from "../gql/mutation";
-import { GET_ALL_READ_LISTS } from "../gql/query";
-import { AddReadList, AddReadListVariables } from "../types/generated-types";
-import { dateFormatter } from "../utils/helper";
+import { ADD_READ_LIST } from "../../gql/mutation";
+import { GET_ALL_READ_LISTS } from "../../gql/query";
+import { AddReadList, AddReadListVariables } from "../../types/generated-types";
+import { dateFormatter } from "../../utils/helper";
 
 interface Props {
   className: string;

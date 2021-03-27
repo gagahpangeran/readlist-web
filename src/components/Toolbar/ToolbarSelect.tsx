@@ -4,12 +4,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
-import { DELETE_READ_LISTS } from "../gql/mutation";
-import { GET_ALL_READ_LISTS } from "../gql/query";
+import { DELETE_READ_LISTS } from "../../gql/mutation";
+import { GET_ALL_READ_LISTS } from "../../gql/query";
 import {
   DeleteReadLists,
   DeleteReadListsVariables
-} from "../types/generated-types";
+} from "../../types/generated-types";
 
 interface Props {
   className: string;
