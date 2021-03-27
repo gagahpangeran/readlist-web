@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
 import ReadList from "../model/ReadList";
 import {
   addReadList,
@@ -6,6 +6,20 @@ import {
   getAllReadList
 } from "../service/ReadListService";
 
+@InputType()
+class AddReadListInput implements Partial<ReadList> {
+  @Field()
+  link!: string;
+
+  @Field()
+  title!: string;
+
+  @Field({ nullable: true })
+  readAt?: Date;
+
+  @Field({ nullable: true })
+  comment?: string;
+}
 @Resolver(_of => ReadList)
 export default class ReadListResolver {
   @Query(_returns => [ReadList])
@@ -14,12 +28,8 @@ export default class ReadListResolver {
   }
 
   @Mutation(_returns => ReadList)
-  addReadList(
-    @Arg("link") link: string,
-    @Arg("title") title: string,
-    @Arg("readAt", { nullable: true }) readAt?: Date,
-    @Arg("comment", { nullable: true }) comment?: string
-  ) {
+  addReadList(@Arg("data") newReadListData: AddReadListInput) {
+    const { link, title, readAt, comment } = newReadListData;
     return addReadList(new ReadList(link, title, readAt, comment));
   }
 
