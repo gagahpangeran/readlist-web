@@ -21,7 +21,7 @@ export interface AddReadList {
 }
 
 export interface AddReadListVariables {
-  data: AddReadListInput;
+  data: ReadListInput;
 }
 
 /* tslint:disable */
@@ -99,7 +99,7 @@ export interface ReadList {
 // START Enums and Input Objects
 //==============================================================
 
-export interface AddReadListInput {
+export interface ReadListInput {
   link: string;
   title: string;
   readAt?: DateTime | null;

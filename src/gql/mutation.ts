@@ -3,7 +3,7 @@ import { READ_LIST } from "./fragment";
 
 export const ADD_READ_LIST = gql`
   ${READ_LIST}
-  mutation AddReadList($data: AddReadListInput!) {
+  mutation AddReadList($data: ReadListInput!) {
     addReadList(data: $data) {
       ...ReadList
     }

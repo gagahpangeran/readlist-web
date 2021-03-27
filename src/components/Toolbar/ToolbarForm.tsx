@@ -13,8 +13,8 @@ import { ADD_READ_LIST } from "../../gql/mutation";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
 import {
   AddReadList,
-  AddReadListInput,
-  AddReadListVariables
+  AddReadListVariables,
+  ReadListInput
 } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 
@@ -65,7 +65,7 @@ export default function ToolbarForm(props: Props) {
     comment
   }: InputForm) => {
     comment = comment.trim();
-    const data: AddReadListInput = {
+    const data: ReadListInput = {
       link,
       title,
       readAt: isRead ? new Date(readAt).toISOString() : null,
