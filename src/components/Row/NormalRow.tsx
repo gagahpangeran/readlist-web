@@ -5,17 +5,20 @@ import React from "react";
 import { ReadList } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 import DeleteButton from "../Button/DeleteButton";
+import EditButton from "../Button/EditButton";
 
 interface Props {
   readList: ReadList;
   isRowSelected: boolean;
   onCheckboxClick: (id: string) => void;
+  onEditButtonClick: () => void;
 }
 
 export default function NormalRow({
   readList,
   isRowSelected,
-  onCheckboxClick
+  onCheckboxClick,
+  onEditButtonClick
 }: Props) {
   const { id, title, link, readAt, comment } = readList;
 
@@ -32,6 +35,7 @@ export default function NormalRow({
       <TableCell align="left">{dateFormatter(readAt)}</TableCell>
       <TableCell align="left">{comment ?? "-"}</TableCell>
       <TableCell>
+        <EditButton onClick={onEditButtonClick} disabled={isRowSelected} />
         <DeleteButton id={id} disabled={isRowSelected} />
       </TableCell>
     </TableRow>
