@@ -11,11 +11,11 @@ import {
 } from "../../types/generated-types";
 
 interface Props {
-  id: string;
-  disabled: boolean;
+  ids: string[];
+  disabled?: boolean;
 }
 
-function DeleteButton({ id, disabled }: Props) {
+function DeleteButton({ ids, disabled }: Props) {
   const [deleteReadLists] = useMutation<
     DeleteReadLists,
     DeleteReadListsVariables
@@ -28,7 +28,7 @@ function DeleteButton({ id, disabled }: Props) {
   });
 
   const handleClick = async () => {
-    await deleteReadLists({ variables: { ids: [id] } });
+    await deleteReadLists({ variables: { ids } });
   };
 
   return (

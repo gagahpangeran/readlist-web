@@ -36,7 +36,7 @@ export default function NormalRow({
       <TableCell align="left">{comment ?? "-"}</TableCell>
       <TableCell>
         <EditButton onClick={onEditButtonClick} disabled={isRowSelected} />
-        <DeleteButton id={id} disabled={isRowSelected} />
+        <DeleteButton ids={[id]} disabled={isRowSelected} />
       </TableCell>
     </TableRow>
   );
