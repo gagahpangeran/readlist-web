@@ -10,7 +10,7 @@ import {
   ReadListKey,
   stableSort
 } from "../../utils/table";
-import ReadListTableRow from "./TableRow";
+import NormalRow from "../Row/NormalRow";
 
 interface Props {
   rows: ReadList[];
@@ -40,7 +40,7 @@ export default function ReadListTableBody(props: Props) {
     <TableBody>
       {stableSort(rows ?? [], getComparator(order, orderBy)).map(row => {
         return (
-          <ReadListTableRow
+          <NormalRow
             key={row.id}
             readList={row}
             isRowSelected={isSelected(row.id)}

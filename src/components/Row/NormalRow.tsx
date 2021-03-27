@@ -12,7 +12,7 @@ interface Props {
   onCheckboxClick: (id: string) => void;
 }
 
-export default function ReadListTableRow({
+export default function NormalRow({
   readList,
   isRowSelected,
   onCheckboxClick
@@ -20,7 +20,7 @@ export default function ReadListTableRow({
   const { id, title, link, readAt, comment } = readList;
 
   return (
-    <TableRow hover tabIndex={-1} key={id} selected={isRowSelected}>
+    <TableRow tabIndex={-1} selected={isRowSelected}>
       <TableCell padding="checkbox">
         <Checkbox checked={isRowSelected} onClick={() => onCheckboxClick(id)} />
       </TableCell>
@@ -32,7 +32,7 @@ export default function ReadListTableRow({
       <TableCell align="left">{dateFormatter(readAt)}</TableCell>
       <TableCell align="left">{comment ?? "-"}</TableCell>
       <TableCell>
-        <DeleteButton id={id} />
+        <DeleteButton id={id} disabled={isRowSelected} />
       </TableCell>
     </TableRow>
   );
