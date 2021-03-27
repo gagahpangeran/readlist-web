@@ -15,7 +15,7 @@ import {
 } from "../service/ReadListService";
 
 @InputType()
-class AddReadListInput implements Partial<ReadList> {
+class ReadListInput implements Partial<ReadList> {
   @Field()
   link!: string;
 
@@ -36,9 +36,8 @@ export default class ReadListResolver {
   }
 
   @Mutation(_returns => ReadList)
-  addReadList(@Arg("data") newReadListData: AddReadListInput) {
-    const { link, title, readAt, comment } = newReadListData;
-    return addReadList(new ReadList(link, title, readAt, comment));
+  addReadList(@Arg("data") readListData: ReadListInput) {
+    return addReadList(readListData);
   }
 
   @Mutation(_returns => [ReadList])

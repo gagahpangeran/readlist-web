@@ -6,12 +6,21 @@ async function getRepo() {
   return conn.getRepository(ReadList);
 }
 
+interface Data {
+  link: string;
+  title: string;
+  readAt?: Date;
+  comment?: string;
+}
+
 export async function getAllReadList() {
   return await (await getRepo()).find();
 }
 
-export async function addReadList(readList: ReadList) {
-  return await (await getRepo()).save(readList);
+export async function addReadList({ link, title, readAt, comment }: Data) {
+  return await (await getRepo()).save(
+    new ReadList(link, title, readAt, comment)
+  );
 }
 
 export async function deleteReadLists(ids: string[]) {
