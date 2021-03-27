@@ -48,9 +48,6 @@ export default function ReadListTableBody(props: Props) {
           return (
             <TableRow
               hover
-              onClick={event => onRowClick(event, row.id)}
-              role="checkbox"
-              aria-checked={isItemSelected}
               tabIndex={-1}
               key={row.id}
               selected={isItemSelected}
@@ -58,6 +55,7 @@ export default function ReadListTableBody(props: Props) {
               <TableCell padding="checkbox">
                 <Checkbox
                   checked={isItemSelected}
+                  onClick={e => onRowClick(e, row.id)}
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </TableCell>
