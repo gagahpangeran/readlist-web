@@ -15,6 +15,6 @@ export async function addReadList(readList: ReadList) {
 }
 
 export async function deleteReadLists(ids: string[]) {
-  await (await getRepo()).delete(ids);
+  await (await getRepo()).softDelete(ids);
   return await getAllReadList();
 }
