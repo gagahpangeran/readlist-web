@@ -11,6 +11,7 @@ import ReadList from "../model/ReadList";
 import {
   addReadList,
   deleteReadLists,
+  editReadList,
   getAllReadList
 } from "../service/ReadListService";
 
@@ -38,6 +39,14 @@ export default class ReadListResolver {
   @Mutation(_returns => ReadList)
   addReadList(@Arg("data") readListData: ReadListInput) {
     return addReadList(readListData);
+  }
+
+  @Mutation(_returns => ReadList)
+  editReadList(
+    @Arg("id", _type => ID) id: string,
+    @Arg("data") readListData: ReadListInput
+  ) {
+    return editReadList(id, readListData);
   }
 
   @Mutation(_returns => [ReadList])
