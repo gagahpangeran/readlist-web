@@ -17,9 +17,10 @@ export default class ReadListResolver {
   addReadList(
     @Arg("link") link: string,
     @Arg("title") title: string,
-    @Arg("isRead") isRead: boolean
+    @Arg("readAt", { nullable: true }) readAt?: Date,
+    @Arg("comment", { nullable: true }) comment?: string
   ) {
-    return addReadList(new ReadList(link, title, isRead));
+    return addReadList(new ReadList(link, title, readAt, comment));
   }
 
   @Mutation(_returns => [ReadList])
