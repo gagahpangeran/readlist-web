@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { ConnectionOptions } from "typeorm";
+import migrations from "./graphql/migrations";
 import ReadList from "./graphql/model/ReadList";
 
 dotenv.config();
@@ -14,7 +15,8 @@ const connectionOptions: ConnectionOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [ReadList]
+  entities: [ReadList],
+  migrations
 };
 
 export default connectionOptions;
