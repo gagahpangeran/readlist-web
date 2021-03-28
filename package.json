@@ -64,7 +64,8 @@
     "eject": "react-scripts eject",
     "gen-types": "apollo client:codegen ./src/types/generated-types.ts --target=typescript --outputFlat --passthroughCustomScalars",
     "type-check": "tsc --noEmit",
-    "migration:create": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d ./graphql/migrations -n"
+    "migration:create": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d ./graphql/migrations -n",
+    "migration:run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
   },
   "eslintConfig": {
     "extends": [
