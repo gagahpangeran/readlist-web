@@ -1,28 +1,7 @@
-import dotenv from "dotenv";
-import {
-  Connection,
-  ConnectionOptions,
-  createConnection,
-  getConnectionManager
-} from "typeorm";
-import ReadList from "../model/ReadList";
-
-dotenv.config();
+import { Connection, createConnection, getConnectionManager } from "typeorm";
+import connectionOptions from "../../ormconfig";
 
 const CONNECTION_NAME = "default";
-
-const connectionOptions: ConnectionOptions = {
-  name: CONNECTION_NAME,
-  type: "mysql",
-  port: 3306,
-  synchronize: true,
-  logging: true,
-  host: process.env.DB_HOST,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  entities: [ReadList]
-};
 
 const connectionManager = getConnectionManager();
 
