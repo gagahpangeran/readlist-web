@@ -40,6 +40,7 @@ export default function ReadListTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [showComment, setShowComment] = useState(false);
+  const [delayed, setDelayed] = useState(true);
 
   const [getAllReadLists, { data, loading }] = useLazyQuery<
     GetAllReadLists,
@@ -55,6 +56,9 @@ export default function ReadListTable() {
         filter: { readAt: { isNull: false } }
       }
     });
+    setDelayed(true);
+    const timeout = setTimeout(() => setDelayed(false), 500);
+    return () => clearTimeout(timeout);
   }, [getAllReadLists, page, rowsPerPage]);
 
   const allReadLists = data?.allReadLists;
@@ -113,7 +117,7 @@ export default function ReadListTable() {
               rows={allReadLists}
               order={order}
               orderBy={orderBy}
-              loading={loading}
+              loading={loading || delayed}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
               showComment={showComment}
