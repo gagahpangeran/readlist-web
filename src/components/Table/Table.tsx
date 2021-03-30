@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
 import {
   GetAllReadLists,
@@ -37,18 +37,21 @@ export default function ReadListTable() {
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { data, loading, refetch } = useQuery<
+  const [getAllReadLists, { data, loading }] = useLazyQuery<
     GetAllReadLists,
     GetAllReadListsVariables
-  >(GET_ALL_READ_LISTS, {
-    variables: {
-      skip: 0,
-      limit: 20,
-      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
-      filter: { readAt: { isNull: false } }
-    },
-    fetchPolicy: "network-only"
-  });
+  >(GET_ALL_READ_LISTS, { fetchPolicy: "network-only" });
+
+  useEffect(() => {
+    getAllReadLists({
+      variables: {
+        skip: 0,
+        limit: 10,
+        sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
+        filter: { readAt: { isNull: false } }
+      }
+    });
+  }, [getAllReadLists]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -88,7 +91,10 @@ export default function ReadListTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <ReadListTableToolbar selected={selected} refetch={() => refetch()} />
+        <ReadListTableToolbar
+          selected={selected}
+          refetch={() => console.log("refetch")}
+        />
         <TableContainer>
           <Table
             className={classes.table}
