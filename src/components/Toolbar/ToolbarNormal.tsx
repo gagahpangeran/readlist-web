@@ -10,10 +10,11 @@ interface Props {
   className: string;
   refetch: () => void;
   openForm: () => void;
+  changeShowFilter: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, refetch, openForm } = props;
+  const { className, refetch, openForm, changeShowFilter } = props;
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function ToolbarNormal(props: Props) {
         </IconButton>
       </Tooltip>
       <Tooltip title="Filter list">
-        <IconButton aria-label="filter list">
+        <IconButton onClick={changeShowFilter} aria-label="filter list">
           <FilterListIcon />
         </IconButton>
       </Tooltip>

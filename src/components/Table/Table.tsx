@@ -98,6 +98,8 @@ export default function ReadListTable() {
         <ReadListTableToolbar
           selected={selected}
           refetch={() => console.log("refetch")}
+          showComment={showComment}
+          changeShowComment={() => setShowComment(!showComment)}
         />
         <TableContainer>
           <Table

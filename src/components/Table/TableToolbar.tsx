@@ -1,12 +1,14 @@
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   createStyles,
   lighten,
   makeStyles,
   Theme
 } from "@material-ui/core/styles";
+import Switch from "@material-ui/core/Switch";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import ToolbarForm from "../Toolbar/ToolbarForm";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
@@ -14,6 +16,8 @@ import ToolbarSelect from "../Toolbar/ToolbarSelect";
 interface Props {
   selected: string[];
   refetch: () => void;
+  showComment: boolean;
+  changeShowComment: () => void;
 }
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
@@ -40,9 +44,10 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
-  const { selected, refetch } = props;
+  const { selected, refetch, showComment, changeShowComment } = props;
 
-  const [showForm, setShowForm] = React.useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
 
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
@@ -63,17 +68,34 @@ export default function ReadListTableToolbar(props: Props) {
         className={classes.title}
         refetch={refetch}
         openForm={() => setShowForm(true)}
+        changeShowFilter={() => setShowFilter(!showFilter)}
       />
     );
   };
 
   return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: selected.length > 0
-      })}
-    >
-      {renderToolbarMenu()}
-    </Toolbar>
+    <>
+      <Toolbar
+        className={clsx(classes.root, {
+          [classes.highlight]: selected.length > 0
+        })}
+      >
+        {renderToolbarMenu()}
+      </Toolbar>
+      {showFilter && (
+        <Toolbar>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={showComment}
+                onChange={changeShowComment}
+                color="primary"
+              />
+            }
+            label="Show Comment"
+          />
+        </Toolbar>
+      )}
+    </>
   );
 }
