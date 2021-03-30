@@ -19,9 +19,14 @@ import { dateFormatter, getSubmitData, InputData } from "../../utils/helper";
 interface Props {
   readList: ReadList;
   onCancelButtonClick: () => void;
+  showComment: boolean;
 }
 
-export default function EditRow({ readList, onCancelButtonClick }: Props) {
+export default function EditRow({
+  readList,
+  onCancelButtonClick,
+  showComment
+}: Props) {
   const { id, title, link, readAt, comment } = readList;
 
   const [editReadList] = useMutation<EditReadList, EditReadListVariables>(
@@ -86,15 +91,18 @@ export default function EditRow({ readList, onCancelButtonClick }: Props) {
         />
       </TableCell>
 
-      <TableCell align="left">
-        <TextField
-          inputRef={register}
-          name="comment"
-          placeholder="Comment"
-          multiline
-          defaultValue={comment}
-        />
-      </TableCell>
+      {showComment && (
+        <TableCell align="left">
+          <TextField
+            inputRef={register}
+            name="comment"
+            placeholder="Comment"
+            multiline
+            defaultValue={comment}
+          />
+        </TableCell>
+      )}
+
       <TableCell>
         <Button
           variant="contained"

@@ -17,6 +17,7 @@ interface Props {
   order: Order;
   orderBy: string;
   rowCount: number;
+  showComment: boolean;
 }
 
 const useStyles = makeStyles(() =>
@@ -54,7 +55,8 @@ export default function ReadListTableHead(props: Props) {
     orderBy,
     numSelected,
     rowCount,
-    onRequestSort
+    onRequestSort,
+    showComment
   } = props;
   const createSortHandler = (property: ReadListKey) => (
     event: React.MouseEvent<unknown>
@@ -73,26 +75,30 @@ export default function ReadListTableHead(props: Props) {
             onChange={onSelectAllClick}
           />
         </TableCell>
-        {headCells.map(headCell => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.align}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
+        {headCells
+          .filter(headCell => headCell.id !== "comment" || showComment)
+          .map(headCell => (
+            <TableCell
+              key={headCell.id}
+              align={headCell.align}
+              sortDirection={orderBy === headCell.id ? order : false}
             >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            </TableCell>
+          ))}
         <TableCell>Actions</TableCell>
       </TableRow>
     </TableHead>

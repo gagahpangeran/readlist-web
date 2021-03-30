@@ -39,6 +39,7 @@ export default function ReadListTable() {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showComment, setShowComment] = useState(false);
 
   const [getAllReadLists, { data, loading }] = useLazyQuery<
     GetAllReadLists,
@@ -112,6 +113,7 @@ export default function ReadListTable() {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={allReadLists?.length ?? 0}
+              showComment={showComment}
             />
             <ReadListTableBody
               rows={allReadLists}
@@ -120,6 +122,7 @@ export default function ReadListTable() {
               loading={false}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
+              showComment={showComment}
             />
           </Table>
         </TableContainer>

@@ -12,13 +12,15 @@ interface Props {
   isRowSelected: boolean;
   onCheckboxClick: () => void;
   onEditButtonClick: () => void;
+  showComment: boolean;
 }
 
 export default function NormalRow({
   readList,
   isRowSelected,
   onCheckboxClick,
-  onEditButtonClick
+  onEditButtonClick,
+  showComment
 }: Props) {
   const { id, title, link, readAt, comment } = readList;
 
@@ -33,7 +35,7 @@ export default function NormalRow({
         </a>
       </TableCell>
       <TableCell align="left">{dateFormatter(readAt)}</TableCell>
-      <TableCell align="left">{comment ?? "-"}</TableCell>
+      {showComment && <TableCell align="left">{comment ?? "-"}</TableCell>}
       <TableCell>
         <EditButton onClick={onEditButtonClick} disabled={isRowSelected} />
         <DeleteButton ids={[id]} disabled={isRowSelected} />

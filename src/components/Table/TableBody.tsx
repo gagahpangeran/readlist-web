@@ -20,11 +20,20 @@ interface Props {
   loading: boolean;
   onCheckboxClick: (id: string) => void;
   isSelected: (id: string) => boolean;
+  showComment: boolean;
 }
 
 export default function ReadListTableBody(props: Props) {
   const [editedRow, setEditedRow] = useState("");
-  const { rows, order, orderBy, loading, onCheckboxClick, isSelected } = props;
+  const {
+    rows,
+    order,
+    orderBy,
+    loading,
+    onCheckboxClick,
+    isSelected,
+    showComment
+  } = props;
 
   if (rows === null || loading) {
     return (
@@ -50,6 +59,7 @@ export default function ReadListTableBody(props: Props) {
             key={row.id}
             readList={row}
             onCancelButtonClick={() => onEditButtonClick("")}
+            showComment={showComment}
           />
         ) : (
           <NormalRow
@@ -58,6 +68,7 @@ export default function ReadListTableBody(props: Props) {
             isRowSelected={isSelected(row.id)}
             onCheckboxClick={() => onCheckboxClick(row.id)}
             onEditButtonClick={() => onEditButtonClick(row.id)}
+            showComment={showComment}
           />
         )
       )}
