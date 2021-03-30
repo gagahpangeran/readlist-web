@@ -99,7 +99,7 @@ export default function ReadListTableHead(props: Props) {
               </TableSortLabel>
             </TableCell>
           ))}
-        <TableCell>Actions</TableCell>
+        <TableCell align="center">Actions</TableCell>
       </TableRow>
     </TableHead>
   );

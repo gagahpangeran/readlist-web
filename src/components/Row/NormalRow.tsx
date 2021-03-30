@@ -29,14 +29,18 @@ export default function NormalRow({
       <TableCell padding="checkbox">
         <Checkbox checked={isRowSelected} onClick={onCheckboxClick} />
       </TableCell>
-      <TableCell component="th" scope="row">
+      <TableCell width={showComment ? "460" : "550"}>
         <a href={link} target="_blank" rel="nofollow noreferrer">
           {title}
         </a>
       </TableCell>
-      <TableCell align="left">{dateFormatter(readAt)}</TableCell>
-      {showComment && <TableCell align="left">{comment ?? "-"}</TableCell>}
-      <TableCell>
+      <TableCell width="90">{dateFormatter(readAt)}</TableCell>
+      {showComment && (
+        <TableCell align="left" width="90">
+          {comment ?? "-"}
+        </TableCell>
+      )}
+      <TableCell width="100">
         <EditButton onClick={onEditButtonClick} disabled={isRowSelected} />
         <DeleteButton ids={[id]} disabled={isRowSelected} />
       </TableCell>
