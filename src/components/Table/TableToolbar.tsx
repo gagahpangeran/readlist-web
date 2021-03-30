@@ -47,7 +47,6 @@ export default function ReadListTableToolbar(props: Props) {
   const { selected, refetch, showComment, changeShowComment } = props;
 
   const [showForm, setShowForm] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
 
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
@@ -68,7 +67,6 @@ export default function ReadListTableToolbar(props: Props) {
         className={classes.title}
         refetch={refetch}
         openForm={() => setShowForm(true)}
-        changeShowFilter={() => setShowFilter(!showFilter)}
       />
     );
   };
@@ -82,20 +80,19 @@ export default function ReadListTableToolbar(props: Props) {
       >
         {renderToolbarMenu()}
       </Toolbar>
-      {showFilter && (
-        <Toolbar>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={showComment}
-                onChange={changeShowComment}
-                color="primary"
-              />
-            }
-            label="Show Comment"
-          />
-        </Toolbar>
-      )}
+
+      <Toolbar>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showComment}
+              onChange={changeShowComment}
+              color="primary"
+            />
+          }
+          label="Show Comment"
+        />
+      </Toolbar>
     </>
   );
 }
