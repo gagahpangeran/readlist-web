@@ -60,17 +60,8 @@ export interface EditReadListVariables {
 // GraphQL mutation operation: DeleteReadLists
 // ====================================================
 
-export interface DeleteReadLists_deleteReadLists {
-  __typename: "ReadList";
-  id: string;
-  title: string;
-  link: string;
-  readAt: DateTime | null;
-  comment: string | null;
-}
-
 export interface DeleteReadLists {
-  deleteReadLists: DeleteReadLists_deleteReadLists[];
+  deleteReadLists: boolean;
 }
 
 export interface DeleteReadListsVariables {
