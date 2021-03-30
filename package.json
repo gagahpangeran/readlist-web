@@ -43,6 +43,7 @@
     "lint:prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "gen": "run-s gen:*",
     "gen:schema": "apollo schema:download ./src/types/schema.json --endpoint=http://localhost:9000/graphql",
     "gen:types": "apollo client:codegen ./src/types/generated-types.ts --target=typescript --outputFlat --passthroughCustomScalars",
     "type-check": "tsc --noEmit"
