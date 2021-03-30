@@ -46,12 +46,6 @@
     "gen-types": "apollo client:codegen ./src/types/generated-types.ts --target=typescript --outputFlat --passthroughCustomScalars",
     "type-check": "tsc --noEmit"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
