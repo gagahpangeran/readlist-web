@@ -44,7 +44,8 @@ export default function ReadListTable() {
     variables: {
       skip: 0,
       limit: 20,
-      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC }
+      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
+      filter: { readAt: { isNull: false } }
     },
     fetchPolicy: "network-only"
   });

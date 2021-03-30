@@ -94,6 +94,7 @@ export interface GetAllReadListsVariables {
   skip: number;
   limit: number;
   sort: ReadListSort;
+  filter: ReadListFilter;
 }
 
 /* tslint:disable */
@@ -131,6 +132,28 @@ export enum Order {
 export enum ReadListFields {
   readAt = "readAt",
   title = "title",
+}
+
+export interface CommentFilter {
+  contains?: string | null;
+  isNull?: boolean | null;
+}
+
+export interface ContainsFilter {
+  contains?: string | null;
+}
+
+export interface ReadAtFilter {
+  from?: DateTime | null;
+  to?: DateTime | null;
+  isNull?: boolean | null;
+}
+
+export interface ReadListFilter {
+  title?: ContainsFilter | null;
+  link?: ContainsFilter | null;
+  comment?: CommentFilter | null;
+  readAt?: ReadAtFilter | null;
 }
 
 export interface ReadListInput {
