@@ -32,10 +32,13 @@ export default function ReadListTable() {
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { data, loading, refetch } = useQuery<GetAllReadLists>(
-    GET_ALL_READ_LISTS,
-    { fetchPolicy: "network-only" }
-  );
+  const { data, loading, refetch } = useQuery<
+    GetAllReadLists,
+    GetAllReadListsVariables
+  >(GET_ALL_READ_LISTS, {
+    variables: { skip: 0, limit: 20 },
+    fetchPolicy: "network-only"
+  });
 
   if (loading) {
     return <div>Loading...</div>;

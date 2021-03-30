@@ -90,6 +90,11 @@ export interface GetAllReadLists {
   allReadLists: GetAllReadLists_allReadLists[];
 }
 
+export interface GetAllReadListsVariables {
+  skip: number;
+  limit: number;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
