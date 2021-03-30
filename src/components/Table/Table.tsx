@@ -5,7 +5,12 @@ import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import React, { useState } from "react";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
-import { GetAllReadLists } from "../../types/generated-types";
+import {
+  GetAllReadLists,
+  GetAllReadListsVariables,
+  Order as ReadListOrder,
+  ReadListFields
+} from "../../types/generated-types";
 import { getSelected, Order, ReadListKey } from "../../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
@@ -36,7 +41,11 @@ export default function ReadListTable() {
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
-    variables: { skip: 0, limit: 20 },
+    variables: {
+      skip: 0,
+      limit: 20,
+      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC }
+    },
     fetchPolicy: "network-only"
   });
 

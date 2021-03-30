@@ -93,6 +93,7 @@ export interface GetAllReadLists {
 export interface GetAllReadListsVariables {
   skip: number;
   limit: number;
+  sort: ReadListSort;
 }
 
 /* tslint:disable */
@@ -122,11 +123,26 @@ export interface ReadList {
 // START Enums and Input Objects
 //==============================================================
 
+export enum Order {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+export enum ReadListFields {
+  readAt = "readAt",
+  title = "title",
+}
+
 export interface ReadListInput {
   link: string;
   title: string;
   readAt?: DateTime | null;
   comment?: string | null;
+}
+
+export interface ReadListSort {
+  order: Order;
+  fields: ReadListFields;
 }
 
 //==============================================================
