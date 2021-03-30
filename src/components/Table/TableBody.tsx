@@ -14,7 +14,7 @@ import EditRow from "../Row/EditRow";
 import NormalRow from "../Row/NormalRow";
 
 interface Props {
-  rows: ReadList[];
+  rows?: ReadList[];
   order: Order;
   orderBy: ReadListKey;
   loading: boolean;
@@ -35,7 +35,7 @@ export default function ReadListTableBody(props: Props) {
     showComment
   } = props;
 
-  if (rows === null || loading) {
+  if (loading || rows === undefined) {
     return (
       <TableBody>
         <TableRow>

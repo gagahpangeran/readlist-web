@@ -57,15 +57,7 @@ export default function ReadListTable() {
     });
   }, [getAllReadLists, page, rowsPerPage]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (data === undefined) {
-    return <div>No Data!</div>;
-  }
-
-  const { allReadLists } = data;
+  const allReadLists = data?.allReadLists;
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
@@ -121,7 +113,7 @@ export default function ReadListTable() {
               rows={allReadLists}
               order={order}
               orderBy={orderBy}
-              loading={false}
+              loading={loading}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
               showComment={showComment}
