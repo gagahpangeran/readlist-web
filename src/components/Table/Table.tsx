@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
+import TablePagination from "@material-ui/core/TablePagination";
 import React, { useEffect, useState } from "react";
 import { GET_ALL_READ_LISTS } from "../../gql/query";
 import {
@@ -36,6 +37,8 @@ export default function ReadListTable() {
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [getAllReadLists, { data, loading }] = useLazyQuery<
     GetAllReadLists,
@@ -45,13 +48,13 @@ export default function ReadListTable() {
   useEffect(() => {
     getAllReadLists({
       variables: {
-        skip: 0,
-        limit: 10,
+        skip: page * rowsPerPage,
+        limit: rowsPerPage,
         sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
         filter: { readAt: { isNull: false } }
       }
     });
-  }, [getAllReadLists]);
+  }, [getAllReadLists, page, rowsPerPage]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -120,6 +123,20 @@ export default function ReadListTable() {
             />
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={Array.from({ length: 10 }).map(
+            (_, i) => (i + 1) * 5
+          )}
+          component="div"
+          count={-1}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={(_, page) => setPage(page)}
+          onChangeRowsPerPage={e => {
+            setRowsPerPage(Number(e.target.value));
+            setPage(0);
+          }}
+        />
       </Paper>
     </div>
   );
