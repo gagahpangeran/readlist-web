@@ -2,6 +2,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
 
@@ -9,10 +10,11 @@ interface Props {
   className: string;
   refetch: () => void;
   openForm: () => void;
+  openLoginForm: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, refetch, openForm } = props;
+  const { className, refetch, openForm, openLoginForm } = props;
 
   return (
     <>
@@ -25,6 +27,11 @@ export default function ToolbarNormal(props: Props) {
         List
       </Typography>
 
+      <Tooltip title="Login">
+        <IconButton onClick={openLoginForm} aria-label="login">
+          <PersonAddIcon color="primary" />
+        </IconButton>
+      </Tooltip>
       <Tooltip title="Add New Read List">
         <IconButton onClick={openForm} aria-label="add new read list">
           <AddIcon />

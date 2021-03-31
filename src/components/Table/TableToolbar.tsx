@@ -18,6 +18,7 @@ interface Props {
   refetch: () => void;
   showComment: boolean;
   changeShowComment: () => void;
+  openLoginForm: () => void;
 }
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
@@ -44,7 +45,13 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
-  const { selected, refetch, showComment, changeShowComment } = props;
+  const {
+    selected,
+    refetch,
+    showComment,
+    changeShowComment,
+    openLoginForm
+  } = props;
 
   const [showForm, setShowForm] = useState(false);
 
@@ -67,6 +74,7 @@ export default function ReadListTableToolbar(props: Props) {
         className={classes.title}
         refetch={refetch}
         openForm={() => setShowForm(true)}
+        openLoginForm={openLoginForm}
       />
     );
   };

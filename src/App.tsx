@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useState } from "react";
+import LoginForm from "./components/Form/LoginForm";
 import ReadListTable from "./components/Table/Table";
 
 const client = new ApolloClient({
@@ -10,12 +11,18 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [isLoginFormOpen, setisLoginFormOpen] = useState(false);
+
   return (
     <ApolloProvider client={client}>
       <Container component="main" maxWidth="md">
         <Typography variant="h2">Read List</Typography>
-        <ReadListTable />
+        <ReadListTable openLoginForm={() => setisLoginFormOpen(true)} />
       </Container>
+      <LoginForm
+        open={isLoginFormOpen}
+        handleClose={() => setisLoginFormOpen(false)}
+      />
     </ApolloProvider>
   );
 }
