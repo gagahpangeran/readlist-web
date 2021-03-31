@@ -9,6 +9,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LOGIN } from "../../gql/mutation";
 import { Login, LoginVariables } from "../../types/generated-types";
+import { saveToken } from "../../utils/helper";
 
 interface Props {
   open: boolean;
@@ -28,8 +29,8 @@ export default function LoginForm({ open, handleClose }: Props) {
 
   useEffect(() => {
     if (!loading) {
-      if (data !== undefined) {
-        console.log(data);
+      if (data !== undefined && data !== null) {
+        saveToken(data.login.token);
       }
 
       if (error !== undefined) {
