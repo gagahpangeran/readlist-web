@@ -20,8 +20,15 @@ export const EDIT_READ_LIST = gql`
 `;
 
 export const DELETE_READ_LISTS = gql`
-  ${READ_LIST}
   mutation DeleteReadLists($ids: [ID!]!) {
     deleteReadLists(ids: $ids)
+  }
+`;
+
+export const LOGIN = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      token
+    }
   }
 `;
