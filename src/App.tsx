@@ -4,13 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import ReadListTable from "./components/Table/Table";
 
-const uri =
-  process.env.NODE_ENV === "production"
-    ? "/graphql"
-    : "http://localhost:9000/graphql";
-
 const client = new ApolloClient({
-  uri,
+  uri: process.env.REACT_APP_GRAPHQL,
   cache: new InMemoryCache()
 });
 
