@@ -1,20 +1,16 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import LoginForm from "./components/Form/LoginForm";
 import ReadListTable from "./components/Table/Table";
-
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL,
-  cache: new InMemoryCache()
-});
+import { apolloClient } from "./context/apollo";
 
 function App() {
   const [isLoginFormOpen, setisLoginFormOpen] = useState(false);
 
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <Container component="main" maxWidth="md">
         <Typography variant="h2">Read List</Typography>
         <ReadListTable openLoginForm={() => setisLoginFormOpen(true)} />
