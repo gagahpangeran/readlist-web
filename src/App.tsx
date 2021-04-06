@@ -2,9 +2,9 @@ import { ApolloProvider } from "@apollo/client";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
+import { apolloClient } from "./apollo/client";
 import LoginForm from "./components/Form/LoginForm";
 import ReadListTable from "./components/Table/Table";
-import { apolloClient } from "./context/apollo";
 
 function App() {
   const [isLoginFormOpen, setisLoginFormOpen] = useState(false);
