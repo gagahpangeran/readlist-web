@@ -1,17 +1,14 @@
+import Checkbox from "@material-ui/core/Checkbox";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React, { useState } from "react";
 import { ReadList } from "../../types/generated-types";
-import {
-  getComparator,
-  Order,
-  ReadListKey,
-  stableSort
-} from "../../utils/table";
-import EditRow from "../Row/EditRow";
-import NormalRow from "../Row/NormalRow";
+import { dateFormatter } from "../../utils/helper";
+import { Order, ReadListKey } from "../../utils/table";
+import DeleteButton from "../Button/DeleteButton";
+import EditButton from "../Button/EditButton";
 
 interface Props {
   rows?: ReadList[];
@@ -47,31 +44,40 @@ export default function ReadListTableBody(props: Props) {
     );
   }
 
-  const onEditButtonClick = (id: string) => {
-    setEditedRow(id);
+  const onEditButtonClick = () => {
+    console.log("edit");
   };
 
   return (
     <TableBody>
-      {stableSort(rows ?? [], getComparator(order, orderBy)).map(row =>
-        row.id === editedRow ? (
-          <EditRow
-            key={row.id}
-            readList={row}
-            onCancelButtonClick={() => onEditButtonClick("")}
-            showComment={showComment}
-          />
-        ) : (
-          <NormalRow
-            key={row.id}
-            readList={row}
-            isRowSelected={isSelected(row.id)}
-            onCheckboxClick={() => onCheckboxClick(row.id)}
-            onEditButtonClick={() => onEditButtonClick(row.id)}
-            showComment={showComment}
-          />
-        )
-      )}
+      {rows.map(({ id, link, title, readAt, comment }) => {
+        const selected = isSelected(id);
+        return (
+          <TableRow key={id} tabIndex={-1} selected={selected}>
+            <TableCell padding="checkbox">
+              <Checkbox
+                checked={selected}
+                onClick={() => onCheckboxClick(id)}
+              />
+            </TableCell>
+            <TableCell width={showComment ? "460" : "550"}>
+              <a href={link} target="_blank" rel="nofollow noreferrer">
+                {title}
+              </a>
+            </TableCell>
+            <TableCell width="90">{dateFormatter(readAt)}</TableCell>
+            {showComment && (
+              <TableCell align="left" width="90">
+                {comment ?? "-"}
+              </TableCell>
+            )}
+            <TableCell width="100">
+              <EditButton onClick={onEditButtonClick} disabled={selected} />
+              <DeleteButton ids={[id]} disabled={selected} />
+            </TableCell>
+          </TableRow>
+        );
+      })}
     </TableBody>
   );
 }
