@@ -78,8 +78,9 @@ export interface DeleteReadListsVariables {
 // ====================================================
 
 export interface Login_login {
-  __typename: "AuthToken";
-  token: string | null;
+  __typename: "Auth";
+  token: string;
+  username: string;
 }
 
 export interface Login {
@@ -126,6 +127,19 @@ export interface GetAllReadListsVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: IsLogin
+// ====================================================
+
+export interface IsLogin {
+  isLogin: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: ReadList
 // ====================================================
 
@@ -136,6 +150,21 @@ export interface ReadList {
   link: string;
   readAt: DateTime | null;
   comment: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Auth
+// ====================================================
+
+export interface Auth {
+  __typename: "Auth";
+  token: string;
+  username: string;
 }
 
 /* tslint:disable */

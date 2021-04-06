@@ -27,7 +27,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "100",
+                "defaultValue": "10",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -51,7 +51,7 @@
                   "name": "ReadListSort",
                   "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "{order: DESC, fields: readAt}",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -83,6 +83,22 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isLogin",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -541,7 +557,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "AuthToken",
+                "name": "Auth",
                 "ofType": null
               }
             },
@@ -679,7 +695,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "AuthToken",
+        "name": "Auth",
         "description": null,
         "specifiedByUrl": null,
         "fields": [
@@ -688,9 +704,29 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "username",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
