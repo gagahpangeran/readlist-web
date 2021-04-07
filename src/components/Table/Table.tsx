@@ -1,4 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -39,26 +39,26 @@ export default function ReadListTable() {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [delayed, setDelayed] = useState(true);
 
-  const [getAllReadLists, { data, loading }] = useLazyQuery<
+  const { data, loading, refetch } = useQuery<
     GetAllReadLists,
     GetAllReadListsVariables
-  >(GET_ALL_READ_LISTS, { fetchPolicy: "network-only" });
+  >(GET_ALL_READ_LISTS, {
+    fetchPolicy: "cache-and-network",
+    variables: {
+      skip: page * rowsPerPage,
+      limit: rowsPerPage,
+      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
+      filter: { readAt: { isNull: false } }
+    }
+  });
 
   useEffect(() => {
-    getAllReadLists({
-      variables: {
-        skip: page * rowsPerPage,
-        limit: rowsPerPage,
-        sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
-        filter: { readAt: { isNull: false } }
-      }
+    refetch({
+      skip: page * rowsPerPage,
+      limit: rowsPerPage
     });
-    setDelayed(true);
-    const timeout = setTimeout(() => setDelayed(false), 500);
-    return () => clearTimeout(timeout);
-  }, [getAllReadLists, page, rowsPerPage]);
+  }, [refetch, page, rowsPerPage]);
 
   const allReadLists = data?.allReadLists;
 
@@ -113,7 +113,7 @@ export default function ReadListTable() {
               rows={allReadLists}
               order={order}
               orderBy={orderBy}
-              loading={loading || delayed}
+              loading={loading}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
             />
