@@ -62,7 +62,7 @@ export default function ReadListTableBody(props: Props) {
         </TableRow>
       )}
 
-      {rows?.map(({ id, link, title, readAt, comment }) => {
+      {rows?.map(({ id, link, title, readAt }) => {
         const selected = isSelected(id);
         return (
           <TableRow key={id} tabIndex={-1} selected={selected}>
@@ -85,7 +85,6 @@ export default function ReadListTableBody(props: Props) {
                   <DeleteButton ids={[id]} disabled={selected} />
                 </>
               )}
-              {comment !== null && <div>Show Comment</div>}
             </TableCell>
           </TableRow>
         );
