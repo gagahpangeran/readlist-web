@@ -4,6 +4,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
+import useAuth from "../../gql/auth";
 import { ReadList } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 import { Order, ReadListKey } from "../../utils/table";
@@ -21,6 +22,8 @@ interface Props {
 
 export default function ReadListTableBody(props: Props) {
   const { rows, order, orderBy, loading, onCheckboxClick, isSelected } = props;
+
+  const { isLogin } = useAuth();
 
   if (loading || rows === undefined) {
     return (
@@ -57,8 +60,12 @@ export default function ReadListTableBody(props: Props) {
             </TableCell>
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
             <TableCell width="100" align="center">
-              <EditButton onClick={onEditButtonClick} disabled={selected} />
-              <DeleteButton ids={[id]} disabled={selected} />
+              {isLogin && (
+                <>
+                  <EditButton onClick={onEditButtonClick} disabled={selected} />
+                  <DeleteButton ids={[id]} disabled={selected} />
+                </>
+              )}
               {comment !== null && <div>Show Comment</div>}
             </TableCell>
           </TableRow>
