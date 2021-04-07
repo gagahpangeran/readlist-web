@@ -39,6 +39,7 @@ export default function ReadListTable() {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [delayed, setDelayed] = useState(false);
 
   const { data, loading, refetch } = useQuery<
     GetAllReadLists,
@@ -52,6 +53,14 @@ export default function ReadListTable() {
       filter: { readAt: { isNull: false } }
     }
   });
+
+  useEffect(() => {
+    setDelayed(true);
+    const timeout = setTimeout(() => {
+      setDelayed(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [data]);
 
   useEffect(() => {
     refetch({
@@ -113,7 +122,7 @@ export default function ReadListTable() {
               rows={allReadLists}
               order={order}
               orderBy={orderBy}
-              loading={loading}
+              loading={loading || delayed}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
             />
