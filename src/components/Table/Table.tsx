@@ -43,7 +43,7 @@ export default function ReadListTable() {
   const [delayed, setDelayed] = useState(false);
   const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
 
-  const { data, loading, refetch } = useQuery<
+  const { data, loading, refetch, error } = useQuery<
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
@@ -124,6 +124,7 @@ export default function ReadListTable() {
               order={order}
               orderBy={orderBy}
               loading={loading || delayed}
+              error={error !== undefined}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
             />

@@ -16,12 +16,21 @@ interface Props {
   order: Order;
   orderBy: ReadListKey;
   loading: boolean;
+  error: boolean;
   onCheckboxClick: (id: string) => void;
   isSelected: (id: string) => boolean;
 }
 
 export default function ReadListTableBody(props: Props) {
-  const { rows, order, orderBy, loading, onCheckboxClick, isSelected } = props;
+  const {
+    rows,
+    order,
+    orderBy,
+    loading,
+    error,
+    onCheckboxClick,
+    isSelected
+  } = props;
 
   const { isLogin } = useAuth();
 
@@ -36,6 +45,14 @@ export default function ReadListTableBody(props: Props) {
           {loading && <LinearProgress />}
         </TableCell>
       </TableRow>
+
+      {!loading && error && (
+        <TableRow>
+          <TableCell colSpan={4} align="center">
+            Error, there is something wrong!
+          </TableCell>
+        </TableRow>
+      )}
       {rows?.map(({ id, link, title, readAt, comment }) => {
         const selected = isSelected(id);
         return (
