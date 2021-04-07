@@ -4,6 +4,43 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: IsLogin
+// ====================================================
+
+export interface IsLogin {
+  isLogin: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Login
+// ====================================================
+
+export interface Login_login {
+  __typename: "Auth";
+  token: string;
+  username: string;
+}
+
+export interface Login {
+  login: Login_login;
+}
+
+export interface LoginVariables {
+  username: string;
+  password: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: AddReadList
 // ====================================================
 
@@ -74,30 +111,6 @@ export interface DeleteReadListsVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: Login
-// ====================================================
-
-export interface Login_login {
-  __typename: "Auth";
-  token: string;
-  username: string;
-}
-
-export interface Login {
-  login: Login_login;
-}
-
-export interface LoginVariables {
-  username: string;
-  password: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: GetAllReadLists
 // ====================================================
 
@@ -127,11 +140,13 @@ export interface GetAllReadListsVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: IsLogin
+// GraphQL fragment: Auth
 // ====================================================
 
-export interface IsLogin {
-  isLogin: boolean;
+export interface Auth {
+  __typename: "Auth";
+  token: string;
+  username: string;
 }
 
 /* tslint:disable */
@@ -150,21 +165,6 @@ export interface ReadList {
   link: string;
   readAt: DateTime | null;
   comment: string | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL fragment: Auth
-// ====================================================
-
-export interface Auth {
-  __typename: "Auth";
-  token: string;
-  username: string;
 }
 
 /* tslint:disable */
