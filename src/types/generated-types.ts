@@ -41,6 +41,48 @@ export interface LoginVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: OpenedDialog
+// ====================================================
+
+export interface OpenedDialog {
+  openedDialog: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetAllReadLists
+// ====================================================
+
+export interface GetAllReadLists_allReadLists {
+  __typename: "ReadList";
+  id: string;
+  title: string;
+  link: string;
+  readAt: DateTime | null;
+  comment: string | null;
+}
+
+export interface GetAllReadLists {
+  allReadLists: GetAllReadLists_allReadLists[];
+}
+
+export interface GetAllReadListsVariables {
+  skip: number;
+  limit: number;
+  sort: ReadListSort;
+  filter: ReadListFilter;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: AddReadList
 // ====================================================
 
@@ -103,35 +145,6 @@ export interface DeleteReadLists {
 
 export interface DeleteReadListsVariables {
   ids: string[];
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetAllReadLists
-// ====================================================
-
-export interface GetAllReadLists_allReadLists {
-  __typename: "ReadList";
-  id: string;
-  title: string;
-  link: string;
-  readAt: DateTime | null;
-  comment: string | null;
-}
-
-export interface GetAllReadLists {
-  allReadLists: GetAllReadLists_allReadLists[];
-}
-
-export interface GetAllReadListsVariables {
-  skip: number;
-  limit: number;
-  sort: ReadListSort;
-  filter: ReadListFilter;
 }
 
 /* tslint:disable */

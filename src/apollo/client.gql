@@ -2,4 +2,5 @@
 
 extend type Query {
   isLogin: Boolean!
+  openedDialog: String
 }
