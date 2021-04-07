@@ -3,6 +3,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
+import useAuth from "../../gql/auth";
 import { Order, ReadListKey } from "../../utils/table";
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
 
 export default function ReadListTableHead(props: Props) {
   const { onSelectAllClick, numSelected, rowCount } = props;
+  const { isLogin } = useAuth();
 
   return (
     <TableHead>
@@ -32,9 +34,11 @@ export default function ReadListTableHead(props: Props) {
         </TableCell>
         <TableCell width="550">Title</TableCell>
         <TableCell width="90">Read At</TableCell>
-        <TableCell align="center" width="100">
-          Actions
-        </TableCell>
+        {isLogin && (
+          <TableCell align="center" width="100">
+            Actions
+          </TableCell>
+        )}
       </TableRow>
     </TableHead>
   );

@@ -78,14 +78,12 @@ export default function ReadListTableBody(props: Props) {
               </a>
             </TableCell>
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
-            <TableCell width="100" align="center">
-              {isLogin && (
-                <>
-                  <EditButton onClick={onEditButtonClick} disabled={selected} />
-                  <DeleteButton ids={[id]} disabled={selected} />
-                </>
-              )}
-            </TableCell>
+            {isLogin && (
+              <TableCell width="100" align="center">
+                <EditButton onClick={onEditButtonClick} disabled={selected} />
+                <DeleteButton ids={[id]} disabled={selected} />
+              </TableCell>
+            )}
           </TableRow>
         );
       })}
