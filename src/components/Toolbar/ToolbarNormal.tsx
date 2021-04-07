@@ -17,7 +17,7 @@ interface Props {
 
 export default function ToolbarNormal(props: Props) {
   const { className, refetch, openForm } = props;
-  const { isLogin, logout } = useAuth();
+  const { isLogin } = useAuth();
   const { openDialog } = useDialog();
 
   return (
@@ -33,7 +33,7 @@ export default function ToolbarNormal(props: Props) {
 
       {isLogin ? (
         <Tooltip title="Logout">
-          <IconButton onClick={logout} aria-label="logout">
+          <IconButton onClick={() => openDialog("logout")} aria-label="logout">
             <ExitToAppIcon color="secondary" />
           </IconButton>
         </Tooltip>
