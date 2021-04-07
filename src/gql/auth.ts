@@ -52,9 +52,17 @@ export default function useAuth() {
     }
   });
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
+    apolloClient.writeQuery(writeQueryData(false));
+  };
+
   return {
     isLogin: data?.isLogin ?? false,
     loading: queryLoading || mutationLoading,
-    login
+    login,
+    logout
   };
 }
