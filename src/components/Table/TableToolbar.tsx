@@ -6,8 +6,7 @@ import {
 } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
-import React, { useState } from "react";
-import ToolbarForm from "../Toolbar/ToolbarForm";
+import React from "react";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
 
@@ -42,29 +41,12 @@ export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
   const { selected, refetch } = props;
 
-  const [showForm, setShowForm] = useState(false);
-
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
       return <ToolbarSelect className={classes.title} selected={selected} />;
     }
 
-    if (showForm) {
-      return (
-        <ToolbarForm
-          className={classes.title}
-          closeForm={() => setShowForm(false)}
-        />
-      );
-    }
-
-    return (
-      <ToolbarNormal
-        className={classes.title}
-        refetch={refetch}
-        openForm={() => setShowForm(true)}
-      />
-    );
+    return <ToolbarNormal className={classes.title} refetch={refetch} />;
   };
 
   return (

@@ -12,11 +12,10 @@ import useDialog from "../../gql/dialog";
 interface Props {
   className: string;
   refetch: () => void;
-  openForm: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, refetch, openForm } = props;
+  const { className, refetch } = props;
   const { isLogin } = useAuth();
   const { openDialog } = useDialog();
 
