@@ -10,6 +10,7 @@ import {
   GetAllReadLists,
   GetAllReadListsVariables,
   Order as ReadListOrder,
+  ReadList,
   ReadListFields
 } from "../../types/generated-types";
 import { getSelected, Order, ReadListKey } from "../../utils/table";
@@ -40,6 +41,7 @@ export default function ReadListTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [delayed, setDelayed] = useState(false);
+  const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
 
   const { data, loading, refetch } = useQuery<
     GetAllReadLists,
@@ -58,6 +60,7 @@ export default function ReadListTable() {
     setDelayed(true);
     const timeout = setTimeout(() => {
       setDelayed(false);
+      setAllReadLists(data?.allReadLists);
     }, 500);
     return () => clearTimeout(timeout);
   }, [data]);
@@ -68,8 +71,6 @@ export default function ReadListTable() {
       limit: rowsPerPage
     });
   }, [refetch, page, rowsPerPage]);
-
-  const allReadLists = data?.allReadLists;
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
