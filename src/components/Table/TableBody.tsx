@@ -53,6 +53,15 @@ export default function ReadListTableBody(props: Props) {
           </TableCell>
         </TableRow>
       )}
+
+      {!loading && rows?.length === 0 && (
+        <TableRow>
+          <TableCell colSpan={4} align="center">
+            There is no data
+          </TableCell>
+        </TableRow>
+      )}
+
       {rows?.map(({ id, link, title, readAt, comment }) => {
         const selected = isSelected(id);
         return (
