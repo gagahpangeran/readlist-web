@@ -32,11 +32,24 @@ export default function ToolbarNormal(props: Props) {
       </Typography>
 
       {isLogin ? (
-        <Tooltip title="Logout">
-          <IconButton onClick={() => openDialog("logout")} aria-label="logout">
-            <ExitToAppIcon color="secondary" />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title="Logout">
+            <IconButton
+              onClick={() => openDialog("logout")}
+              aria-label="logout"
+            >
+              <ExitToAppIcon color="secondary" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Add New Read List">
+            <IconButton
+              onClick={() => openDialog("readlist")}
+              aria-label="add new read list"
+            >
+              <AddIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        </>
       ) : (
         <Tooltip title="Login">
           <IconButton onClick={() => openDialog("login")} aria-label="login">
@@ -44,14 +57,6 @@ export default function ToolbarNormal(props: Props) {
           </IconButton>
         </Tooltip>
       )}
-      <Tooltip title="Add New Read List">
-        <IconButton
-          onClick={() => openDialog("readlist")}
-          aria-label="add new read list"
-        >
-          <AddIcon />
-        </IconButton>
-      </Tooltip>
       <Tooltip title="Refresh Data">
         <IconButton onClick={refetch} aria-label="refresh data">
           <RefreshIcon />
