@@ -3,8 +3,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { apolloClient } from "./apollo/client";
-import LoginDialog from "./components/Dialog/LoginDialog";
-import LogoutDialog from "./components/Dialog/LogoutDialog";
+import DialogContainer from "./components/Dialog/DialogContainer";
 import ReadListTable from "./components/Table/Table";
 
 function App() {
@@ -14,8 +13,7 @@ function App() {
         <Typography variant="h2">Read List</Typography>
         <ReadListTable />
       </Container>
-      <LoginDialog />
-      <LogoutDialog />
+      <DialogContainer />
     </ApolloProvider>
   );
 }
