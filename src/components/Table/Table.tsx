@@ -43,7 +43,6 @@ export default function ReadListTable({ openLoginForm }: Props) {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [showComment, setShowComment] = useState(false);
   const [delayed, setDelayed] = useState(true);
 
   const [getAllReadLists, { data, loading }] = useLazyQuery<
@@ -98,8 +97,6 @@ export default function ReadListTable({ openLoginForm }: Props) {
         <ReadListTableToolbar
           selected={selected}
           refetch={() => console.log("refetch")}
-          showComment={showComment}
-          changeShowComment={() => setShowComment(!showComment)}
           openLoginForm={openLoginForm}
         />
         <TableContainer>
@@ -116,7 +113,6 @@ export default function ReadListTable({ openLoginForm }: Props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={allReadLists?.length ?? 0}
-              showComment={showComment}
             />
             <ReadListTableBody
               rows={allReadLists}
@@ -125,7 +121,6 @@ export default function ReadListTable({ openLoginForm }: Props) {
               loading={loading || delayed}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
-              showComment={showComment}
             />
           </Table>
         </TableContainer>

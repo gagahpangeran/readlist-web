@@ -1,11 +1,9 @@
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   createStyles,
   lighten,
   makeStyles,
   Theme
 } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import React, { useState } from "react";
@@ -16,8 +14,6 @@ import ToolbarSelect from "../Toolbar/ToolbarSelect";
 interface Props {
   selected: string[];
   refetch: () => void;
-  showComment: boolean;
-  changeShowComment: () => void;
   openLoginForm: () => void;
 }
 
@@ -45,13 +41,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
-  const {
-    selected,
-    refetch,
-    showComment,
-    changeShowComment,
-    openLoginForm
-  } = props;
+  const { selected, refetch, openLoginForm } = props;
 
   const [showForm, setShowForm] = useState(false);
 
@@ -80,27 +70,12 @@ export default function ReadListTableToolbar(props: Props) {
   };
 
   return (
-    <>
-      <Toolbar
-        className={clsx(classes.root, {
-          [classes.highlight]: selected.length > 0
-        })}
-      >
-        {renderToolbarMenu()}
-      </Toolbar>
-
-      <Toolbar>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={showComment}
-              onChange={changeShowComment}
-              color="primary"
-            />
-          }
-          label="Show Comment"
-        />
-      </Toolbar>
-    </>
+    <Toolbar
+      className={clsx(classes.root, {
+        [classes.highlight]: selected.length > 0
+      })}
+    >
+      {renderToolbarMenu()}
+    </Toolbar>
   );
 }

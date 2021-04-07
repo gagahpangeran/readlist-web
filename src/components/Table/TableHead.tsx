@@ -15,11 +15,10 @@ interface Props {
   order: Order;
   orderBy: string;
   rowCount: number;
-  showComment: boolean;
 }
 
 export default function ReadListTableHead(props: Props) {
-  const { onSelectAllClick, numSelected, rowCount, showComment } = props;
+  const { onSelectAllClick, numSelected, rowCount } = props;
 
   return (
     <TableHead>
@@ -31,9 +30,8 @@ export default function ReadListTableHead(props: Props) {
             onChange={onSelectAllClick}
           />
         </TableCell>
-        <TableCell width={showComment ? "460" : "550"}>Title</TableCell>
+        <TableCell width="550">Title</TableCell>
         <TableCell width="90">Read At</TableCell>
-        {showComment && <TableCell width="90">Comment</TableCell>}
         <TableCell align="center" width="100">
           Actions
         </TableCell>

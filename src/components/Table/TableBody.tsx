@@ -3,7 +3,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import React, { useState } from "react";
+import React from "react";
 import { ReadList } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 import { Order, ReadListKey } from "../../utils/table";
@@ -17,20 +17,10 @@ interface Props {
   loading: boolean;
   onCheckboxClick: (id: string) => void;
   isSelected: (id: string) => boolean;
-  showComment: boolean;
 }
 
 export default function ReadListTableBody(props: Props) {
-  const [editedRow, setEditedRow] = useState("");
-  const {
-    rows,
-    order,
-    orderBy,
-    loading,
-    onCheckboxClick,
-    isSelected,
-    showComment
-  } = props;
+  const { rows, order, orderBy, loading, onCheckboxClick, isSelected } = props;
 
   if (loading || rows === undefined) {
     return (
@@ -60,20 +50,16 @@ export default function ReadListTableBody(props: Props) {
                 onClick={() => onCheckboxClick(id)}
               />
             </TableCell>
-            <TableCell width={showComment ? "460" : "550"}>
+            <TableCell width="550">
               <a href={link} target="_blank" rel="nofollow noreferrer">
                 {title}
               </a>
             </TableCell>
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
-            {showComment && (
-              <TableCell align="left" width="90">
-                {comment ?? "-"}
-              </TableCell>
-            )}
-            <TableCell width="100">
+            <TableCell width="100" align="center">
               <EditButton onClick={onEditButtonClick} disabled={selected} />
               <DeleteButton ids={[id]} disabled={selected} />
+              {comment !== null && <div>Show Comment</div>}
             </TableCell>
           </TableRow>
         );
