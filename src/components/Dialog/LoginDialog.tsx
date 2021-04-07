@@ -15,7 +15,7 @@ interface Props {
   handleClose: () => void;
 }
 
-export default function LoginForm({ open, handleClose }: Props) {
+export default function LoginDialog({ open, handleClose }: Props) {
   const { register, handleSubmit } = useForm<LoginVariables>();
   const { login, loading } = useAuth();
 

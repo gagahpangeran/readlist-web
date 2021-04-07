@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { apolloClient } from "./apollo/client";
-import LoginForm from "./components/Form/LoginForm";
+import LoginDialog from "./components/Dialog/LoginDialog";
 import ReadListTable from "./components/Table/Table";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Typography variant="h2">Read List</Typography>
         <ReadListTable openLoginForm={() => setisLoginFormOpen(true)} />
       </Container>
-      <LoginForm
+      <LoginDialog
         open={isLoginFormOpen}
         handleClose={() => setisLoginFormOpen(false)}
       />
