@@ -138,6 +138,7 @@ export default function ReadListTable() {
           count={-1}
           rowsPerPage={rowsPerPage}
           page={page}
+          nextIconButtonProps={{ disabled: allReadLists?.length === 0 }}
           onChangePage={(_, page) => setPage(page)}
           onChangeRowsPerPage={e => {
             setRowsPerPage(Number(e.target.value));
