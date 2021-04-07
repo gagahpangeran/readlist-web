@@ -31,7 +31,7 @@ export default function ReadListDialog() {
     AddReadListVariables
   >(ADD_READ_LIST, { errorPolicy: "all" });
 
-  const { register, handleSubmit, watch } = useForm<InputForm>();
+  const { register, handleSubmit, watch, reset } = useForm<InputForm>();
 
   const onSubmit = async ({ isRead, readAt, comment, ...rest }: InputForm) => {
     const data = {
@@ -107,6 +107,9 @@ export default function ReadListDialog() {
         </DialogContent>
 
         <DialogActions>
+          <Button disabled={loading} onClick={() => reset()}>
+            Reset
+          </Button>
           <Button disabled={loading} color="secondary" onClick={closeDialog}>
             Cancel
           </Button>
