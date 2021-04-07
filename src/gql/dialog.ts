@@ -8,7 +8,7 @@ const GET_OPENED_DIALOG = gql`
   }
 `;
 
-type Dialog = "login" | "logout" | null;
+type Dialog = "login" | "logout" | "readlist" | null;
 
 const writeQueryData = (openedDialog: Dialog) => ({
   query: GET_OPENED_DIALOG,
