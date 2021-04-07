@@ -1,5 +1,5 @@
 import Checkbox from "@material-ui/core/Checkbox";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -25,25 +25,18 @@ export default function ReadListTableBody(props: Props) {
 
   const { isLogin } = useAuth();
 
-  if (loading || rows === undefined) {
-    return (
-      <TableBody>
-        <TableRow>
-          <TableCell colSpan={4} align="center">
-            {loading ? <CircularProgress /> : "No Data"}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    );
-  }
-
   const onEditButtonClick = () => {
     console.log("edit");
   };
 
   return (
     <TableBody>
-      {rows.map(({ id, link, title, readAt, comment }) => {
+      <TableRow>
+        <TableCell colSpan={4} padding="none">
+          {loading && <LinearProgress />}
+        </TableCell>
+      </TableRow>
+      {rows?.map(({ id, link, title, readAt, comment }) => {
         const selected = isSelected(id);
         return (
           <TableRow key={id} tabIndex={-1} selected={selected}>
