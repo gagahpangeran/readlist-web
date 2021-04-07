@@ -14,7 +14,6 @@ import ToolbarSelect from "../Toolbar/ToolbarSelect";
 interface Props {
   selected: string[];
   refetch: () => void;
-  openLoginForm: () => void;
 }
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
@@ -41,7 +40,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
-  const { selected, refetch, openLoginForm } = props;
+  const { selected, refetch } = props;
 
   const [showForm, setShowForm] = useState(false);
 
@@ -64,7 +63,6 @@ export default function ReadListTableToolbar(props: Props) {
         className={classes.title}
         refetch={refetch}
         openForm={() => setShowForm(true)}
-        openLoginForm={openLoginForm}
       />
     );
   };

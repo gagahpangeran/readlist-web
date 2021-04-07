@@ -32,11 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  openLoginForm: () => void;
-}
-
-export default function ReadListTable({ openLoginForm }: Props) {
+export default function ReadListTable() {
   const classes = useStyles();
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
@@ -97,7 +93,6 @@ export default function ReadListTable({ openLoginForm }: Props) {
         <ReadListTableToolbar
           selected={selected}
           refetch={() => console.log("refetch")}
-          openLoginForm={openLoginForm}
         />
         <TableContainer>
           <Table

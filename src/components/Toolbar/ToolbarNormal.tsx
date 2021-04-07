@@ -7,17 +7,18 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
 import useAuth from "../../gql/auth";
+import useDialog from "../../gql/dialog";
 
 interface Props {
   className: string;
   refetch: () => void;
   openForm: () => void;
-  openLoginForm: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, refetch, openForm, openLoginForm } = props;
+  const { className, refetch, openForm } = props;
   const { isLogin, logout } = useAuth();
+  const { openDialog } = useDialog();
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function ToolbarNormal(props: Props) {
         </Tooltip>
       ) : (
         <Tooltip title="Login">
-          <IconButton onClick={openLoginForm} aria-label="login">
+          <IconButton onClick={() => openDialog("login")} aria-label="login">
             <PersonAddIcon color="primary" />
           </IconButton>
         </Tooltip>

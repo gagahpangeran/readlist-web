@@ -8,24 +8,21 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../gql/auth";
+import useDialog from "../../gql/dialog";
 import { LoginVariables } from "../../types/generated-types";
 
-interface Props {
-  open: boolean;
-  handleClose: () => void;
-}
-
-export default function LoginDialog({ open, handleClose }: Props) {
+export default function LoginDialog() {
   const { register, handleSubmit } = useForm<LoginVariables>();
   const { login, loading } = useAuth();
+  const { openedDialog, closeDialog } = useDialog();
 
   const onSubmit = async (inputData: LoginVariables) => {
     await login({ variables: { ...inputData } });
-    handleClose();
+    closeDialog();
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={openedDialog === "login"} onClose={closeDialog}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
@@ -50,7 +47,7 @@ export default function LoginDialog({ open, handleClose }: Props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button disabled={loading} onClick={handleClose} color="secondary">
+          <Button disabled={loading} onClick={closeDialog} color="secondary">
             Cancel
           </Button>
           <Button
