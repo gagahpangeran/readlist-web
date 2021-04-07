@@ -41,9 +41,3 @@ export function getSubmitData({
     comment: comment.length > 0 ? comment : null
   };
 }
-
-export function saveToken(token: string | null) {
-  if (token !== null) {
-    localStorage.setItem("token", token);
-  }
-}
