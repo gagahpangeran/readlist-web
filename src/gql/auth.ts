@@ -2,13 +2,13 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { apolloClient, cache } from "../apollo/client";
 import { IsLogin, Login, LoginVariables } from "../types/generated-types";
 
-export const IS_LOGIN = gql`
+const IS_LOGIN = gql`
   query IsLogin {
     isLogin @client
   }
 `;
 
-export const LOGIN = gql`
+const LOGIN = gql`
   fragment Auth on Auth {
     token
     username
