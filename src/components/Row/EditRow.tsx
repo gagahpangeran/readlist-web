@@ -7,8 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { EDIT_READ_LIST } from "../../gql/mutation";
-import { GET_ALL_READ_LISTS } from "../../gql/query";
+import { EDIT_READ_LIST, GET_ALL_READ_LISTS } from "../../gql/readlist";
 import {
   EditReadList,
   EditReadListVariables,

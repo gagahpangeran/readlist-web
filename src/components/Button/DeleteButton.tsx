@@ -3,8 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
-import { DELETE_READ_LISTS } from "../../gql/mutation";
-import { GET_ALL_READ_LISTS } from "../../gql/query";
+import { DELETE_READ_LISTS, GET_ALL_READ_LISTS } from "../../gql/readlist";
 import {
   DeleteReadLists,
   DeleteReadListsVariables

@@ -5,7 +5,7 @@ import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import React, { useEffect, useState } from "react";
-import { GET_ALL_READ_LISTS } from "../../gql/query";
+import { GET_ALL_READ_LISTS } from "../../gql/readlist";
 import {
   GetAllReadLists,
   GetAllReadListsVariables,

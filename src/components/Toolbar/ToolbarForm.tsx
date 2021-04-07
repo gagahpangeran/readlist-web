@@ -9,8 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ADD_READ_LIST } from "../../gql/mutation";
-import { GET_ALL_READ_LISTS } from "../../gql/query";
+import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../../gql/readlist";
 import { AddReadList, AddReadListVariables } from "../../types/generated-types";
 import { dateFormatter, getSubmitData, InputData } from "../../utils/helper";
 
