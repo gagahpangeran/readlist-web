@@ -1,18 +1,10 @@
-import { useQuery } from "@apollo/client";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import React, { useEffect, useState } from "react";
-import { GET_ALL_READ_LISTS } from "../../gql/readlist";
-import {
-  GetAllReadLists,
-  GetAllReadListsVariables,
-  Order as ReadListOrder,
-  ReadList,
-  ReadListFields
-} from "../../types/generated-types";
+import useReadList from "../../gql/readlist";
 import { getSelected, Order, ReadListKey } from "../../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
@@ -40,30 +32,8 @@ export default function ReadListTable() {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [delayed, setDelayed] = useState(false);
-  const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
 
-  const { data, loading, refetch, error } = useQuery<
-    GetAllReadLists,
-    GetAllReadListsVariables
-  >(GET_ALL_READ_LISTS, {
-    fetchPolicy: "cache-and-network",
-    variables: {
-      skip: page * rowsPerPage,
-      limit: rowsPerPage,
-      sort: { fields: ReadListFields.readAt, order: ReadListOrder.DESC },
-      filter: { readAt: { isNull: false } }
-    }
-  });
-
-  useEffect(() => {
-    setDelayed(true);
-    const timeout = setTimeout(() => {
-      setDelayed(false);
-      setAllReadLists(data?.allReadLists);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [data]);
+  const { allReadLists, loading, refetch, error } = useReadList();
 
   useEffect(() => {
     refetch({
@@ -120,8 +90,8 @@ export default function ReadListTable() {
               rows={allReadLists}
               order={order}
               orderBy={orderBy}
-              loading={loading || delayed}
-              error={error !== undefined}
+              loading={loading}
+              error={error}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
             />
