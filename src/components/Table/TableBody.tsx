@@ -4,7 +4,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
-import useAuth from "../../gql/auth";
+import useAuth from "../../hooks/auth";
 import { ReadList } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 import { Order, ReadListKey } from "../../utils/table";

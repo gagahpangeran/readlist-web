@@ -7,7 +7,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../../gql/auth";
+import useAuth from "../../hooks/auth";
 import useDialog from "../../hooks/dialog";
 import { LoginVariables } from "../../types/generated-types";
 

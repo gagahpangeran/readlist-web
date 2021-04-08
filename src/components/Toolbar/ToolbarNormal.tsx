@@ -6,7 +6,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
-import useAuth from "../../gql/auth";
+import useAuth from "../../hooks/auth";
 import useDialog from "../../hooks/dialog";
 
 interface Props {
