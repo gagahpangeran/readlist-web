@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
+import useDialog from "../../gql/dialog";
 import { DELETE_READ_LISTS, GET_ALL_READ_LISTS } from "../../gql/readlist";
 import {
   DeleteReadLists,
@@ -30,12 +31,14 @@ function DeleteButton({ ids, disabled }: Props) {
     await deleteReadLists({ variables: { ids } });
   };
 
+  const { openDialog } = useDialog();
+
   return (
     <Tooltip title="Delete">
       <IconButton
         aria-label="delete"
         color="secondary"
-        onClick={handleClick}
+        onClick={() => openDialog("delete")}
         disabled={disabled}
       >
         <DeleteIcon />
