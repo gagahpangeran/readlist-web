@@ -4,7 +4,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import { DELETE_READ_LISTS, GET_ALL_READ_LISTS } from "../../gql/readlist.gql";
-import useDialog from "../../hooks/dialog";
+import { useDialog } from "../../hooks/dialog";
 import {
   DeleteReadLists,
   DeleteReadListsVariables

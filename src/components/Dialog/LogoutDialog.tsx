@@ -4,8 +4,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
-import useAuth from "../../hooks/auth";
-import useDialog from "../../hooks/dialog";
+import { useAuth } from "../../hooks/auth";
+import { useDialog } from "../../hooks/dialog";
 
 export default function LogoutDialog() {
   const { logout } = useAuth();

@@ -4,7 +4,7 @@ type Dialog = "login" | "logout" | "readlist" | "delete" | null;
 
 const openedDialogVar = makeVar<Dialog>(null);
 
-export default function useDialog() {
+export function useDialog() {
   return {
     openedDialog: useReactiveVar(openedDialogVar),
     openDialog: (dialog: Dialog) => openedDialogVar(dialog),

@@ -7,7 +7,7 @@ const isLoginVar = makeVar(
     localStorage.getItem("username") !== null
 );
 
-export default function useAuth() {
+export function useAuth() {
   const [login, { loading }] = useMutation<Login, LoginVariables>(LOGIN, {
     errorPolicy: "all",
     onCompleted: ({ login }) => {

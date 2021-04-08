@@ -9,8 +9,8 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
-import useDialog from "../../hooks/dialog";
-import useReadList from "../../hooks/readlist";
+import { useDialog } from "../../hooks/dialog";
+import { useReadList } from "../../hooks/readlist";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {

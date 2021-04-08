@@ -11,7 +11,7 @@ import {
   ReadListFields
 } from "../types/generated-types";
 
-export default function useReadList() {
+export function useReadList() {
   const [delayed, setDelayed] = useState(false);
   const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
 

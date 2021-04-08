@@ -3,7 +3,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
-import useAuth from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 import { Order, ReadListKey } from "../../utils/table";
 
 interface Props {
