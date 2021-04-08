@@ -4,19 +4,6 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: IsLogin
-// ====================================================
-
-export interface IsLogin {
-  isLogin: boolean;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: Login
 // ====================================================
 
@@ -33,19 +20,6 @@ export interface Login {
 export interface LoginVariables {
   username: string;
   password: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: OpenedDialog
-// ====================================================
-
-export interface OpenedDialog {
-  openedDialog: string | null;
 }
 
 /* tslint:disable */

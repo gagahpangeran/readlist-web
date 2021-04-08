@@ -5,7 +5,7 @@ module.exports = {
   client: {
     service: {
       name: "graphql",
-      localSchemaFile: ["./src/types/schema.json", "./src/apollo/client.gql"]
+      localSchemaFile: ["./src/types/schema.json"]
     },
     includes: ["./src/**/*.ts", "./src/**/*.tsx"]
   }

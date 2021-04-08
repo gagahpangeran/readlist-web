@@ -1,6 +1,0 @@
-# Client side only GraphQL schema
-
-extend type Query {
-  isLogin: Boolean!
-  openedDialog: String
-}
