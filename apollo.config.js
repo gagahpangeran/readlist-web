@@ -7,6 +7,6 @@ module.exports = {
       name: "graphql",
       localSchemaFile: ["./src/types/schema.json"]
     },
-    includes: ["./src/**/*.ts", "./src/**/*.tsx"]
+    includes: ["./src/**/*.gql.ts"]
   }
 };

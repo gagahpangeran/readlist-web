@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist";
+import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist.gql";
 import {
   AddReadList,
   AddReadListVariables,

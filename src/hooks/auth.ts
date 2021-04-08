@@ -1,5 +1,5 @@
 import { makeVar, useMutation, useReactiveVar } from "@apollo/client";
-import { LOGIN } from "../gql/auth";
+import { LOGIN } from "../gql/auth.gql";
 import { Login, LoginVariables } from "../types/generated-types";
 
 const isLoginVar = makeVar(
