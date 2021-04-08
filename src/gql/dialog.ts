@@ -1,38 +1,13 @@
-import { gql, useQuery } from "@apollo/client";
-import { apolloClient, cache } from "../apollo/client";
-import { OpenedDialog } from "../types/generated-types";
-
-const GET_OPENED_DIALOG = gql`
-  query OpenedDialog {
-    openedDialog @client
-  }
-`;
+import { makeVar, useReactiveVar } from "@apollo/client";
 
 type Dialog = "login" | "logout" | "readlist" | "delete" | null;
 
-const writeQueryData = (openedDialog: Dialog) => ({
-  query: GET_OPENED_DIALOG,
-  data: {
-    openedDialog
-  }
-});
-
-cache.writeQuery(writeQueryData(null));
+const openedDialogVar = makeVar<Dialog>(null);
 
 export default function useDialog() {
-  const { data } = useQuery<OpenedDialog>(GET_OPENED_DIALOG);
-
-  const openDialog = (dialog: Dialog) => {
-    apolloClient.writeQuery(writeQueryData(dialog));
-  };
-
-  const closeDialog = () => {
-    apolloClient.writeQuery(writeQueryData(null));
-  };
-
   return {
-    openedDialog: (data?.openedDialog ?? null) as Dialog,
-    openDialog,
-    closeDialog
+    openedDialog: useReactiveVar(openedDialogVar),
+    openDialog: (dialog: Dialog) => openedDialogVar(dialog),
+    closeDialog: () => openedDialogVar(null)
   };
 }
