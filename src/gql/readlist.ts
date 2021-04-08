@@ -1,6 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import {
+  AddReadList,
+  AddReadListVariables,
   GetAllReadLists,
   GetAllReadListsVariables,
   Order,
@@ -60,7 +62,7 @@ export default function useReadList() {
   const [delayed, setDelayed] = useState(false);
   const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
 
-  const { data, loading, refetch, error } = useQuery<
+  const { data, loading: queryLoading, refetch, error } = useQuery<
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
@@ -70,6 +72,16 @@ export default function useReadList() {
       limit: 10,
       sort: { fields: ReadListFields.readAt, order: Order.DESC },
       filter: { readAt: { isNull: false } }
+    }
+  });
+
+  const [addReadList, { loading: addLoading }] = useMutation<
+    AddReadList,
+    AddReadListVariables
+  >(ADD_READ_LIST, {
+    errorPolicy: "all",
+    onCompleted: () => {
+      refetch();
     }
   });
 
@@ -84,8 +96,9 @@ export default function useReadList() {
 
   return {
     allReadLists,
-    loading: loading || delayed,
+    loading: queryLoading || addLoading || delayed,
     refetch,
-    error: error !== undefined
+    error: error !== undefined,
+    addReadList
   };
 }

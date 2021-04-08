@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/client";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Dialog from "@material-ui/core/Dialog";
@@ -11,8 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useDialog from "../../gql/dialog";
-import { ADD_READ_LIST } from "../../gql/readlist";
-import { AddReadList, AddReadListVariables } from "../../types/generated-types";
+import useReadList from "../../gql/readlist";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {
@@ -26,10 +24,7 @@ interface InputForm {
 export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
 
-  const [addReadList, { loading }] = useMutation<
-    AddReadList,
-    AddReadListVariables
-  >(ADD_READ_LIST, { errorPolicy: "all" });
+  const { addReadList, loading } = useReadList();
 
   const { register, handleSubmit, watch, reset } = useForm<InputForm>();
 
