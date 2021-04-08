@@ -5,7 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import useAuth from "../../gql/auth";
-import useDialog from "../../gql/dialog";
+import useDialog from "../../hooks/dialog";
 
 export default function LogoutDialog() {
   const { logout } = useAuth();

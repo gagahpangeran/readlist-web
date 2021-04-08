@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../gql/auth";
-import useDialog from "../../gql/dialog";
+import useDialog from "../../hooks/dialog";
 import { LoginVariables } from "../../types/generated-types";
 
 export default function LoginDialog() {

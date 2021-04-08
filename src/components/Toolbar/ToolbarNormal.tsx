@@ -7,7 +7,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
 import useAuth from "../../gql/auth";
-import useDialog from "../../gql/dialog";
+import useDialog from "../../hooks/dialog";
 
 interface Props {
   className: string;

@@ -4,7 +4,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
-import useDialog from "../../gql/dialog";
+import useDialog from "../../hooks/dialog";
 
 export default function DeleteDialog() {
   const { openedDialog, closeDialog } = useDialog();
