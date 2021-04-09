@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDialog } from "../../hooks/dialog";
-import { useAddReadList } from "../../hooks/readlist";
+import { useAddReadList, useReadListEditData } from "../../hooks/readlist";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {
@@ -24,10 +24,22 @@ interface InputForm {
 export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
   const { addReadList, loading } = useAddReadList();
-  const { register, handleSubmit, watch, reset } = useForm<InputForm>();
+  const { editData } = useReadListEditData();
 
   const isOpen = openedDialog === "add" || openedDialog === "edit";
   const isEdit = openedDialog === "edit";
+
+  const defaultValue: InputForm = {
+    link: editData?.data.link ?? "",
+    title: editData?.data.title ?? "",
+    isRead: !!editData?.data.readAt || !isEdit,
+    readAt: editData?.data.readAt
+      ? dateFormatter(editData.data.readAt)
+      : dateFormatter(new Date()),
+    comment: editData?.data.comment ?? ""
+  };
+
+  const { register, handleSubmit, watch, reset } = useForm<InputForm>();
 
   const onSubmit = async ({ isRead, readAt, comment, ...rest }: InputForm) => {
     const data = {
@@ -41,7 +53,7 @@ export default function ReadListDialog() {
     closeDialog();
   };
 
-  const isRead = watch("isRead") ?? true;
+  const isRead = watch("isRead") ?? defaultValue.isRead;
 
   return (
     <Dialog open={isOpen} onClose={closeDialog} fullWidth>
@@ -53,6 +65,7 @@ export default function ReadListDialog() {
             required
             name="link"
             label="Link"
+            defaultValue={defaultValue.link}
             fullWidth
           />
         </DialogContent>
@@ -63,6 +76,7 @@ export default function ReadListDialog() {
             required
             name="title"
             label="Title"
+            defaultValue={defaultValue.title}
             fullWidth
           />
         </DialogContent>
@@ -72,7 +86,7 @@ export default function ReadListDialog() {
             control={
               <Checkbox
                 inputRef={register}
-                defaultChecked
+                defaultChecked={defaultValue.isRead}
                 name="isRead"
                 color="primary"
               />
@@ -86,7 +100,7 @@ export default function ReadListDialog() {
             inputRef={register}
             type="date"
             name="readAt"
-            defaultValue={dateFormatter(new Date())}
+            defaultValue={defaultValue.readAt}
             disabled={!isRead}
             fullWidth
           />
@@ -97,6 +111,7 @@ export default function ReadListDialog() {
             inputRef={register}
             name="comment"
             placeholder="Comment"
+            defaultValue={defaultValue.comment}
             multiline
             fullWidth
           />
