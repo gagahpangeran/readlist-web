@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { makeVar, useMutation, useQuery, useReactiveVar } from "@apollo/client";
 import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist.gql";
 import {
   AddReadList,
@@ -8,6 +8,31 @@ import {
   Order,
   ReadListFields
 } from "../types/generated-types";
+
+const initialVariables: GetAllReadListsVariables = {
+  skip: 0,
+  limit: 10,
+  sort: { fields: ReadListFields.readAt, order: Order.DESC },
+  filter: { readAt: { isNull: false } }
+};
+
+const variablesVar = makeVar(initialVariables);
+
+export function useReadListVariable() {
+  const variables = useReactiveVar(variablesVar);
+
+  const changeVariables = (vars: Partial<GetAllReadListsVariables>) => {
+    variablesVar({
+      ...variables,
+      ...vars
+    });
+  };
+
+  return {
+    variables,
+    changeVariables
+  };
+}
 
 export function useAddReadList() {
   const [addReadList, { loading }] = useMutation<
@@ -29,12 +54,7 @@ export function useGetReadList() {
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
     fetchPolicy: "cache-and-network",
-    variables: {
-      skip: 0,
-      limit: 10,
-      sort: { fields: ReadListFields.readAt, order: Order.DESC },
-      filter: { readAt: { isNull: false } }
-    }
+    variables: initialVariables
   });
 
   return {
