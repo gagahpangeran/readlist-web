@@ -56,6 +56,30 @@ export function useReadListSelect() {
   };
 }
 
+const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
+
+export function useGetReadList() {
+  const [getAllReadLists, { data, loading, refetch, error }] = useLazyQuery<
+    GetAllReadLists,
+    GetAllReadListsVariables
+  >(GET_ALL_READ_LISTS, {
+    fetchPolicy: "cache-and-network",
+    variables: initialVariables
+  });
+
+  useEffect(() => {
+    allReadListsVar(data?.allReadLists);
+  }, [data]);
+
+  return {
+    getAllReadLists,
+    allReadLists: useReactiveVar(allReadListsVar),
+    loading,
+    refetch,
+    error: error !== undefined
+  };
+}
+
 export function useAddReadList() {
   const [addReadList, { loading }] = useMutation<
     AddReadList,
@@ -87,29 +111,5 @@ export function useDeleteReadList() {
   return {
     deleteReadLists,
     loading
-  };
-}
-
-const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
-
-export function useGetReadList() {
-  const [getAllReadLists, { data, loading, refetch, error }] = useLazyQuery<
-    GetAllReadLists,
-    GetAllReadListsVariables
-  >(GET_ALL_READ_LISTS, {
-    fetchPolicy: "cache-and-network",
-    variables: initialVariables
-  });
-
-  useEffect(() => {
-    allReadListsVar(data?.allReadLists);
-  }, [data]);
-
-  return {
-    getAllReadLists,
-    allReadLists: useReactiveVar(allReadListsVar),
-    loading,
-    refetch,
-    error: error !== undefined
   };
 }
