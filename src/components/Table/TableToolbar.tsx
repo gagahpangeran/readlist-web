@@ -7,12 +7,9 @@ import {
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import React from "react";
+import { useReadListSelect } from "../../hooks/readlist";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
-
-interface Props {
-  selected: string[];
-}
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,9 +33,9 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ReadListTableToolbar(props: Props) {
+export default function ReadListTableToolbar() {
   const classes = useToolbarStyles();
-  const { selected } = props;
+  const { selected } = useReadListSelect();
 
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
