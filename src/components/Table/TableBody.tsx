@@ -91,7 +91,7 @@ export default function ReadListTableBody() {
             {isLogin && (
               <TableCell width="100" align="center">
                 <EditButton onClick={onEditButtonClick} disabled={selected} />
-                <DeleteButton ids={[id]} disabled={selected} />
+                <DeleteButton deletedId={id} disabled={selected} />
               </TableCell>
             )}
           </TableRow>

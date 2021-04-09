@@ -21,7 +21,7 @@ export default function ToolbarSelect(props: Props) {
         {selected.length} selected
       </Typography>
 
-      <DeleteButton ids={selected} />
+      <DeleteButton />
     </>
   );
 }
