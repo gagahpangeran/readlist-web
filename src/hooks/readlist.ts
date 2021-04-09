@@ -41,6 +41,15 @@ export function useReadListVariable() {
   };
 }
 
+const selectedVar = makeVar<string[]>([]);
+
+export function useReadListSelect() {
+  return {
+    selected: useReactiveVar(selectedVar),
+    setSelected: (ids: string[]) => selectedVar(ids)
+  };
+}
+
 export function useAddReadList() {
   const [addReadList, { loading }] = useMutation<
     AddReadList,
