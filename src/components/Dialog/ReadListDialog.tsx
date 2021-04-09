@@ -10,7 +10,11 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDialog } from "../../hooks/dialog";
-import { useAddReadList, useReadListEditData } from "../../hooks/readlist";
+import {
+  useAddReadList,
+  useEditReadList,
+  useReadListEditData
+} from "../../hooks/readlist";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {
@@ -23,11 +27,13 @@ interface InputForm {
 
 export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
-  const { addReadList, loading } = useAddReadList();
-  const { editData } = useReadListEditData();
+  const { addReadList, loading: addLoading } = useAddReadList();
+  const { editReadList, loading: editLoading } = useEditReadList();
+  const { editData, setEditData } = useReadListEditData();
 
   const isOpen = openedDialog === "add" || openedDialog === "edit";
   const isEdit = openedDialog === "edit";
+  const loading = addLoading || editLoading;
 
   const defaultValue: InputForm = {
     link: editData?.data.link ?? "",
@@ -48,8 +54,13 @@ export default function ReadListDialog() {
       comment: comment.trim().length > 0 ? comment.trim() : null
     };
 
-    await addReadList({ variables: { data } });
+    if (isEdit && editData?.id !== undefined) {
+      await editReadList({ variables: { id: editData.id, data } });
+    } else {
+      await addReadList({ variables: { data } });
+    }
 
+    setEditData(null);
     closeDialog();
   };
 
