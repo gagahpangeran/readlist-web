@@ -16,7 +16,7 @@ export default function ReadListTableHead() {
   const { isLogin } = useAuth();
   const { allReadLists } = useGetReadList();
   const { selected, setSelected } = useReadListSelect();
-  const { variables } = useReadListVariable();
+  const { variables, changeVariables } = useReadListVariable();
 
   const rowCount = allReadLists?.length ?? 0;
   const numSelected = selected.length;
@@ -30,6 +30,28 @@ export default function ReadListTableHead() {
       return;
     }
     setSelected([]);
+  };
+
+  const handleSort = (newFields: ReadListFields) => {
+    setSelected([]);
+
+    if (newFields === fields) {
+      changeVariables({
+        ...variables,
+        sort: {
+          fields,
+          order: isAsc ? Order.DESC : Order.ASC
+        }
+      });
+    } else {
+      changeVariables({
+        ...variables,
+        sort: {
+          fields: newFields,
+          order: Order.DESC
+        }
+      });
+    }
   };
 
   return (
@@ -46,6 +68,7 @@ export default function ReadListTableHead() {
           <TableSortLabel
             active={fields === ReadListFields.title}
             direction={isAsc ? "asc" : "desc"}
+            onClick={() => handleSort(ReadListFields.title)}
           >
             Title
           </TableSortLabel>
@@ -54,6 +77,7 @@ export default function ReadListTableHead() {
           <TableSortLabel
             active={fields === ReadListFields.readAt}
             direction={isAsc ? "asc" : "desc"}
+            onClick={() => handleSort(ReadListFields.readAt)}
           >
             Read At
           </TableSortLabel>
