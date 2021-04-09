@@ -31,7 +31,7 @@ export default function ReadListTable() {
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { allReadLists, loading, refetch, error } = useGetReadList();
+  const { allReadLists, loading, error } = useGetReadList();
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
@@ -61,7 +61,7 @@ export default function ReadListTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <ReadListTableToolbar selected={selected} refetch={() => refetch()} />
+        <ReadListTableToolbar selected={selected} />
         <TableContainer>
           <Table
             className={classes.table}

@@ -4,18 +4,16 @@ import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
 import { useDialog } from "../../hooks/dialog";
 
 interface Props {
   className: string;
-  refetch: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, refetch } = props;
+  const { className } = props;
   const { isLogin } = useAuth();
   const { openDialog } = useDialog();
 
@@ -56,11 +54,6 @@ export default function ToolbarNormal(props: Props) {
           </IconButton>
         </Tooltip>
       )}
-      <Tooltip title="Refresh Data">
-        <IconButton onClick={refetch} aria-label="refresh data">
-          <RefreshIcon />
-        </IconButton>
-      </Tooltip>
     </>
   );
 }

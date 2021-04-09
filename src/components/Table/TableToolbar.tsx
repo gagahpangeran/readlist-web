@@ -12,7 +12,6 @@ import ToolbarSelect from "../Toolbar/ToolbarSelect";
 
 interface Props {
   selected: string[];
-  refetch: () => void;
 }
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
@@ -39,14 +38,14 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar(props: Props) {
   const classes = useToolbarStyles();
-  const { selected, refetch } = props;
+  const { selected } = props;
 
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
       return <ToolbarSelect className={classes.title} selected={selected} />;
     }
 
-    return <ToolbarNormal className={classes.title} refetch={refetch} />;
+    return <ToolbarNormal className={classes.title} />;
   };
 
   return (
