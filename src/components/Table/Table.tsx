@@ -4,7 +4,7 @@ import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import React, { useEffect, useState } from "react";
-import { useReadList } from "../../hooks/readlist";
+import { useGetReadList } from "../../hooks/readlist";
 import { getSelected, Order, ReadListKey } from "../../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
@@ -33,7 +33,7 @@ export default function ReadListTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { allReadLists, loading, refetch, error } = useReadList();
+  const { allReadLists, loading, refetch, error } = useGetReadList();
 
   useEffect(() => {
     refetch({

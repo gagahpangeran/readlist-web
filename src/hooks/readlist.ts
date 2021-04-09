@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
 import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist.gql";
 import {
   AddReadList,
@@ -7,15 +6,25 @@ import {
   GetAllReadLists,
   GetAllReadListsVariables,
   Order,
-  ReadList,
   ReadListFields
 } from "../types/generated-types";
 
-export function useReadList() {
-  const [delayed, setDelayed] = useState(false);
-  const [allReadLists, setAllReadLists] = useState<ReadList[] | undefined>();
+export function useAddReadList() {
+  const [addReadList, { loading }] = useMutation<
+    AddReadList,
+    AddReadListVariables
+  >(ADD_READ_LIST, {
+    errorPolicy: "all"
+  });
 
-  const { data, loading: queryLoading, refetch, error } = useQuery<
+  return {
+    addReadList,
+    loading
+  };
+}
+
+export function useGetReadList() {
+  const { data, loading, refetch, error } = useQuery<
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
@@ -28,30 +37,10 @@ export function useReadList() {
     }
   });
 
-  const [addReadList, { loading: addLoading }] = useMutation<
-    AddReadList,
-    AddReadListVariables
-  >(ADD_READ_LIST, {
-    errorPolicy: "all",
-    onCompleted: () => {
-      refetch();
-    }
-  });
-
-  useEffect(() => {
-    setDelayed(true);
-    const timeout = setTimeout(() => {
-      setDelayed(false);
-      setAllReadLists(data?.allReadLists);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [data]);
-
   return {
-    allReadLists,
-    loading: queryLoading || addLoading || delayed,
+    allReadLists: data?.allReadLists,
+    loading,
     refetch,
-    error: error !== undefined,
-    addReadList
+    error: error !== undefined
   };
 }

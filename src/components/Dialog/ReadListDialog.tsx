@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDialog } from "../../hooks/dialog";
-import { useReadList } from "../../hooks/readlist";
+import { useAddReadList } from "../../hooks/readlist";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {
@@ -24,7 +24,7 @@ interface InputForm {
 export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
 
-  const { addReadList, loading } = useReadList();
+  const { addReadList, loading } = useAddReadList();
 
   const { register, handleSubmit, watch, reset } = useForm<InputForm>();
 

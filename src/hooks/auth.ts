@@ -1,4 +1,5 @@
 import { makeVar, useMutation, useReactiveVar } from "@apollo/client";
+import { apolloClient } from "../apollo/client";
 import { LOGIN } from "../gql/auth.gql";
 import { Login, LoginVariables } from "../types/generated-types";
 
@@ -25,6 +26,7 @@ export function useAuth() {
     localStorage.removeItem("username");
 
     isLoginVar(false);
+    apolloClient.resetStore();
   };
 
   return {
