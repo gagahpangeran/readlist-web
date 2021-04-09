@@ -5,10 +5,16 @@ import {
   useReactiveVar
 } from "@apollo/client";
 import { useEffect } from "react";
-import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist.gql";
+import {
+  ADD_READ_LIST,
+  DELETE_READ_LISTS,
+  GET_ALL_READ_LISTS
+} from "../gql/readlist.gql";
 import {
   AddReadList,
   AddReadListVariables,
+  DeleteReadLists,
+  DeleteReadListsVariables,
   GetAllReadLists,
   GetAllReadListsVariables,
   Order,
@@ -60,6 +66,26 @@ export function useAddReadList() {
 
   return {
     addReadList,
+    loading
+  };
+}
+
+export function useDeleteReadList() {
+  const [deleteReadLists, { loading }] = useMutation<
+    DeleteReadLists,
+    DeleteReadListsVariables
+  >(DELETE_READ_LISTS, {
+    errorPolicy: "all",
+    refetchQueries: [
+      {
+        query: GET_ALL_READ_LISTS,
+        variables: useReactiveVar(variablesVar)
+      }
+    ]
+  });
+
+  return {
+    deleteReadLists,
     loading
   };
 }
