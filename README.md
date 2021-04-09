@@ -1,15 +1,7 @@
 # Readlist Web
 
-Web version of [Readlist](https://github.com/gagahpangeran/readlist/) using
-React Material UI and GraphQL.
-
-This project is also includes the serverless graphql backend using Apollo
-GraphQL Lambda and netlify functions.
-
-And of course support Typescript.
-
-## Template
-
-Built using
-[React Netlify Lambda GraphQL](https://github.com/gagahpangeran/react-netlify-lambda-graphql/)
-template.
+Dashboard frontend of
+[Readlist Web](https://github.com/gagahpangeran/readlist-web/) and web app
+alternative of
+[Readlist Mobile](https://github.com/gagahpangeran/readlist-mobile/). Built
+using React Material UI and Apollo client GraphQL with TypeScript support.
