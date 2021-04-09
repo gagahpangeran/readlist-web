@@ -59,6 +59,15 @@ export function useReadListSelect() {
   };
 }
 
+const editDataVar = makeVar<EditReadListVariables | null>(null);
+
+export function useReadListEditData() {
+  return {
+    editData: useReactiveVar(editDataVar),
+    setEditData: (data: EditReadListVariables | null) => editDataVar(data)
+  };
+}
+
 const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
 
 export function useGetReadList() {
