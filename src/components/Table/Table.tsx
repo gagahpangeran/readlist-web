@@ -2,12 +2,12 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
-import TablePagination from "@material-ui/core/TablePagination";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useGetReadList } from "../../hooks/readlist";
 import { getSelected, Order, ReadListKey } from "../../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
+import ReadListTablePagination from "./TablePagination";
 import ReadListTableToolbar from "./TableToolbar";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,17 +30,8 @@ export default function ReadListTable() {
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const { allReadLists, loading, refetch, error } = useGetReadList();
-
-  useEffect(() => {
-    refetch({
-      skip: page * rowsPerPage,
-      limit: rowsPerPage
-    });
-  }, [refetch, page, rowsPerPage]);
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
@@ -97,21 +88,7 @@ export default function ReadListTable() {
             />
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={Array.from({ length: 10 }).map(
-            (_, i) => (i + 1) * 5
-          )}
-          component="div"
-          count={-1}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          nextIconButtonProps={{ disabled: allReadLists?.length === 0 }}
-          onChangePage={(_, page) => setPage(page)}
-          onChangeRowsPerPage={e => {
-            setRowsPerPage(Number(e.target.value));
-            setPage(0);
-          }}
-        />
+        <ReadListTablePagination />
       </Paper>
     </div>
   );
