@@ -1,4 +1,10 @@
-import { makeVar, useMutation, useQuery, useReactiveVar } from "@apollo/client";
+import {
+  makeVar,
+  useLazyQuery,
+  useMutation,
+  useReactiveVar
+} from "@apollo/client";
+import { useEffect } from "react";
 import { ADD_READ_LIST, GET_ALL_READ_LISTS } from "../gql/readlist.gql";
 import {
   AddReadList,
@@ -6,6 +12,7 @@ import {
   GetAllReadLists,
   GetAllReadListsVariables,
   Order,
+  ReadList,
   ReadListFields
 } from "../types/generated-types";
 
@@ -48,8 +55,10 @@ export function useAddReadList() {
   };
 }
 
+const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
+
 export function useGetReadList() {
-  const { data, loading, refetch, error } = useQuery<
+  const [getAllReadLists, { data, loading, refetch, error }] = useLazyQuery<
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
@@ -57,8 +66,13 @@ export function useGetReadList() {
     variables: initialVariables
   });
 
+  useEffect(() => {
+    allReadListsVar(data?.allReadLists);
+  }, [data]);
+
   return {
-    allReadLists: data?.allReadLists,
+    getAllReadLists,
+    allReadLists: useReactiveVar(allReadListsVar),
     loading,
     refetch,
     error: error !== undefined
