@@ -68,8 +68,10 @@ export default function ReadListTableBody() {
         </TableRow>
       )}
 
-      {allReadLists?.map(({ id, link, title, readAt }) => {
+      {allReadLists?.map(readList => {
+        const { id, link, title, readAt } = readList;
         const selected = isSelected(id);
+
         return (
           <TableRow key={id} tabIndex={-1} selected={selected}>
             <TableCell padding="checkbox">
@@ -86,7 +88,7 @@ export default function ReadListTableBody() {
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
             {isLogin && (
               <TableCell width="100" align="center">
-                <EditButton disabled={selected} />
+                <EditButton editData={readList} disabled={selected} />
                 <DeleteButton deletedId={id} disabled={selected} />
               </TableCell>
             )}

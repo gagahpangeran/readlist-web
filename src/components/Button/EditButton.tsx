@@ -3,13 +3,23 @@ import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
 import { useDialog } from "../../hooks/dialog";
+import { useReadListEditData } from "../../hooks/readlist";
+import { ReadList } from "../../types/generated-types";
 
 interface Props {
+  editData: ReadList;
   disabled: boolean;
 }
 
-function DeleteButton({ disabled }: Props) {
+function DeleteButton({ editData, disabled }: Props) {
   const { openDialog } = useDialog();
+  const { setEditData } = useReadListEditData();
+
+  const handleClick = () => {
+    const { id, ...data } = editData;
+    setEditData({ id, data });
+    openDialog("edit");
+  };
 
   return (
     <Tooltip title="Edit">
@@ -17,7 +27,7 @@ function DeleteButton({ disabled }: Props) {
         aria-label="edit"
         color="primary"
         disabled={disabled}
-        onClick={() => openDialog("edit")}
+        onClick={handleClick}
       >
         <EditIcon />
       </IconButton>
