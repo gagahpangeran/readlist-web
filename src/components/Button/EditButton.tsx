@@ -2,20 +2,22 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
+import { useDialog } from "../../hooks/dialog";
 
 interface Props {
-  onClick: () => void;
   disabled: boolean;
 }
 
-function DeleteButton({ onClick, disabled }: Props) {
+function DeleteButton({ disabled }: Props) {
+  const { openDialog } = useDialog();
+
   return (
     <Tooltip title="Edit">
       <IconButton
         aria-label="edit"
         color="primary"
         disabled={disabled}
-        onClick={onClick}
+        onClick={() => openDialog("edit")}
       >
         <EditIcon />
       </IconButton>

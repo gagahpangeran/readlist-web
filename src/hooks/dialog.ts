@@ -1,6 +1,6 @@
 import { makeVar, useReactiveVar } from "@apollo/client";
 
-type Dialog = "login" | "logout" | "readlist" | "delete" | null;
+type Dialog = "login" | "logout" | "add" | "edit" | "delete" | null;
 
 const openedDialogVar = makeVar<Dialog>(null);
 

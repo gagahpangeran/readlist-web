@@ -40,7 +40,7 @@ export default function ToolbarNormal(props: Props) {
           </Tooltip>
           <Tooltip title="Add New Read List">
             <IconButton
-              onClick={() => openDialog("readlist")}
+              onClick={() => openDialog("add")}
               aria-label="add new read list"
             >
               <AddIcon color="primary" />

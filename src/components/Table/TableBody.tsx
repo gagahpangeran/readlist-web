@@ -37,10 +37,6 @@ export default function ReadListTableBody() {
     }
   }, [variables, refetch]);
 
-  const onEditButtonClick = () => {
-    console.log("edit");
-  };
-
   const handleCheckBoxClick = (id: string) => {
     const newSelected = getSelected(selected, id);
     setSelected(newSelected);
@@ -90,7 +86,7 @@ export default function ReadListTableBody() {
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
             {isLogin && (
               <TableCell width="100" align="center">
-                <EditButton onClick={onEditButtonClick} disabled={selected} />
+                <EditButton disabled={selected} />
                 <DeleteButton deletedId={id} disabled={selected} />
               </TableCell>
             )}

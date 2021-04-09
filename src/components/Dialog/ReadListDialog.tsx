@@ -23,10 +23,11 @@ interface InputForm {
 
 export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
-
   const { addReadList, loading } = useAddReadList();
-
   const { register, handleSubmit, watch, reset } = useForm<InputForm>();
+
+  const isOpen = openedDialog === "add" || openedDialog === "edit";
+  const isEdit = openedDialog === "edit";
 
   const onSubmit = async ({ isRead, readAt, comment, ...rest }: InputForm) => {
     const data = {
@@ -43,9 +44,9 @@ export default function ReadListDialog() {
   const isRead = watch("isRead") ?? true;
 
   return (
-    <Dialog open={openedDialog === "readlist"} onClose={closeDialog} fullWidth>
+    <Dialog open={isOpen} onClose={closeDialog} fullWidth>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogTitle>Add New Read List</DialogTitle>
+        <DialogTitle>{`${isEdit ? "Edit" : "Add New"} Read List`}</DialogTitle>
         <DialogContent>
           <TextField
             inputRef={register}
