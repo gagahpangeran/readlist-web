@@ -5,19 +5,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
-import { useGetReadList, useReadListVariable } from "../../hooks/readlist";
+import {
+  useGetReadList,
+  useReadListSelect,
+  useReadListVariable
+} from "../../hooks/readlist";
 import { dateFormatter } from "../../utils/helper";
+import { getSelected } from "../../utils/table";
 import DeleteButton from "../Button/DeleteButton";
 import EditButton from "../Button/EditButton";
 
-interface Props {
-  onCheckboxClick: (id: string) => void;
-  isSelected: (id: string) => boolean;
-}
-
-export default function ReadListTableBody(props: Props) {
-  const { onCheckboxClick, isSelected } = props;
-
+export default function ReadListTableBody() {
   const { isLogin } = useAuth();
   const {
     getAllReadLists,
@@ -27,6 +25,7 @@ export default function ReadListTableBody(props: Props) {
     refetch
   } = useGetReadList();
   const { variables } = useReadListVariable();
+  const { selected, setSelected } = useReadListSelect();
 
   useEffect(() => {
     getAllReadLists();
@@ -41,6 +40,13 @@ export default function ReadListTableBody(props: Props) {
   const onEditButtonClick = () => {
     console.log("edit");
   };
+
+  const handleCheckBoxClick = (id: string) => {
+    const newSelected = getSelected(selected, id);
+    setSelected(newSelected);
+  };
+
+  const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
   return (
     <TableBody>
@@ -73,7 +79,7 @@ export default function ReadListTableBody(props: Props) {
             <TableCell padding="checkbox">
               <Checkbox
                 checked={selected}
-                onClick={() => onCheckboxClick(id)}
+                onClick={() => handleCheckBoxClick(id)}
               />
             </TableCell>
             <TableCell width="550">

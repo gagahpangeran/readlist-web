@@ -4,7 +4,7 @@ import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import React, { useState } from "react";
 import { useGetReadList } from "../../hooks/readlist";
-import { getSelected, Order, ReadListKey } from "../../utils/table";
+import { Order, ReadListKey } from "../../utils/table";
 import ReadListTableBody from "./TableBody";
 import ReadListTableHead from "./TableHead";
 import ReadListTablePagination from "./TablePagination";
@@ -51,13 +51,6 @@ export default function ReadListTable() {
     setSelected([]);
   };
 
-  const handleClick = (id: string) => {
-    const newSelected = getSelected(selected, id);
-    setSelected(newSelected);
-  };
-
-  const isSelected = (id: string) => selected.indexOf(id) !== -1;
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -77,10 +70,7 @@ export default function ReadListTable() {
               onRequestSort={handleRequestSort}
               rowCount={allReadLists?.length ?? 0}
             />
-            <ReadListTableBody
-              onCheckboxClick={handleClick}
-              isSelected={isSelected}
-            />
+            <ReadListTableBody />
           </Table>
         </TableContainer>
         <ReadListTablePagination />
