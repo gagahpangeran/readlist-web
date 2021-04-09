@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import {
   ADD_READ_LIST,
   DELETE_READ_LISTS,
+  EDIT_READ_LIST,
   GET_ALL_READ_LISTS
 } from "../gql/readlist.gql";
 import {
@@ -15,6 +16,8 @@ import {
   AddReadListVariables,
   DeleteReadLists,
   DeleteReadListsVariables,
+  EditReadList,
+  EditReadListVariables,
   GetAllReadLists,
   GetAllReadListsVariables,
   Order,
@@ -96,6 +99,26 @@ export function useAddReadList() {
 
   return {
     addReadList,
+    loading
+  };
+}
+
+export function useEditReadList() {
+  const [editReadList, { loading }] = useMutation<
+    EditReadList,
+    EditReadListVariables
+  >(EDIT_READ_LIST, {
+    errorPolicy: "all",
+    refetchQueries: [
+      {
+        query: GET_ALL_READ_LISTS,
+        variables: useReactiveVar(variablesVar)
+      }
+    ]
+  });
+
+  return {
+    editReadList,
     loading
   };
 }
