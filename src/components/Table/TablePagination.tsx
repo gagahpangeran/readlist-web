@@ -1,11 +1,16 @@
 import TablePagination from "@material-ui/core/TablePagination";
 import React, { useState } from "react";
-import { useReadListSelect, useReadListVariable } from "../../hooks/readlist";
+import {
+  useGetReadList,
+  useReadListSelect,
+  useReadListVariable
+} from "../../hooks/readlist";
 
 export default function ReadListTablePagination() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const { allReadLists } = useGetReadList();
   const { changeVariables } = useReadListVariable();
   const { setSelected } = useReadListSelect();
 
@@ -34,6 +39,9 @@ export default function ReadListTablePagination() {
       count={-1}
       rowsPerPage={rowsPerPage}
       page={page}
+      nextIconButtonProps={{
+        disabled: (allReadLists?.length ?? 0) < rowsPerPage
+      }}
       onChangePage={(_, page) => handleChangePage(page)}
       onChangeRowsPerPage={e => handleChangeRowsPerPage(Number(e.target.value))}
     />
