@@ -4,23 +4,24 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
-import { Order, ReadListKey } from "../../utils/table";
+import { useGetReadList, useReadListSelect } from "../../hooks/readlist";
 
-interface Props {
-  numSelected: number;
-  onRequestSort: (
-    event: React.MouseEvent<unknown>,
-    property: ReadListKey
-  ) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: Order;
-  orderBy: string;
-  rowCount: number;
-}
-
-export default function ReadListTableHead(props: Props) {
-  const { onSelectAllClick, numSelected, rowCount } = props;
+export default function ReadListTableHead() {
   const { isLogin } = useAuth();
+  const { allReadLists } = useGetReadList();
+  const { selected, setSelected } = useReadListSelect();
+
+  const rowCount = allReadLists?.length ?? 0;
+  const numSelected = selected.length;
+
+  const handleSelectAllClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      const newSelecteds = allReadLists?.map(({ id }) => id) ?? [];
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
 
   return (
     <TableHead>
@@ -29,7 +30,7 @@ export default function ReadListTableHead(props: Props) {
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
+            onChange={handleSelectAllClick}
           />
         </TableCell>
         <TableCell width="550">Title</TableCell>
