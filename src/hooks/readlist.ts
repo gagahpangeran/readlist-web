@@ -85,7 +85,13 @@ export function useAddReadList() {
     AddReadList,
     AddReadListVariables
   >(ADD_READ_LIST, {
-    errorPolicy: "all"
+    errorPolicy: "all",
+    refetchQueries: [
+      {
+        query: GET_ALL_READ_LISTS,
+        variables: useReactiveVar(variablesVar)
+      }
+    ]
   });
 
   return {
