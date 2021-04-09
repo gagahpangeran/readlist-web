@@ -31,7 +31,7 @@ export default function ReadListTable() {
   const [orderBy, setOrderBy] = useState<ReadListKey>("readAt");
   const [selected, setSelected] = useState<string[]>([]);
 
-  const { allReadLists, loading, error } = useGetReadList();
+  const { allReadLists } = useGetReadList();
 
   const handleRequestSort = (
     _: React.MouseEvent<unknown>,
@@ -78,11 +78,6 @@ export default function ReadListTable() {
               rowCount={allReadLists?.length ?? 0}
             />
             <ReadListTableBody
-              rows={allReadLists}
-              order={order}
-              orderBy={orderBy}
-              loading={loading}
-              error={error}
               onCheckboxClick={handleClick}
               isSelected={isSelected}
             />
