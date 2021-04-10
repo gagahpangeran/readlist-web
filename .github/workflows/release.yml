@@ -8,8 +8,6 @@ jobs:
   deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
-    env:
-      REACT_APP_GRAPHQL: ${{ secrets.REACT_APP_GRAPHQL }}
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
@@ -37,20 +35,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Install netlify cli
+        run: yarn global add netlify-cli
+
       - name: Install dependencies
         run: yarn
 
       - name: Build app
+        env:
+          REACT_APP_GRAPHQL: ${{ secrets.REACT_APP_GRAPHQL }}
         run: yarn build
 
       - name: Deploy to netlify
-        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: |
-            deploy --prod --dir=build
+        run: netlify deploy --prod --dir=build
 
   release:
     needs: deploy
