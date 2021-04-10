@@ -10,8 +10,7 @@ import {
   useReadListSelect,
   useReadListVariable
 } from "../../hooks/readlist";
-import { dateFormatter } from "../../utils/helper";
-import { getSelected } from "../../utils/table";
+import { dateFormatter, getSelected } from "../../utils/helper";
 import DeleteButton from "../Button/DeleteButton";
 import EditButton from "../Button/EditButton";
 
