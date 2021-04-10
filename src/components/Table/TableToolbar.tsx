@@ -8,6 +8,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import React from "react";
 import { useReadListSelect } from "../../hooks/readlist";
+import ToolbarFilter from "../Toolbar/ToolbarFilter";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
 
@@ -46,12 +47,15 @@ export default function ReadListTableToolbar() {
   };
 
   return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: selected.length > 0
-      })}
-    >
-      {renderToolbarMenu()}
-    </Toolbar>
+    <>
+      <Toolbar
+        className={clsx(classes.root, {
+          [classes.highlight]: selected.length > 0
+        })}
+      >
+        {renderToolbarMenu()}
+      </Toolbar>
+      <ToolbarFilter />
+    </>
   );
 }
