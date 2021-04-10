@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ToolbarFilter() {
+interface Props {
+  close: () => void;
+}
+
+export default function ToolbarFilter({ close }: Props) {
   const classes = useStyles();
   const { variables, changeVariables } = useReadListVariable();
 
@@ -139,7 +143,7 @@ export default function ToolbarFilter() {
           </Grid>
 
           <Grid item xs={12} className={classes.buttonWrapper}>
-            <Button>Cancel</Button>
+            <Button onClick={close}>Close</Button>
             <Button
               variant="outlined"
               color="secondary"
