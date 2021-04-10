@@ -14,24 +14,33 @@ export interface FilterInputForm {
   readTo: string;
 }
 
-const boolToCommentStatus = new Map<boolean | null, CommentStatus>([
-  [true, "without"],
-  [false, "with"],
-  [null, "all"]
-]);
+function createTernaryMap<T>(
+  trueVal: T,
+  falseVal: T,
+  nullVal: T
+): [Map<boolean | null, T>, Map<T, boolean | null>] {
+  const boolToTernary = new Map<boolean | null, T>([
+    [true, trueVal],
+    [false, falseVal],
+    [null, nullVal]
+  ]);
 
-const commentStatusToBool = new Map<CommentStatus, boolean | null>(
-  Array.from(boolToCommentStatus.entries()).map(([k, v]) => [v, k])
-);
+  const ternaryToBool = new Map<T, boolean | null>(
+    Array.from(boolToTernary.entries()).map(([k, v]) => [v, k])
+  );
 
-const boolToReadStatus = new Map<boolean | null, ReadStatus>([
-  [true, "unread"],
-  [false, "read"],
-  [null, "all"]
-]);
+  return [boolToTernary, ternaryToBool];
+}
 
-const readStatusToBool = new Map<ReadStatus, boolean | null>(
-  Array.from(boolToReadStatus.entries()).map(([k, v]) => [v, k])
+const [
+  boolToCommentStatus,
+  commentStatusToBool
+] = createTernaryMap<CommentStatus>("without", "with", "all");
+
+const [boolToReadStatus, readStatusToBool] = createTernaryMap<ReadStatus>(
+  "unread",
+  "read",
+  "all"
 );
 
 export function getFilterDefaultValues(
