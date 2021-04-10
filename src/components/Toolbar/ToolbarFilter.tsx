@@ -9,6 +9,8 @@ import TextField from "@material-ui/core/TextField";
 import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useReadListVariable } from "../../hooks/readlist";
+import { dateFormatter } from "../../utils/helper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,17 +23,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+type SearchBy = "title" | "link";
+type CommentStatus = "all" | "with" | "without";
+type ReadStatus = "all" | "read" | "unread";
 interface InputForm {
-  searchBy: "title" | "link";
+  searchBy: SearchBy;
   searchKeyword: string;
-  commentStatus: "all" | "with" | "without";
-  readStatus: "all" | "read" | "unread";
+  commentStatus: CommentStatus;
+  readStatus: ReadStatus;
   readFrom: string;
   readTo: string;
 }
 
 export default function ToolbarFilter() {
   const classes = useStyles();
+  const { variables } = useReadListVariable();
+  const { filter } = variables;
 
   const {
     register,
@@ -41,11 +48,34 @@ export default function ToolbarFilter() {
     reset
   } = useForm<InputForm>();
 
+  const searchByFields: SearchBy = filter.link?.contains ? "link" : "title";
+  const mapCommentStatus = new Map<boolean | null, CommentStatus>([
+    [true, "without"],
+    [false, "with"],
+    [null, "all"]
+  ]);
+  const mapReadStatus = new Map<boolean | null, ReadStatus>([
+    [true, "unread"],
+    [false, "read"],
+    [null, "all"]
+  ]);
+
+  const defaultValues: InputForm = {
+    searchBy: searchByFields,
+    searchKeyword: filter?.[searchByFields]?.contains ?? "",
+    commentStatus:
+      mapCommentStatus.get(filter.comment?.isNull ?? null) ?? "all",
+    readStatus: mapReadStatus.get(filter.readAt?.isNull ?? null) ?? "read",
+    readFrom: filter.readAt?.from ? dateFormatter(filter.readAt.from) : "",
+    readTo: filter.readAt?.to ? dateFormatter(filter.readAt.to) : ""
+  };
+
   const onSubmit = (inputData: InputForm) => {
     console.log(inputData);
   };
 
-  const disableDate = watch("readStatus") === "unread";
+  const disableDate =
+    (watch("readStatus") ?? defaultValues.readStatus) === "unread";
 
   return (
     <Toolbar>
@@ -57,7 +87,7 @@ export default function ToolbarFilter() {
               <Controller
                 control={control}
                 name="searchBy"
-                defaultValue="title"
+                defaultValue={defaultValues.searchBy}
                 as={
                   <Select required fullWidth>
                     <MenuItem value="title">Title</MenuItem>
@@ -73,6 +103,7 @@ export default function ToolbarFilter() {
               name="searchKeyword"
               inputRef={register}
               label="Search Keyword"
+              defaultValue={defaultValues.searchKeyword}
               fullWidth
             />
           </Grid>
@@ -83,7 +114,7 @@ export default function ToolbarFilter() {
               <Controller
                 control={control}
                 name="commentStatus"
-                defaultValue="all"
+                defaultValue={defaultValues.commentStatus}
                 as={
                   <Select required fullWidth>
                     <MenuItem value="all">All Posts</MenuItem>
@@ -101,7 +132,7 @@ export default function ToolbarFilter() {
               <Controller
                 control={control}
                 name="readStatus"
-                defaultValue="read"
+                defaultValue={defaultValues.readStatus}
                 as={
                   <Select required fullWidth>
                     <MenuItem value="all">All</MenuItem>
@@ -122,6 +153,7 @@ export default function ToolbarFilter() {
               InputLabelProps={{
                 shrink: true
               }}
+              defaultValue={defaultValues.readFrom}
               disabled={disableDate}
               fullWidth
             />
@@ -136,6 +168,7 @@ export default function ToolbarFilter() {
               InputLabelProps={{
                 shrink: true
               }}
+              defaultValue={defaultValues.readTo}
               disabled={disableDate}
               fullWidth
             />
