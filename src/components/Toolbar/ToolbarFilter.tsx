@@ -10,8 +10,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useReadListVariable } from "../../hooks/readlist";
-import { ReadListFilter } from "../../types/generated-types";
-import { dateFormatter } from "../../utils/helper";
+import {
+  FilterInputForm,
+  getFilterData,
+  getFilterDefaultValues
+} from "../../utils/filter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,91 +27,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type SearchBy = "title" | "link";
-type CommentStatus = "all" | "with" | "without";
-type ReadStatus = "all" | "read" | "unread";
-interface InputForm {
-  searchBy: SearchBy;
-  searchKeyword: string;
-  commentStatus: CommentStatus;
-  readStatus: ReadStatus;
-  readFrom: string;
-  readTo: string;
-}
-
 export default function ToolbarFilter() {
   const classes = useStyles();
   const { variables, changeVariables } = useReadListVariable();
-  const { filter } = variables;
 
-  const { register, control, handleSubmit, reset } = useForm<InputForm>();
+  const { register, control, handleSubmit, reset } = useForm<FilterInputForm>();
 
-  const searchByFields: SearchBy = filter.link?.contains ? "link" : "title";
+  const defaultValues = getFilterDefaultValues(variables.filter);
 
-  const boolToCommentStatus = new Map<boolean | null, CommentStatus>([
-    [true, "without"],
-    [false, "with"],
-    [null, "all"]
-  ]);
-
-  const commentStatusToBool = new Map<CommentStatus, boolean | null>(
-    Array.from(boolToCommentStatus.entries()).map(([k, v]) => [v, k])
-  );
-
-  const boolToReadStatus = new Map<boolean | null, ReadStatus>([
-    [true, "unread"],
-    [false, "read"],
-    [null, "all"]
-  ]);
-
-  const readStatusToBool = new Map<ReadStatus, boolean | null>(
-    Array.from(boolToReadStatus.entries()).map(([k, v]) => [v, k])
-  );
-
-  const defaultValues: InputForm = {
-    searchBy: searchByFields,
-    searchKeyword: filter?.[searchByFields]?.contains ?? "",
-    commentStatus:
-      boolToCommentStatus.get(filter.comment?.isNull ?? null) ?? "all",
-    readStatus: boolToReadStatus.get(filter.readAt?.isNull ?? null) ?? "read",
-    readFrom: filter.readAt?.from ? dateFormatter(filter.readAt.from) : "",
-    readTo: filter.readAt?.to ? dateFormatter(filter.readAt.to) : ""
-  };
-
-  const onSubmit = ({
-    searchBy,
-    searchKeyword,
-    commentStatus,
-    readStatus,
-    readFrom,
-    readTo
-  }: InputForm) => {
-    const filterData: ReadListFilter = {
-      comment: {
-        isNull: commentStatusToBool.get(commentStatus)
-      }
-    };
-
-    const readFromDate =
-      readFrom.length > 0 && readStatus !== "unread"
-        ? new Date(readFrom)
-        : null;
-
-    const readToDate =
-      readTo.length > 0 && readStatus !== "unread" ? new Date(readTo) : null;
-
-    filterData.readAt = {
-      isNull: readStatusToBool.get(readStatus),
-      from: readFromDate?.toISOString(),
-      to: readToDate?.toISOString()
-    };
-
-    const keyword = searchKeyword.trim();
-    if (keyword.length > 0) {
-      filterData[searchBy] = {
-        contains: keyword
-      };
-    }
+  const onSubmit = (inputData: FilterInputForm) => {
+    const filterData = getFilterData(inputData);
+    changeVariables({
+      ...variables,
+      filter: filterData
+    });
   };
 
   return (
