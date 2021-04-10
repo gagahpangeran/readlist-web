@@ -3,6 +3,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
@@ -10,10 +11,11 @@ import { useDialog } from "../../hooks/dialog";
 
 interface Props {
   className: string;
+  openFilter: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className } = props;
+  const { className, openFilter } = props;
   const { isLogin } = useAuth();
   const { openDialog } = useDialog();
 
@@ -54,6 +56,11 @@ export default function ToolbarNormal(props: Props) {
           </IconButton>
         </Tooltip>
       )}
+      <Tooltip title="Filter list">
+        <IconButton onClick={openFilter} aria-label="filter list">
+          <FilterListIcon />
+        </IconButton>
+      </Tooltip>
     </>
   );
 }
