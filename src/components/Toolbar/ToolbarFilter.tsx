@@ -10,6 +10,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useReadListVariable } from "../../hooks/readlist";
+import { ReadListFilter } from "../../types/generated-types";
 import { dateFormatter } from "../../utils/helper";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,45 +38,78 @@ interface InputForm {
 
 export default function ToolbarFilter() {
   const classes = useStyles();
-  const { variables } = useReadListVariable();
+  const { variables, changeVariables } = useReadListVariable();
   const { filter } = variables;
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    reset
-  } = useForm<InputForm>();
+  const { register, control, handleSubmit, reset } = useForm<InputForm>();
 
   const searchByFields: SearchBy = filter.link?.contains ? "link" : "title";
-  const mapCommentStatus = new Map<boolean | null, CommentStatus>([
+
+  const boolToCommentStatus = new Map<boolean | null, CommentStatus>([
     [true, "without"],
     [false, "with"],
     [null, "all"]
   ]);
-  const mapReadStatus = new Map<boolean | null, ReadStatus>([
+
+  const commentStatusToBool = new Map<CommentStatus, boolean | null>(
+    Array.from(boolToCommentStatus.entries()).map(([k, v]) => [v, k])
+  );
+
+  const boolToReadStatus = new Map<boolean | null, ReadStatus>([
     [true, "unread"],
     [false, "read"],
     [null, "all"]
   ]);
 
+  const readStatusToBool = new Map<ReadStatus, boolean | null>(
+    Array.from(boolToReadStatus.entries()).map(([k, v]) => [v, k])
+  );
+
   const defaultValues: InputForm = {
     searchBy: searchByFields,
     searchKeyword: filter?.[searchByFields]?.contains ?? "",
     commentStatus:
-      mapCommentStatus.get(filter.comment?.isNull ?? null) ?? "all",
-    readStatus: mapReadStatus.get(filter.readAt?.isNull ?? null) ?? "read",
+      boolToCommentStatus.get(filter.comment?.isNull ?? null) ?? "all",
+    readStatus: boolToReadStatus.get(filter.readAt?.isNull ?? null) ?? "read",
     readFrom: filter.readAt?.from ? dateFormatter(filter.readAt.from) : "",
     readTo: filter.readAt?.to ? dateFormatter(filter.readAt.to) : ""
   };
 
-  const onSubmit = (inputData: InputForm) => {
-    console.log(inputData);
-  };
+  const onSubmit = ({
+    searchBy,
+    searchKeyword,
+    commentStatus,
+    readStatus,
+    readFrom,
+    readTo
+  }: InputForm) => {
+    const filterData: ReadListFilter = {
+      comment: {
+        isNull: commentStatusToBool.get(commentStatus)
+      }
+    };
 
-  const disableDate =
-    (watch("readStatus") ?? defaultValues.readStatus) === "unread";
+    const readFromDate =
+      readFrom.length > 0 && readStatus !== "unread"
+        ? new Date(readFrom)
+        : null;
+
+    const readToDate =
+      readTo.length > 0 && readStatus !== "unread" ? new Date(readTo) : null;
+
+    filterData.readAt = {
+      isNull: readStatusToBool.get(readStatus),
+      from: readFromDate?.toISOString(),
+      to: readToDate?.toISOString()
+    };
+
+    const keyword = searchKeyword.trim();
+    if (keyword.length > 0) {
+      filterData[searchBy] = {
+        contains: keyword
+      };
+    }
+  };
 
   return (
     <Toolbar>
@@ -154,7 +188,6 @@ export default function ToolbarFilter() {
                 shrink: true
               }}
               defaultValue={defaultValues.readFrom}
-              disabled={disableDate}
               fullWidth
             />
           </Grid>
@@ -169,7 +202,6 @@ export default function ToolbarFilter() {
                 shrink: true
               }}
               defaultValue={defaultValues.readTo}
-              disabled={disableDate}
               fullWidth
             />
           </Grid>
