@@ -1,5 +1,6 @@
 import Checkbox from "@material-ui/core/Checkbox";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Link from "@material-ui/core/Link";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -80,9 +81,15 @@ export default function ReadListTableBody() {
               />
             </TableCell>
             <TableCell width="550">
-              <a href={link} target="_blank" rel="nofollow noreferrer">
+              <Link
+                color="primary"
+                variant="body1"
+                href={link}
+                target="_blank"
+                rel="nofollow noreferrer"
+              >
                 {title}
-              </a>
+              </Link>
             </TableCell>
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
             {isLogin && (
