@@ -15,6 +15,7 @@ import {
   useEditReadList,
   useReadListEditData
 } from "../../hooks/readlist";
+import { useSnackbar } from "../../hooks/snackbar";
 import { dateFormatter } from "../../utils/helper";
 
 interface InputForm {
@@ -30,6 +31,7 @@ export default function ReadListDialog() {
   const { addReadList, loading: addLoading } = useAddReadList();
   const { editReadList, loading: editLoading } = useEditReadList();
   const { editData, setEditData } = useReadListEditData();
+  const { openSnackbar } = useSnackbar();
 
   const isOpen = openedDialog === "add" || openedDialog === "edit";
   const isEdit = openedDialog === "edit";
@@ -54,14 +56,18 @@ export default function ReadListDialog() {
       comment: comment.trim().length > 0 ? comment.trim() : null
     };
 
-    if (isEdit && editData?.id !== undefined) {
-      await editReadList({ variables: { id: editData.id, data } });
-    } else {
-      await addReadList({ variables: { data } });
-    }
+    try {
+      if (isEdit && editData?.id !== undefined) {
+        await editReadList({ variables: { id: editData.id, data } });
+      } else {
+        await addReadList({ variables: { data } });
+      }
 
-    setEditData(null);
-    closeDialog();
+      setEditData(null);
+      closeDialog();
+    } catch (e) {
+      openSnackbar("Error, can't submit! Please try again!");
+    }
   };
 
   const isRead = watch("isRead") ?? defaultValue.isRead;
