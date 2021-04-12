@@ -1,4 +1,5 @@
 import {
+  ApolloError,
   makeVar,
   useLazyQuery,
   useMutation,
@@ -95,8 +96,6 @@ export function useGetReadList() {
 }
 
 export function useAddReadList() {
-  const { openSnackbar } = useSnackbar();
-
   const [addReadList, { loading }] = useMutation<
     AddReadList,
     AddReadListVariables
@@ -107,10 +106,7 @@ export function useAddReadList() {
         variables: useReactiveVar(variablesVar)
       }
     ],
-    onError: error => {
-      const message = getErrorMessage(error);
-      openSnackbar(`Error! ${message}`);
-    }
+    ...useCompleteError("Success add new read list")
   });
 
   return {
@@ -130,7 +126,8 @@ export function useEditReadList() {
         query: GET_ALL_READ_LISTS,
         variables: useReactiveVar(variablesVar)
       }
-    ]
+    ],
+    ...useCompleteError("Success edit read list")
   });
 
   return {
@@ -150,11 +147,30 @@ export function useDeleteReadList() {
         query: GET_ALL_READ_LISTS,
         variables: useReactiveVar(variablesVar)
       }
-    ]
+    ],
+    ...useCompleteError("Success delete read list")
   });
 
   return {
     deleteReadLists,
     loading
+  };
+}
+
+function useCompleteError(successMessage: string) {
+  const { openSnackbar } = useSnackbar();
+
+  const onCompleted = () => {
+    openSnackbar(successMessage);
+  };
+
+  const onError = (error: ApolloError) => {
+    const message = getErrorMessage(error);
+    openSnackbar(`Error! ${message}`);
+  };
+
+  return {
+    onCompleted,
+    onError
   };
 }
