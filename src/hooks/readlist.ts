@@ -148,12 +148,12 @@ function usePostMutation(successMessage: string) {
   ];
 
   const onCompleted = () => {
-    openSnackbar(successMessage);
+    openSnackbar(successMessage, "success");
   };
 
   const onError = (error: ApolloError) => {
     const message = getErrorMessage(error);
-    openSnackbar(`Error! ${message}`);
+    openSnackbar(`Error! ${message}`, "error");
   };
 
   return {
