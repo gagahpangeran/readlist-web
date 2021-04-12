@@ -76,7 +76,9 @@ export default function ReadListDialog() {
             required
             name="link"
             label="Link"
+            type="url"
             defaultValue={defaultValue.link}
+            autoFocus={!isEdit}
             fullWidth
           />
         </DialogContent>
