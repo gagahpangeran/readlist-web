@@ -7,22 +7,19 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import { useDialog } from "../../hooks/dialog";
 import { useDeleteReadList, useReadListSelect } from "../../hooks/readlist";
-import { useSnackbar } from "../../hooks/snackbar";
 
 export default function DeleteDialog() {
   const { openedDialog, closeDialog } = useDialog();
   const { selected, setSelected } = useReadListSelect();
-  const { openSnackbar } = useSnackbar();
 
   const { deleteReadLists, loading } = useDeleteReadList();
 
   const handleSubmit = async () => {
-    try {
-      await deleteReadLists({ variables: { ids: selected } });
+    const result = await deleteReadLists({ variables: { ids: selected } });
+
+    if (result !== undefined) {
       setSelected([]);
       closeDialog();
-    } catch (e) {
-      openSnackbar("Error, can't delete! Please try again!");
     }
   };
 
