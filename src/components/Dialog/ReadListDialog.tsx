@@ -60,6 +60,10 @@ export default function ReadListDialog() {
       await addReadList({ variables: { data } });
     }
 
+    handleClose();
+  };
+
+  const handleClose = () => {
     setEditData(null);
     closeDialog();
   };
@@ -67,7 +71,7 @@ export default function ReadListDialog() {
   const isRead = watch("isRead") ?? defaultValue.isRead;
 
   return (
-    <Dialog open={isOpen} onClose={closeDialog} fullWidth>
+    <Dialog open={isOpen} onClose={handleClose} fullWidth>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>{`${isEdit ? "Edit" : "Add New"} Read List`}</DialogTitle>
         <DialogContent>
@@ -132,7 +136,7 @@ export default function ReadListDialog() {
           <Button disabled={loading} onClick={() => reset()}>
             Reset
           </Button>
-          <Button disabled={loading} color="secondary" onClick={closeDialog}>
+          <Button disabled={loading} color="secondary" onClick={handleClose}>
             Cancel
           </Button>
           <Button
