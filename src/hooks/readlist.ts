@@ -100,13 +100,7 @@ export function useAddReadList() {
     AddReadList,
     AddReadListVariables
   >(ADD_READ_LIST, {
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ],
-    ...useCompleteError("Success add new read list")
+    ...usePostMutation("Success add new read list")
   });
 
   return {
@@ -120,14 +114,7 @@ export function useEditReadList() {
     EditReadList,
     EditReadListVariables
   >(EDIT_READ_LIST, {
-    errorPolicy: "all",
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ],
-    ...useCompleteError("Success edit read list")
+    ...usePostMutation("Success edit read list")
   });
 
   return {
@@ -141,14 +128,7 @@ export function useDeleteReadList() {
     DeleteReadLists,
     DeleteReadListsVariables
   >(DELETE_READ_LISTS, {
-    errorPolicy: "all",
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ],
-    ...useCompleteError("Success delete read list")
+    ...usePostMutation("Success delete read list")
   });
 
   return {
@@ -157,8 +137,15 @@ export function useDeleteReadList() {
   };
 }
 
-function useCompleteError(successMessage: string) {
+function usePostMutation(successMessage: string) {
   const { openSnackbar } = useSnackbar();
+
+  const refetchQueries = [
+    {
+      query: GET_ALL_READ_LISTS,
+      variables: useReactiveVar(variablesVar)
+    }
+  ];
 
   const onCompleted = () => {
     openSnackbar(successMessage);
@@ -170,6 +157,7 @@ function useCompleteError(successMessage: string) {
   };
 
   return {
+    refetchQueries,
     onCompleted,
     onError
   };
