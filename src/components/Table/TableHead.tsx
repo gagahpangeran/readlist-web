@@ -83,7 +83,7 @@ export default function ReadListTableHead() {
           </TableSortLabel>
         </TableCell>
         {isLogin && (
-          <TableCell align="center" width="100">
+          <TableCell align="center" width="120">
             Actions
           </TableCell>
         )}

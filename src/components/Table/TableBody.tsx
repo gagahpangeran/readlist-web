@@ -93,7 +93,7 @@ export default function ReadListTableBody() {
             </TableCell>
             <TableCell width="90">{dateFormatter(readAt)}</TableCell>
             {isLogin && (
-              <TableCell width="100" align="center">
+              <TableCell width="120" align="center">
                 <EditButton editData={readList} disabled={selected} />
                 <DeleteButton deletedId={id} disabled={selected} />
               </TableCell>
