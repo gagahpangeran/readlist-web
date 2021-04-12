@@ -24,6 +24,8 @@ import {
   ReadList,
   ReadListFields
 } from "../types/generated-types";
+import { getErrorMessage } from "../utils/error";
+import { useSnackbar } from "./snackbar";
 
 const initialVariables: GetAllReadListsVariables = {
   skip: 0,
@@ -93,17 +95,22 @@ export function useGetReadList() {
 }
 
 export function useAddReadList() {
+  const { openSnackbar } = useSnackbar();
+
   const [addReadList, { loading }] = useMutation<
     AddReadList,
     AddReadListVariables
   >(ADD_READ_LIST, {
-    errorPolicy: "all",
     refetchQueries: [
       {
         query: GET_ALL_READ_LISTS,
         variables: useReactiveVar(variablesVar)
       }
-    ]
+    ],
+    onError: error => {
+      const message = getErrorMessage(error);
+      openSnackbar(`Error! ${message}`);
+    }
   });
 
   return {

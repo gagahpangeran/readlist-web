@@ -56,18 +56,21 @@ export default function ReadListDialog() {
       comment: comment.trim().length > 0 ? comment.trim() : null
     };
 
-    try {
-      if (isEdit && editData?.id !== undefined) {
-        await editReadList({ variables: { id: editData.id, data } });
-      } else {
-        await addReadList({ variables: { data } });
-      }
-
-      setEditData(null);
-      closeDialog();
-    } catch (e) {
-      openSnackbar("Error, can't submit! Please try again!");
+    let result;
+    if (isEdit && editData?.id !== undefined) {
+      result = await editReadList({ variables: { id: editData.id, data } });
+    } else {
+      result = await addReadList({ variables: { data } });
     }
+
+    if (result === undefined) {
+      return;
+    }
+
+    openSnackbar(`Success ${isEdit ? "edit" : "add"} read list`);
+
+    setEditData(null);
+    closeDialog();
   };
 
   const isRead = watch("isRead") ?? defaultValue.isRead;
