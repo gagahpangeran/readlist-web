@@ -1,4 +1,5 @@
 import {
+  ApolloError,
   makeVar,
   useLazyQuery,
   useMutation,
@@ -24,6 +25,8 @@ import {
   ReadList,
   ReadListFields
 } from "../types/generated-types";
+import { getErrorMessage } from "../utils/error";
+import { useSnackbar } from "./snackbar";
 
 const initialVariables: GetAllReadListsVariables = {
   skip: 0,
@@ -97,13 +100,7 @@ export function useAddReadList() {
     AddReadList,
     AddReadListVariables
   >(ADD_READ_LIST, {
-    errorPolicy: "all",
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ]
+    ...usePostMutation("Success add new read list")
   });
 
   return {
@@ -117,13 +114,7 @@ export function useEditReadList() {
     EditReadList,
     EditReadListVariables
   >(EDIT_READ_LIST, {
-    errorPolicy: "all",
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ]
+    ...usePostMutation("Success edit read list")
   });
 
   return {
@@ -137,17 +128,37 @@ export function useDeleteReadList() {
     DeleteReadLists,
     DeleteReadListsVariables
   >(DELETE_READ_LISTS, {
-    errorPolicy: "all",
-    refetchQueries: [
-      {
-        query: GET_ALL_READ_LISTS,
-        variables: useReactiveVar(variablesVar)
-      }
-    ]
+    ...usePostMutation("Success delete read list")
   });
 
   return {
     deleteReadLists,
     loading
+  };
+}
+
+function usePostMutation(successMessage: string) {
+  const { openSnackbar } = useSnackbar();
+
+  const refetchQueries = [
+    {
+      query: GET_ALL_READ_LISTS,
+      variables: useReactiveVar(variablesVar)
+    }
+  ];
+
+  const onCompleted = () => {
+    openSnackbar(successMessage, "success");
+  };
+
+  const onError = (error: ApolloError) => {
+    const message = getErrorMessage(error);
+    openSnackbar(`Error! ${message}`, "error");
+  };
+
+  return {
+    refetchQueries,
+    onCompleted,
+    onError
   };
 }

@@ -15,9 +15,12 @@ export default function DeleteDialog() {
   const { deleteReadLists, loading } = useDeleteReadList();
 
   const handleSubmit = async () => {
-    await deleteReadLists({ variables: { ids: selected } });
-    setSelected([]);
-    closeDialog();
+    const result = await deleteReadLists({ variables: { ids: selected } });
+
+    if (result !== undefined) {
+      setSelected([]);
+      closeDialog();
+    }
   };
 
   return (

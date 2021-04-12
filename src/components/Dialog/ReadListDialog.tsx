@@ -54,13 +54,16 @@ export default function ReadListDialog() {
       comment: comment.trim().length > 0 ? comment.trim() : null
     };
 
+    let result;
     if (isEdit && editData?.id !== undefined) {
-      await editReadList({ variables: { id: editData.id, data } });
+      result = await editReadList({ variables: { id: editData.id, data } });
     } else {
-      await addReadList({ variables: { data } });
+      result = await addReadList({ variables: { data } });
     }
 
-    handleClose();
+    if (result !== undefined) {
+      handleClose();
+    }
   };
 
   const handleClose = () => {
