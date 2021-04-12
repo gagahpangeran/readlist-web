@@ -11,7 +11,18 @@ import ReadListTable from "./components/Table/Table";
 
 const darkTheme = createMuiTheme({
   palette: {
-    type: "dark"
+    type: "dark",
+    background: {
+      default: "#16161a",
+      paper: "#242629"
+    },
+    primary: {
+      main: "#2cb67d",
+      contrastText: "#fff"
+    },
+    secondary: {
+      main: "#e53170"
+    }
   }
 });
 
