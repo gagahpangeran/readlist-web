@@ -47,9 +47,16 @@ export default function ReadListDialog() {
 
   const { register, handleSubmit, watch, reset } = useForm<InputForm>();
 
-  const onSubmit = async ({ isRead, readAt, comment, ...rest }: InputForm) => {
+  const onSubmit = async ({
+    link,
+    title,
+    isRead,
+    readAt,
+    comment
+  }: InputForm) => {
     const data = {
-      ...rest,
+      link: link.trim(),
+      title: title.trim(),
       readAt: isRead ? new Date(readAt).toISOString() : null,
       comment: comment.trim().length > 0 ? comment.trim() : null
     };
