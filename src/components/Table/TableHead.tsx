@@ -18,14 +18,14 @@ export default function ReadListTableHead() {
   const { selected, setSelected } = useReadListSelect();
   const { variables, changeVariables } = useReadListVariable();
 
-  const rowCount = allReadLists?.length ?? 0;
+  const rowCount = allReadLists.length ?? 0;
   const numSelected = selected.length;
   const { fields, order } = variables.sort;
   const isAsc = order === Order.ASC;
 
   const handleSelectAllClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      const newSelecteds = allReadLists?.map(({ id }) => id) ?? [];
+      const newSelecteds = allReadLists.map(({ id }) => id) ?? [];
       setSelected(newSelecteds);
       return;
     }

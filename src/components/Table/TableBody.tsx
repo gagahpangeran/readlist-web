@@ -60,7 +60,7 @@ export default function ReadListTableBody() {
         </TableRow>
       )}
 
-      {!loading && allReadLists?.length === 0 && (
+      {!loading && allReadLists.length === 0 && (
         <TableRow>
           <TableCell colSpan={4} align="center">
             There is no data
@@ -68,7 +68,7 @@ export default function ReadListTableBody() {
         </TableRow>
       )}
 
-      {allReadLists?.map(readList => {
+      {allReadLists.map(readList => {
         const { id, link, title, readAt } = readList;
         const selected = isSelected(id);
 

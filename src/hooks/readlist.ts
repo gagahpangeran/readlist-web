@@ -71,7 +71,7 @@ export function useReadListEditData() {
   };
 }
 
-const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
+const allReadListsVar = makeVar<ReadList[]>([]);
 
 export function useGetReadList() {
   const [getAllReadLists, { data, loading, refetch, error }] = useLazyQuery<
@@ -83,7 +83,9 @@ export function useGetReadList() {
   });
 
   useEffect(() => {
-    allReadListsVar(data?.allReadLists);
+    if (data !== undefined) {
+      allReadListsVar(data?.allReadLists);
+    }
   }, [data]);
 
   return {
