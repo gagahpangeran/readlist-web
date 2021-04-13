@@ -139,8 +139,22 @@ export function useDeleteReadList() {
   };
 }
 
+function useOnError() {
+  const { openSnackbar } = useSnackbar();
+
+  const onError = (error: ApolloError) => {
+    const message = getErrorMessage(error);
+    openSnackbar(`Error! ${message}`, "error");
+  };
+
+  return {
+    onError
+  };
+}
+
 function usePostMutation(successMessage: string) {
   const { openSnackbar } = useSnackbar();
+  const { onError } = useOnError();
 
   const refetchQueries = [
     {
@@ -151,11 +165,6 @@ function usePostMutation(successMessage: string) {
 
   const onCompleted = () => {
     openSnackbar(successMessage, "success");
-  };
-
-  const onError = (error: ApolloError) => {
-    const message = getErrorMessage(error);
-    openSnackbar(`Error! ${message}`, "error");
   };
 
   return {
