@@ -71,27 +71,33 @@ export function useReadListEditData() {
   };
 }
 
-const allReadListsVar = makeVar<ReadList[] | undefined>(undefined);
+const allReadListsVar = makeVar<ReadList[]>([]);
 
 export function useGetReadList() {
-  const [getAllReadLists, { data, loading, refetch, error }] = useLazyQuery<
+  const { onError } = useOnError();
+
+  const [getAllReadLists, { data, loading, refetch }] = useLazyQuery<
     GetAllReadLists,
     GetAllReadListsVariables
   >(GET_ALL_READ_LISTS, {
     fetchPolicy: "cache-and-network",
-    variables: initialVariables
+    notifyOnNetworkStatusChange: true,
+    variables: initialVariables,
+    errorPolicy: "all",
+    onError
   });
 
   useEffect(() => {
-    allReadListsVar(data?.allReadLists);
+    if (data !== undefined) {
+      allReadListsVar(data?.allReadLists);
+    }
   }, [data]);
 
   return {
     getAllReadLists,
     allReadLists: useReactiveVar(allReadListsVar),
     loading,
-    refetch,
-    error: error !== undefined
+    refetch
   };
 }
 
@@ -137,8 +143,22 @@ export function useDeleteReadList() {
   };
 }
 
+function useOnError() {
+  const { openSnackbar } = useSnackbar();
+
+  const onError = (error: ApolloError) => {
+    const message = getErrorMessage(error);
+    openSnackbar(`Error! ${message}`, "error");
+  };
+
+  return {
+    onError
+  };
+}
+
 function usePostMutation(successMessage: string) {
   const { openSnackbar } = useSnackbar();
+  const { onError } = useOnError();
 
   const refetchQueries = [
     {
@@ -149,11 +169,6 @@ function usePostMutation(successMessage: string) {
 
   const onCompleted = () => {
     openSnackbar(successMessage, "success");
-  };
-
-  const onError = (error: ApolloError) => {
-    const message = getErrorMessage(error);
-    openSnackbar(`Error! ${message}`, "error");
   };
 
   return {

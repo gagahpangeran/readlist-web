@@ -17,13 +17,7 @@ import EditButton from "../Button/EditButton";
 
 export default function ReadListTableBody() {
   const { isLogin } = useAuth();
-  const {
-    getAllReadLists,
-    allReadLists,
-    loading,
-    error,
-    refetch
-  } = useGetReadList();
+  const { getAllReadLists, allReadLists, loading, refetch } = useGetReadList();
   const { variables } = useReadListVariable();
   const { selected, setSelected } = useReadListSelect();
 
@@ -52,15 +46,7 @@ export default function ReadListTableBody() {
         </TableCell>
       </TableRow>
 
-      {!loading && error && (
-        <TableRow>
-          <TableCell colSpan={4} align="center">
-            Error, there is something wrong!
-          </TableCell>
-        </TableRow>
-      )}
-
-      {!loading && allReadLists?.length === 0 && (
+      {!loading && allReadLists.length === 0 && (
         <TableRow>
           <TableCell colSpan={4} align="center">
             There is no data
@@ -68,7 +54,7 @@ export default function ReadListTableBody() {
         </TableRow>
       )}
 
-      {allReadLists?.map(readList => {
+      {allReadLists.map(readList => {
         const { id, link, title, readAt } = readList;
         const selected = isSelected(id);
 
