@@ -16,8 +16,7 @@ function DeleteButton({ editData, disabled }: Props) {
   const { setEditData } = useReadListEditData();
 
   const handleClick = () => {
-    const { id, ...data } = editData;
-    setEditData({ id, data });
+    setEditData(editData);
     openDialog("edit");
   };
 
