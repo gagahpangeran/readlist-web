@@ -5,17 +5,14 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
-import {
-  useGetReadList,
-  useReadListSelect,
-  useReadListVariable
-} from "../../hooks/readlist";
+import { useSelectData } from "../../hooks/data";
+import { useGetReadList, useReadListVariable } from "../../hooks/readlist";
 import { Order, ReadListFields } from "../../types/generated-types";
 
 export default function ReadListTableHead() {
   const { isLogin } = useAuth();
   const { allReadLists } = useGetReadList();
-  const { selected, setSelected } = useReadListSelect();
+  const { selected, setSelected } = useSelectData();
   const { variables, changeVariables } = useReadListVariable();
 
   const rowCount = allReadLists.length ?? 0;

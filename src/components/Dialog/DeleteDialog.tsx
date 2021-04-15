@@ -5,12 +5,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
+import { useSelectData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
-import { useDeleteReadList, useReadListSelect } from "../../hooks/readlist";
+import { useDeleteReadList } from "../../hooks/readlist";
 
 export default function DeleteDialog() {
   const { openedDialog, closeDialog } = useDialog();
-  const { selected, setSelected } = useReadListSelect();
+  const { selected, setSelected } = useSelectData();
 
   const { deleteReadLists, loading } = useDeleteReadList();
 

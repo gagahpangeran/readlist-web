@@ -7,7 +7,7 @@ import {
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { useReadListSelect } from "../../hooks/readlist";
+import { useSelectData } from "../../hooks/data";
 import ToolbarFilter from "../Toolbar/ToolbarFilter";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
@@ -36,7 +36,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 export default function ReadListTableToolbar() {
   const classes = useToolbarStyles();
-  const { selected } = useReadListSelect();
+  const { selected } = useSelectData();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {

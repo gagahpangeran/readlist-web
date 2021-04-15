@@ -9,12 +9,9 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useEditData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
-import {
-  useAddReadList,
-  useEditReadList,
-  useReadListEditData
-} from "../../hooks/readlist";
+import { useAddReadList, useEditReadList } from "../../hooks/readlist";
 
 export interface ReadListInputForm {
   link: string;
@@ -28,7 +25,7 @@ export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
   const { addReadList, loading: addLoading } = useAddReadList();
   const { editReadList, loading: editLoading } = useEditReadList();
-  const { editData, clearEditData } = useReadListEditData();
+  const { editData, clearEditData } = useEditData();
 
   const isOpen = openedDialog === "add" || openedDialog === "edit";
   const isEdit = openedDialog === "edit";

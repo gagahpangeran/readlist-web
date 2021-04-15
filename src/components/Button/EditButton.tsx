@@ -2,8 +2,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
+import { useEditData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
-import { useReadListEditData } from "../../hooks/readlist";
 import { ReadList } from "../../types/generated-types";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 function DeleteButton({ editData, disabled }: Props) {
   const { openDialog } = useDialog();
-  const { setEditData } = useReadListEditData();
+  const { setEditData } = useEditData();
 
   const handleClick = () => {
     setEditData(editData);
