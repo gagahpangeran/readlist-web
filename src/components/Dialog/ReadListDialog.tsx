@@ -9,15 +9,11 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useEditData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
-import {
-  useAddReadList,
-  useEditReadList,
-  useReadListEditData
-} from "../../hooks/readlist";
-import { dateFormatter } from "../../utils/helper";
+import { useAddReadList, useEditReadList } from "../../hooks/readlist";
 
-interface InputForm {
+export interface ReadListInputForm {
   link: string;
   title: string;
   isRead: boolean;
@@ -29,23 +25,15 @@ export default function ReadListDialog() {
   const { openedDialog, closeDialog } = useDialog();
   const { addReadList, loading: addLoading } = useAddReadList();
   const { editReadList, loading: editLoading } = useEditReadList();
-  const { editData, setEditData } = useReadListEditData();
+  const { editData, clearEditData } = useEditData();
 
   const isOpen = openedDialog === "add" || openedDialog === "edit";
   const isEdit = openedDialog === "edit";
   const loading = addLoading || editLoading;
 
-  const defaultValue: InputForm = {
-    link: editData?.data.link ?? "",
-    title: editData?.data.title ?? "",
-    isRead: !!editData?.data.readAt || !isEdit,
-    readAt: editData?.data.readAt
-      ? dateFormatter(editData.data.readAt)
-      : dateFormatter(new Date()),
-    comment: editData?.data.comment ?? ""
-  };
+  const { id, ...defaultValues } = editData;
 
-  const { register, handleSubmit, watch, reset } = useForm<InputForm>();
+  const { register, handleSubmit, watch, reset } = useForm<ReadListInputForm>();
 
   const onSubmit = async ({
     link,
@@ -53,7 +41,7 @@ export default function ReadListDialog() {
     isRead,
     readAt,
     comment
-  }: InputForm) => {
+  }: ReadListInputForm) => {
     const data = {
       link: link.trim(),
       title: title.trim(),
@@ -62,8 +50,8 @@ export default function ReadListDialog() {
     };
 
     let result;
-    if (isEdit && editData?.id !== undefined) {
-      result = await editReadList({ variables: { id: editData.id, data } });
+    if (isEdit && id !== undefined) {
+      result = await editReadList({ variables: { id, data } });
     } else {
       result = await addReadList({ variables: { data } });
     }
@@ -74,11 +62,11 @@ export default function ReadListDialog() {
   };
 
   const handleClose = () => {
-    setEditData(null);
+    clearEditData();
     closeDialog();
   };
 
-  const isRead = watch("isRead") ?? defaultValue.isRead;
+  const isRead = watch("isRead") ?? defaultValues.isRead;
 
   return (
     <Dialog open={isOpen} onClose={handleClose} fullWidth>
@@ -91,7 +79,7 @@ export default function ReadListDialog() {
             name="link"
             label="Link"
             type="url"
-            defaultValue={defaultValue.link}
+            defaultValue={defaultValues.link}
             autoFocus={!isEdit}
             fullWidth
           />
@@ -103,7 +91,7 @@ export default function ReadListDialog() {
             required
             name="title"
             label="Title"
-            defaultValue={defaultValue.title}
+            defaultValue={defaultValues.title}
             fullWidth
           />
         </DialogContent>
@@ -113,7 +101,7 @@ export default function ReadListDialog() {
             control={
               <Checkbox
                 inputRef={register}
-                defaultChecked={defaultValue.isRead}
+                defaultChecked={defaultValues.isRead}
                 name="isRead"
                 color="primary"
               />
@@ -127,7 +115,7 @@ export default function ReadListDialog() {
             inputRef={register}
             type="date"
             name="readAt"
-            defaultValue={defaultValue.readAt}
+            defaultValue={defaultValues.readAt}
             disabled={!isRead}
             fullWidth
           />
@@ -138,7 +126,7 @@ export default function ReadListDialog() {
             inputRef={register}
             name="comment"
             placeholder="Comment"
-            defaultValue={defaultValue.comment}
+            defaultValue={defaultValues.comment}
             multiline
             fullWidth
           />

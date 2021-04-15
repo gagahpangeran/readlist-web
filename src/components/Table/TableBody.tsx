@@ -6,11 +6,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
-import {
-  useGetReadList,
-  useReadListSelect,
-  useReadListVariable
-} from "../../hooks/readlist";
+import { useSelectData } from "../../hooks/data";
+import { useGetReadList, useReadListVariable } from "../../hooks/readlist";
 import { dateFormatter, getSelected } from "../../utils/helper";
 import DeleteButton from "../Button/DeleteButton";
 import EditButton from "../Button/EditButton";
@@ -19,7 +16,7 @@ export default function ReadListTableBody() {
   const { isLogin } = useAuth();
   const { getAllReadLists, allReadLists, loading, refetch } = useGetReadList();
   const { variables } = useReadListVariable();
-  const { selected, setSelected } = useReadListSelect();
+  const { selected, setSelected } = useSelectData();
 
   useEffect(() => {
     getAllReadLists();

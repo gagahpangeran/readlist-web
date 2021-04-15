@@ -2,8 +2,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
+import { useSelectData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
-import { useReadListSelect } from "../../hooks/readlist";
 
 interface Props {
   deletedId?: string;
@@ -12,7 +12,7 @@ interface Props {
 
 function DeleteButton({ deletedId, disabled }: Props) {
   const { openDialog } = useDialog();
-  const { setSelected } = useReadListSelect();
+  const { setSelected } = useSelectData();
 
   const handleOnClick = () => {
     if (deletedId !== undefined) {
