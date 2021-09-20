@@ -1,5 +1,5 @@
 import Paper from "@mui/material/Paper";
-import { createStyles, makeStyles, Theme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
 import React from "react";
@@ -8,26 +8,30 @@ import ReadListTableHead from "./TableHead";
 import ReadListTablePagination from "./TablePagination";
 import ReadListTableToolbar from "./TableToolbar";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: "100%"
-    },
-    paper: {
-      width: "100%",
-      marginBottom: theme.spacing(2)
-    },
-    table: {
-      minWidth: 750
-    }
-  })
-);
+const PREFIX = "ReadListTable";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  paper: `${PREFIX}-paper`,
+  table: `${PREFIX}-content`
+};
+
+const Root = styled("div")(({ theme }) => ({
+  [`&.${classes.root}`]: {
+    width: "100%"
+  },
+  [`& .${classes.paper}`]: {
+    width: "100%",
+    marginBottom: theme.spacing(2)
+  },
+  [`& .${classes.table}`]: {
+    minWidth: 750
+  }
+}));
 
 export default function ReadListTable() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <Paper className={classes.paper}>
         <ReadListTableToolbar />
         <TableContainer>
@@ -43,6 +47,6 @@ export default function ReadListTable() {
         </TableContainer>
         <ReadListTablePagination />
       </Paper>
-    </div>
+    </Root>
   );
 }

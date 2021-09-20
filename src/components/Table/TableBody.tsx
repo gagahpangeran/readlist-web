@@ -63,7 +63,7 @@ export default function ReadListTableBody() {
                 onClick={() => handleCheckBoxClick(id)}
               />
             </TableCell>
-            <TableCell width="550">
+            <TableCell width="545">
               <Link
                 color="primary"
                 variant="body1"

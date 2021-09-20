@@ -61,7 +61,7 @@ export default function ReadListTableHead() {
             onChange={handleSelectAllClick}
           />
         </TableCell>
-        <TableCell width="550">
+        <TableCell width="545">
           <TableSortLabel
             active={fields === ReadListFields.title}
             direction={isAsc ? "asc" : "desc"}
@@ -70,7 +70,7 @@ export default function ReadListTableHead() {
             Title
           </TableSortLabel>
         </TableCell>
-        <TableCell width="90">
+        <TableCell width="95">
           <TableSortLabel
             active={fields === ReadListFields.readAt}
             direction={isAsc ? "asc" : "desc"}

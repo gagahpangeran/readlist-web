@@ -82,6 +82,7 @@ export default function ReadListDialog() {
             defaultValue={defaultValues.link}
             autoFocus={!isEdit}
             fullWidth
+            variant="standard"
           />
         </DialogContent>
 
@@ -93,6 +94,7 @@ export default function ReadListDialog() {
             label="Title"
             defaultValue={defaultValues.title}
             fullWidth
+            variant="standard"
           />
         </DialogContent>
 
@@ -118,6 +120,7 @@ export default function ReadListDialog() {
             defaultValue={defaultValues.readAt}
             disabled={!isRead}
             fullWidth
+            variant="standard"
           />
         </DialogContent>
 
@@ -129,11 +132,12 @@ export default function ReadListDialog() {
             defaultValue={defaultValues.comment}
             multiline
             fullWidth
+            variant="standard"
           />
         </DialogContent>
 
         <DialogActions>
-          <Button disabled={loading} onClick={() => reset()}>
+          <Button disabled={loading} onClick={() => reset()} color="inherit">
             Reset
           </Button>
           <Button disabled={loading} color="secondary" onClick={handleClose}>

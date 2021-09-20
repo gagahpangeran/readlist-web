@@ -34,6 +34,7 @@ export default function LoginDialog() {
             label="Username"
             type="text"
             fullWidth
+            variant="standard"
           />
         </DialogContent>
         <DialogContent>
@@ -44,6 +45,7 @@ export default function LoginDialog() {
             label="Password"
             type="password"
             fullWidth
+            variant="standard"
           />
         </DialogContent>
         <DialogActions>

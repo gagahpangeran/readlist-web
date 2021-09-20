@@ -27,6 +27,7 @@ function DeleteButton({ editData, disabled }: Props) {
         color="primary"
         disabled={disabled}
         onClick={handleClick}
+        size="medium"
       >
         <EditIcon />
       </IconButton>

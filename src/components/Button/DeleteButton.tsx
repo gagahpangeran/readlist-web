@@ -29,6 +29,7 @@ function DeleteButton({ deletedId, disabled }: Props) {
         color="secondary"
         onClick={handleOnClick}
         disabled={disabled}
+        size="medium"
       >
         <DeleteIcon />
       </IconButton>

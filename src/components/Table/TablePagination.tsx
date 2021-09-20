@@ -39,7 +39,7 @@ export default function ReadListTablePagination() {
       nextIconButtonProps={{
         disabled: allReadLists.length < rowsPerPage
       }}
-      onChangeRowsPerPage={e => handleChangeRowsPerPage(Number(e.target.value))}
+      onRowsPerPageChange={e => handleChangeRowsPerPage(Number(e.target.value))}
       onPageChange={(_, page) => handleChangePage(page)}
     />
   );

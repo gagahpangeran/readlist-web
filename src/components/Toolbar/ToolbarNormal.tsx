@@ -36,6 +36,7 @@ export default function ToolbarNormal(props: Props) {
             <IconButton
               onClick={() => openDialog("logout")}
               aria-label="logout"
+              size="medium"
             >
               <ExitToAppIcon color="secondary" />
             </IconButton>
@@ -44,6 +45,7 @@ export default function ToolbarNormal(props: Props) {
             <IconButton
               onClick={() => openDialog("add")}
               aria-label="add new read list"
+              size="medium"
             >
               <AddIcon color="primary" />
             </IconButton>
@@ -51,13 +53,17 @@ export default function ToolbarNormal(props: Props) {
         </>
       ) : (
         <Tooltip title="Login">
-          <IconButton onClick={() => openDialog("login")} aria-label="login">
+          <IconButton
+            onClick={() => openDialog("login")}
+            aria-label="login"
+            size="medium"
+          >
             <PersonAddIcon color="primary" />
           </IconButton>
         </Tooltip>
       )}
       <Tooltip title="Filter list">
-        <IconButton onClick={openFilter} aria-label="filter list">
+        <IconButton onClick={openFilter} aria-label="filter list" size="medium">
           <FilterListIcon />
         </IconButton>
       </Tooltip>

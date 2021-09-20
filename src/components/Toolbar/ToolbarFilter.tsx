@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { createStyles, makeStyles, Theme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
@@ -16,23 +16,26 @@ import {
   getFilterDefaultValues
 } from "../../utils/filter";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttonWrapper: {
-      "& > *": {
-        margin: theme.spacing(1)
-      },
-      textAlign: "center"
-    }
-  })
-);
+const PREFIX = "ToolbarFilter";
+
+const classes = {
+  buttonWrapper: `${PREFIX}-button-wrapper`
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`& .${classes.buttonWrapper}`]: {
+    "& > *": {
+      margin: theme.spacing(1)
+    },
+    textAlign: "center"
+  }
+}));
 
 interface Props {
   close: () => void;
 }
 
 export default function ToolbarFilter({ close }: Props) {
-  const classes = useStyles();
   const { variables, changeVariables } = useReadListVariable();
 
   const { register, control, handleSubmit, reset } = useForm<FilterInputForm>();
@@ -59,7 +62,7 @@ export default function ToolbarFilter({ close }: Props) {
                 name="searchBy"
                 defaultValue={defaultValues.searchBy}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth variant="standard">
                     <MenuItem value="title">Title</MenuItem>
                     <MenuItem value="link">Link</MenuItem>
                   </Select>
@@ -75,6 +78,7 @@ export default function ToolbarFilter({ close }: Props) {
               label="Search Keyword"
               defaultValue={defaultValues.searchKeyword}
               fullWidth
+              variant="standard"
             />
           </Grid>
 
@@ -86,7 +90,7 @@ export default function ToolbarFilter({ close }: Props) {
                 name="commentStatus"
                 defaultValue={defaultValues.commentStatus}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth variant="standard">
                     <MenuItem value="all">All Posts</MenuItem>
                     <MenuItem value="with">Only With Comment</MenuItem>
                     <MenuItem value="without">Only Without Comment</MenuItem>
@@ -104,7 +108,7 @@ export default function ToolbarFilter({ close }: Props) {
                 name="readStatus"
                 defaultValue={defaultValues.readStatus}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth variant="standard">
                     <MenuItem value="all">All</MenuItem>
                     <MenuItem value="read">Read</MenuItem>
                     <MenuItem value="unread">Unread</MenuItem>
@@ -125,6 +129,7 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readFrom}
               fullWidth
+              variant="standard"
             />
           </Grid>
 
@@ -139,11 +144,14 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readTo}
               fullWidth
+              variant="standard"
             />
           </Grid>
 
-          <Grid item xs={12} className={classes.buttonWrapper}>
-            <Button onClick={close}>Close</Button>
+          <StyledGrid item xs={12} className={classes.buttonWrapper}>
+            <Button onClick={close} color="inherit">
+              Close
+            </Button>
             <Button
               variant="outlined"
               color="secondary"
@@ -154,7 +162,7 @@ export default function ToolbarFilter({ close }: Props) {
             <Button variant="contained" color="primary" type="submit">
               Apply
             </Button>
-          </Grid>
+          </StyledGrid>
         </Grid>
       </form>
     </Toolbar>
