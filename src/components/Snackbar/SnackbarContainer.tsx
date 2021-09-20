@@ -8,12 +8,8 @@ function Alert(props: AlertProps) {
 }
 
 export default function SnackbarContainer() {
-  const {
-    isSnackbarOpen,
-    snackbarMessage,
-    snackbarType,
-    closeSnackbar
-  } = useSnackbar();
+  const { isSnackbarOpen, snackbarMessage, snackbarType, closeSnackbar } =
+    useSnackbar();
 
   return (
     <Snackbar

@@ -32,10 +32,8 @@ function createTernaryMap<T>(
   return [boolToTernary, ternaryToBool];
 }
 
-const [
-  boolToCommentStatus,
-  commentStatusToBool
-] = createTernaryMap<CommentStatus>("without", "with", "all");
+const [boolToCommentStatus, commentStatusToBool] =
+  createTernaryMap<CommentStatus>("without", "with", "all");
 
 const [boolToReadStatus, readStatusToBool] = createTernaryMap<ReadStatus>(
   "unread",
