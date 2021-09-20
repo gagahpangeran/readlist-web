@@ -38,7 +38,7 @@
     "@types/node": "^16.9.4",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
-    "apollo": "^2.32.5",
+    "apollo": "^2.33.6",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
