@@ -1,5 +1,5 @@
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import MuiAlert, { AlertProps } from "@mui/lab/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import { useSnackbar } from "../../hooks/snackbar";
 

@@ -1,4 +1,4 @@
-import TablePagination from "@material-ui/core/TablePagination";
+import TablePagination from "@mui/material/TablePagination";
 import React, { useState } from "react";
 import { useSelectData } from "../../hooks/data";
 import { useGetReadList, useReadListVariable } from "../../hooks/readlist";

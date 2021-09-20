@@ -1,8 +1,8 @@
 import { ApolloProvider } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createMuiTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/styles";
 import React from "react";
 import { apolloClient } from "./apollo/client";
 import DialogContainer from "./components/Dialog/DialogContainer";

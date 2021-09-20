@@ -1,6 +1,6 @@
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import { useSelectData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";

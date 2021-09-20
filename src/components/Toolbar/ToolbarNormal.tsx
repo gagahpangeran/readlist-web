@@ -1,10 +1,10 @@
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import AddIcon from "@material-ui/icons/Add";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AddIcon from "@mui/icons-material/Add";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
 import { useDialog } from "../../hooks/dialog";

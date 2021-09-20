@@ -1,10 +1,5 @@
-import {
-  createStyles,
-  lighten,
-  makeStyles,
-  Theme
-} from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
+import { createStyles, lighten, makeStyles, Theme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { useSelectData } from "../../hooks/data";

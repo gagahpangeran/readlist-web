@@ -1,9 +1,9 @@
-import Checkbox from "@material-ui/core/Checkbox";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Link from "@material-ui/core/Link";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+import Checkbox from "@mui/material/Checkbox";
+import LinearProgress from "@mui/material/LinearProgress";
+import Link from "@mui/material/Link";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useSelectData } from "../../hooks/data";
