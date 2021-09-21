@@ -1,4 +1,4 @@
-import { Alert } from "@mui/material";
+import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import { useSnackbar } from "../../hooks/snackbar";
