@@ -81,22 +81,20 @@ export default function ReadListDialog() {
             type="url"
             defaultValue={defaultValues.link}
             autoFocus={!isEdit}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             required
             name="title"
             label="Title"
             defaultValue={defaultValues.title}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <FormControlLabel
             control={
               <Checkbox
@@ -108,26 +106,24 @@ export default function ReadListDialog() {
             }
             label="Already Read?"
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             type="date"
             name="readAt"
             defaultValue={defaultValues.readAt}
             disabled={!isRead}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             name="comment"
             placeholder="Comment"
             defaultValue={defaultValues.comment}
             multiline
+            margin="dense"
             fullWidth
           />
         </DialogContent>

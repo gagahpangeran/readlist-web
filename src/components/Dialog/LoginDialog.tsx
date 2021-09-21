@@ -35,8 +35,7 @@ export default function LoginDialog() {
             type="text"
             fullWidth
           />
-        </DialogContent>
-        <DialogContent>
+
           <TextField
             inputRef={register}
             name="password"

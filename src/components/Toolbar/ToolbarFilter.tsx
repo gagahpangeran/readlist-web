@@ -55,7 +55,7 @@ export default function ToolbarFilter({ close }: Props) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
-            <FormControl fullWidth>
+            <FormControl margin="dense" fullWidth>
               <InputLabel>Search By</InputLabel>
               <Controller
                 control={control}
@@ -78,11 +78,12 @@ export default function ToolbarFilter({ close }: Props) {
               label="Search Keyword"
               defaultValue={defaultValues.searchKeyword}
               fullWidth
+              margin="dense"
             />
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <FormControl fullWidth>
+            <FormControl margin="dense" fullWidth>
               <InputLabel>Comment Status</InputLabel>
               <Controller
                 control={control}
@@ -100,7 +101,7 @@ export default function ToolbarFilter({ close }: Props) {
           </Grid>
 
           <Grid item xs={12} sm={2}>
-            <FormControl fullWidth>
+            <FormControl margin="dense" fullWidth>
               <InputLabel>Read Status</InputLabel>
               <Controller
                 control={control}
@@ -127,6 +128,7 @@ export default function ToolbarFilter({ close }: Props) {
                 shrink: true
               }}
               defaultValue={defaultValues.readFrom}
+              margin="dense"
               fullWidth
             />
           </Grid>
@@ -142,6 +144,7 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readTo}
               fullWidth
+              margin="dense"
             />
           </Grid>
 
