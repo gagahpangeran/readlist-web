@@ -56,13 +56,13 @@ export default function ToolbarFilter({ close }: Props) {
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
             <FormControl fullWidth>
-              <InputLabel>Search by</InputLabel>
+              <InputLabel>Search By</InputLabel>
               <Controller
                 control={control}
                 name="searchBy"
                 defaultValue={defaultValues.searchBy}
                 as={
-                  <Select required fullWidth variant="standard">
+                  <Select required fullWidth label="Search By">
                     <MenuItem value="title">Title</MenuItem>
                     <MenuItem value="link">Link</MenuItem>
                   </Select>
@@ -78,7 +78,6 @@ export default function ToolbarFilter({ close }: Props) {
               label="Search Keyword"
               defaultValue={defaultValues.searchKeyword}
               fullWidth
-              variant="standard"
             />
           </Grid>
 
@@ -90,7 +89,7 @@ export default function ToolbarFilter({ close }: Props) {
                 name="commentStatus"
                 defaultValue={defaultValues.commentStatus}
                 as={
-                  <Select required fullWidth variant="standard">
+                  <Select required fullWidth label="Comment Status">
                     <MenuItem value="all">All Posts</MenuItem>
                     <MenuItem value="with">Only With Comment</MenuItem>
                     <MenuItem value="without">Only Without Comment</MenuItem>
@@ -108,7 +107,7 @@ export default function ToolbarFilter({ close }: Props) {
                 name="readStatus"
                 defaultValue={defaultValues.readStatus}
                 as={
-                  <Select required fullWidth variant="standard">
+                  <Select required fullWidth label="Read Status">
                     <MenuItem value="all">All</MenuItem>
                     <MenuItem value="read">Read</MenuItem>
                     <MenuItem value="unread">Unread</MenuItem>
@@ -129,7 +128,6 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readFrom}
               fullWidth
-              variant="standard"
             />
           </Grid>
 
@@ -144,7 +142,6 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readTo}
               fullWidth
-              variant="standard"
             />
           </Grid>
 
