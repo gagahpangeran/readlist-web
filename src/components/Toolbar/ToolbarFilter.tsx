@@ -1,12 +1,11 @@
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Toolbar from "@mui/material/Toolbar";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useReadListVariable } from "../../hooks/readlist";
@@ -16,23 +15,11 @@ import {
   getFilterDefaultValues
 } from "../../utils/filter";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    buttonWrapper: {
-      "& > *": {
-        margin: theme.spacing(1)
-      },
-      textAlign: "center"
-    }
-  })
-);
-
 interface Props {
   close: () => void;
 }
 
 export default function ToolbarFilter({ close }: Props) {
-  const classes = useStyles();
   const { variables, changeVariables } = useReadListVariable();
 
   const { register, control, handleSubmit, reset } = useForm<FilterInputForm>();
@@ -52,14 +39,14 @@ export default function ToolbarFilter({ close }: Props) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
-            <FormControl fullWidth>
-              <InputLabel>Search by</InputLabel>
+            <FormControl margin="dense" fullWidth>
+              <InputLabel>Search By</InputLabel>
               <Controller
                 control={control}
                 name="searchBy"
                 defaultValue={defaultValues.searchBy}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth label="Search By">
                     <MenuItem value="title">Title</MenuItem>
                     <MenuItem value="link">Link</MenuItem>
                   </Select>
@@ -75,18 +62,19 @@ export default function ToolbarFilter({ close }: Props) {
               label="Search Keyword"
               defaultValue={defaultValues.searchKeyword}
               fullWidth
+              margin="dense"
             />
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <FormControl fullWidth>
+            <FormControl margin="dense" fullWidth>
               <InputLabel>Comment Status</InputLabel>
               <Controller
                 control={control}
                 name="commentStatus"
                 defaultValue={defaultValues.commentStatus}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth label="Comment Status">
                     <MenuItem value="all">All Posts</MenuItem>
                     <MenuItem value="with">Only With Comment</MenuItem>
                     <MenuItem value="without">Only Without Comment</MenuItem>
@@ -97,14 +85,14 @@ export default function ToolbarFilter({ close }: Props) {
           </Grid>
 
           <Grid item xs={12} sm={2}>
-            <FormControl fullWidth>
+            <FormControl margin="dense" fullWidth>
               <InputLabel>Read Status</InputLabel>
               <Controller
                 control={control}
                 name="readStatus"
                 defaultValue={defaultValues.readStatus}
                 as={
-                  <Select required fullWidth>
+                  <Select required fullWidth label="Read Status">
                     <MenuItem value="all">All</MenuItem>
                     <MenuItem value="read">Read</MenuItem>
                     <MenuItem value="unread">Unread</MenuItem>
@@ -124,6 +112,7 @@ export default function ToolbarFilter({ close }: Props) {
                 shrink: true
               }}
               defaultValue={defaultValues.readFrom}
+              margin="dense"
               fullWidth
             />
           </Grid>
@@ -139,11 +128,22 @@ export default function ToolbarFilter({ close }: Props) {
               }}
               defaultValue={defaultValues.readTo}
               fullWidth
+              margin="dense"
             />
           </Grid>
 
-          <Grid item xs={12} className={classes.buttonWrapper}>
-            <Button onClick={close}>Close</Button>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 2
+            }}
+            item
+            xs={12}
+          >
+            <Button onClick={close} color="inherit">
+              Close
+            </Button>
             <Button
               variant="outlined"
               color="secondary"

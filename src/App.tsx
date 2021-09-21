@@ -1,17 +1,20 @@
 import { ApolloProvider } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import {
+  createTheme,
+  StyledEngineProvider,
+  ThemeProvider
+} from "@mui/material/styles";
 import React from "react";
 import { apolloClient } from "./apollo/client";
 import DialogContainer from "./components/Dialog/DialogContainer";
 import SnackbarContainer from "./components/Snackbar/SnackbarContainer";
 import ReadListTable from "./components/Table/Table";
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
     background: {
       default: "#16161a",
       paper: "#242629"
@@ -35,14 +38,16 @@ const darkTheme = createMuiTheme({
 function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <Container component="main" maxWidth="md">
-          <ReadListTable />
-        </Container>
-        <DialogContainer />
-        <SnackbarContainer />
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Container component="main" maxWidth="md">
+            <ReadListTable />
+          </Container>
+          <DialogContainer />
+          <SnackbarContainer />
+        </ThemeProvider>
+      </StyledEngineProvider>
     </ApolloProvider>
   );
 }

@@ -1,12 +1,12 @@
-import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import TextField from "@material-ui/core/TextField";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import LinearProgress from "@mui/material/LinearProgress";
+import TextField from "@mui/material/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useEditData } from "../../hooks/data";
@@ -81,22 +81,20 @@ export default function ReadListDialog() {
             type="url"
             defaultValue={defaultValues.link}
             autoFocus={!isEdit}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             required
             name="title"
             label="Title"
             defaultValue={defaultValues.title}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <FormControlLabel
             control={
               <Checkbox
@@ -108,35 +106,38 @@ export default function ReadListDialog() {
             }
             label="Already Read?"
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             type="date"
             name="readAt"
             defaultValue={defaultValues.readAt}
             disabled={!isRead}
+            margin="dense"
             fullWidth
           />
-        </DialogContent>
 
-        <DialogContent>
           <TextField
             inputRef={register}
             name="comment"
             placeholder="Comment"
             defaultValue={defaultValues.comment}
             multiline
+            margin="dense"
             fullWidth
           />
         </DialogContent>
 
         <DialogActions>
-          <Button disabled={loading} onClick={() => reset()}>
+          <Button disabled={loading} onClick={() => reset()} color="inherit">
             Reset
           </Button>
-          <Button disabled={loading} color="secondary" onClick={handleClose}>
+          <Button
+            disabled={loading}
+            color="secondary"
+            onClick={handleClose}
+            variant="outlined"
+          >
             Cancel
           </Button>
           <Button

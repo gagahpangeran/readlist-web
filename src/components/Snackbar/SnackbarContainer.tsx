@@ -1,11 +1,7 @@
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import { useSnackbar } from "../../hooks/snackbar";
-
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 export default function SnackbarContainer() {
   const { isSnackbarOpen, snackbarMessage, snackbarType, closeSnackbar } =
@@ -13,11 +9,12 @@ export default function SnackbarContainer() {
 
   return (
     <Snackbar
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       open={isSnackbarOpen}
       autoHideDuration={3000}
       onClose={closeSnackbar}
     >
-      <Alert onClose={closeSnackbar} severity={snackbarType}>
+      <Alert onClose={closeSnackbar} severity={snackbarType} variant="filled">
         {snackbarMessage}
       </Alert>
     </Snackbar>

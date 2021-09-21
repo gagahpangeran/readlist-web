@@ -1,6 +1,6 @@
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import EditIcon from "@material-ui/icons/Edit";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import { useEditData } from "../../hooks/data";
 import { useDialog } from "../../hooks/dialog";
@@ -27,6 +27,7 @@ function DeleteButton({ editData, disabled }: Props) {
         color="primary"
         disabled={disabled}
         onClick={handleClick}
+        size="medium"
       >
         <EditIcon />
       </IconButton>

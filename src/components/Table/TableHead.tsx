@@ -1,8 +1,8 @@
-import Checkbox from "@material-ui/core/Checkbox";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Checkbox from "@mui/material/Checkbox";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import React from "react";
 import { useAuth } from "../../hooks/auth";
 import { useSelectData } from "../../hooks/data";
@@ -61,7 +61,7 @@ export default function ReadListTableHead() {
             onChange={handleSelectAllClick}
           />
         </TableCell>
-        <TableCell width="550">
+        <TableCell width="545">
           <TableSortLabel
             active={fields === ReadListFields.title}
             direction={isAsc ? "asc" : "desc"}
@@ -70,7 +70,7 @@ export default function ReadListTableHead() {
             Title
           </TableSortLabel>
         </TableCell>
-        <TableCell width="90">
+        <TableCell width="95">
           <TableSortLabel
             active={fields === ReadListFields.readAt}
             direction={isAsc ? "asc" : "desc"}
