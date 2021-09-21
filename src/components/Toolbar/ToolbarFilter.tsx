@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
@@ -15,21 +14,6 @@ import {
   getFilterData,
   getFilterDefaultValues
 } from "../../utils/filter";
-
-const PREFIX = "ToolbarFilter";
-
-const classes = {
-  buttonWrapper: `${PREFIX}-button-wrapper`
-};
-
-const StyledGrid = styled(Grid)(({ theme }) => ({
-  [`& .${classes.buttonWrapper}`]: {
-    "& > *": {
-      margin: theme.spacing(1)
-    },
-    textAlign: "center"
-  }
-}));
 
 interface Props {
   close: () => void;
@@ -148,7 +132,15 @@ export default function ToolbarFilter({ close }: Props) {
             />
           </Grid>
 
-          <StyledGrid item xs={12} className={classes.buttonWrapper}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 2
+            }}
+            item
+            xs={12}
+          >
             <Button onClick={close} color="inherit">
               Close
             </Button>
@@ -162,7 +154,7 @@ export default function ToolbarFilter({ close }: Props) {
             <Button variant="contained" color="primary" type="submit">
               Apply
             </Button>
-          </StyledGrid>
+          </Grid>
         </Grid>
       </form>
     </Toolbar>

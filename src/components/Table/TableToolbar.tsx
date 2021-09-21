@@ -1,33 +1,9 @@
-import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { useSelectData } from "../../hooks/data";
 import ToolbarFilter from "../Toolbar/ToolbarFilter";
 import ToolbarNormal from "../Toolbar/ToolbarNormal";
 import ToolbarSelect from "../Toolbar/ToolbarSelect";
-
-const PREFIX = "ReadListTableToolbar";
-
-const classes = {
-  root: `${PREFIX}-root`,
-  highlight: `${PREFIX}-highlight`,
-  title: `${PREFIX}-title`
-};
-
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  [`&.${classes.root}`]: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1)
-  },
-  [`& .${classes.highlight}`]: {
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.secondary.dark
-  },
-  [`& .${classes.title}`]: {
-    flex: "1 1 100%"
-  }
-}));
 
 export default function ReadListTableToolbar() {
   const { selected } = useSelectData();
@@ -41,26 +17,26 @@ export default function ReadListTableToolbar() {
 
   const renderToolbarMenu = () => {
     if (selected.length > 0) {
-      return <ToolbarSelect className={classes.title} selected={selected} />;
+      return <ToolbarSelect selected={selected} />;
     }
 
-    return (
-      <ToolbarNormal
-        className={classes.title}
-        openFilter={() => setIsFilterOpen(!isFilterOpen)}
-      />
-    );
+    return <ToolbarNormal openFilter={() => setIsFilterOpen(!isFilterOpen)} />;
   };
 
   return (
     <>
-      <StyledToolbar
-        className={clsx(classes.root, {
-          [classes.highlight]: selected.length > 0
-        })}
+      <Toolbar
+        sx={{
+          pl: 2,
+          pr: 1,
+          ...(selected.length > 0 && {
+            bgcolor: theme => theme.palette.secondary.dark,
+            color: theme => theme.palette.text.primary
+          })
+        }}
       >
         {renderToolbarMenu()}
-      </StyledToolbar>
+      </Toolbar>
       {isFilterOpen && <ToolbarFilter close={() => setIsFilterOpen(false)} />}
     </>
   );

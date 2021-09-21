@@ -3,17 +3,16 @@ import React from "react";
 import DeleteButton from "../Button/DeleteButton";
 
 interface Props {
-  className: string;
   selected: string[];
 }
 
 export default function ToolbarSelect(props: Props) {
-  const { className, selected } = props;
+  const { selected } = props;
 
   return (
     <>
       <Typography
-        className={className}
+        sx={{ flex: "1 1 100%" }}
         color="inherit"
         variant="subtitle1"
         component="div"

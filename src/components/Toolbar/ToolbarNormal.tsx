@@ -10,19 +10,18 @@ import { useAuth } from "../../hooks/auth";
 import { useDialog } from "../../hooks/dialog";
 
 interface Props {
-  className: string;
   openFilter: () => void;
 }
 
 export default function ToolbarNormal(props: Props) {
-  const { className, openFilter } = props;
+  const { openFilter } = props;
   const { isLogin } = useAuth();
   const { openDialog } = useDialog();
 
   return (
     <>
       <Typography
-        className={className}
+        sx={{ flex: "1 1 100%" }}
         variant="h6"
         id="tableTitle"
         component="div"
